@@ -1,2 +1,2 @@
-# phpunit-fluent-assertions
-Fluent assertions for PHPUnit
+# Fluent assertions for PHPUnit
+
