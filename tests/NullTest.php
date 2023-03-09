@@ -13,7 +13,7 @@ use function k2gl\PHPUnitFluentAssertions\fact;
  */
 class NullTest extends TestCase
 {
-    public function testDataIsNull(): void
+    public function testNull(): void
     {
         // act
         fact(null)->null();
@@ -23,18 +23,18 @@ class NullTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderWhereDataIsNotNull
+     * @dataProvider notNullDataProvider
      */
-    public function testDataIsNotNull(mixed $data): void
+    public function testNotNull(mixed $variable): void
     {
         // assert
         $this->expectException(ExpectationFailedException::class);
 
         // act
-        fact($data)->null();
+        fact($variable)->null();
     }
 
-    public function dataProviderWhereDataIsNotNull(): array
+    public function notNullDataProvider(): array
     {
         return [
             [true],

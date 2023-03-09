@@ -9,40 +9,41 @@ use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
- * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notNull
+ * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notFalse
  */
-class NotNullTest extends TestCase
+class NotFalseTest extends TestCase
 {
-    public function testNull(): void
+    public function testFalse(): void
     {
         // assert
         $this->expectException(ExpectationFailedException::class);
 
         // act
-        fact(null)->notNull();
+        fact(false)->notFalse();
     }
 
     /**
-     * @dataProvider notNullDataProvider
+     * @dataProvider notFalseDataProvider
      */
-    public function testNotNull(mixed $variable): void
+    public function testNotFalse(mixed $variable): void
     {
         // act
-        fact($variable)->notNull();
+        fact($variable)->notFalse();
 
         // assert
         self::assertSame(expected: 1, actual: Assert::getCount());
     }
 
-    public function notNullDataProvider(): array
+    public function notFalseDataProvider(): array
     {
         return [
+            [null],
             [true],
-            [false],
             [0],
             [1],
-            ['foo'],
-            [['foo' => 'bar']],
+            ['0'],
+            ['1'],
+            [['foo' => 'bar'], ['foo' => 'bar']],
             [(object) ['foo' => 'bar']],
             [fn() => false],
         ];

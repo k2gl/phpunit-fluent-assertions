@@ -13,7 +13,7 @@ use function k2gl\PHPUnitFluentAssertions\fact;
  */
 class FalseTest extends TestCase
 {
-    public function testPassedForStrictFalse(): void
+    public function testFalse(): void
     {
         // act
         fact(false)->false();
@@ -23,27 +23,28 @@ class FalseTest extends TestCase
     }
 
     /**
-     * @dataProvider dataThatShouldNotPass
+     * @dataProvider notFalseDataProvider
      */
-    public function testNotPassedForOtherValues(mixed $data): void
+    public function testNotFalse(mixed $variable): void
     {
         // assert
         $this->expectException(ExpectationFailedException::class);
 
         // act
-        fact($data)->false();
+        fact($variable)->false();
     }
 
-    public function dataThatShouldNotPass(): array
+    public function notFalseDataProvider(): array
     {
         return [
+            [null],
             [true],
             [0],
             [1],
             ['0'],
             ['1'],
             [(object) ['foo' => 'bar']],
-            [fn() => true],
+            [fn() => false],
         ];
     }
 }

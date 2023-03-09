@@ -14,50 +14,54 @@ use function k2gl\PHPUnitFluentAssertions\fact;
 class NotTest extends TestCase
 {
     /**
-     * @dataProvider dataProviderWhereDataIsNotTheSameAsCompared
+     * @dataProvider notSameDataProvider
      */
-    public function testDataIsNotTheSameAsCompared(mixed $data, mixed $compare): void
+    public function testNotSame(mixed $variable, mixed $compare): void
     {
         // act
-        fact($data)->not($compare);
+        fact($variable)->not($compare);
 
         // assert
         self::assertSame(expected: 1, actual: Assert::getCount());
     }
 
     /**
-     * @dataProvider dataProviderWhereDataIsTheSameAsCompared
+     * @dataProvider sameDataProvider
      */
-    public function testDataIsTheSameAsCompare(mixed $data, mixed $compare): void
+    public function testSame(mixed $variable, mixed $compare): void
     {
         // assert
         $this->expectException(ExpectationFailedException::class);
 
         // act
-        fact($data)->not($compare);
+        fact($variable)->not($compare);
     }
 
-    public function dataProviderWhereDataIsNotTheSameAsCompared(): array
+    public function notSameDataProvider(): array
     {
         return [
-            [1, 2],
+            [null, false],
+            [true, 1],
             [false, 0],
-            [0, false],
+            [1, 2],
             ['0', 0],
             ['1', 1],
+            ['foo', 'bar'],
             [['foo' => 'bar'], ['bar' => 'foo']],
             [(object) ['foo' => 'bar'], (object) ['foo' => 'bar']],
             [fn() => false, fn() => true],
         ];
     }
 
-    public function dataProviderWhereDataIsTheSameAsCompared(): array
+    public function sameDataProvider(): array
     {
         return [
-            [1, 1],
-            [false, false],
             [null, null],
+            [true, true],
+            [false, false],
+            [1, 1],
             ['0', '0'],
+            ['foo', 'foo'],
             [['foo' => 'bar'], ['foo' => 'bar']],
             [$object = (object) ['foo' => 'bar'], $object],
             [$fn = fn() => false, $fn],

@@ -2,17 +2,17 @@
 
 namespace k2gl\PHPUnitFluentAssertions;
 
-function check(mixed $value): FluentAssertions
+function check(mixed $variable): FluentAssertions
 {
-    return FluentAssertions::for($value);
+    return FluentAssertions::for($variable);
 }
 
-function expect(mixed $value): FluentAssertions
+function expect(mixed $variable): FluentAssertions
 {
-    return FluentAssertions::for($value);
+    return FluentAssertions::for($variable);
 }
 
-function fact(mixed $value): FluentAssertions
+function fact(mixed $variable): FluentAssertions
 {
-    return FluentAssertions::for($value);
+    return FluentAssertions::for($variable);
 }

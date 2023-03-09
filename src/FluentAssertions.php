@@ -8,13 +8,13 @@ use PHPUnit\Framework\Assert;
 class FluentAssertions
 {
     public function __construct(
-        public readonly mixed $data
+        public readonly mixed $variable
     ) {
     }
 
-    public static function for(mixed $data): self
+    public static function for(mixed $variable): self
     {
-        return new FluentAssertions($data);
+        return new FluentAssertions(variable: $variable);
     }
 
     /**
@@ -24,7 +24,7 @@ class FluentAssertions
      */
     public function is(mixed $expected, string $message = ''): self
     {
-        Assert::assertSame($expected, $this->data, $message);
+        Assert::assertSame(expected: $expected, actual: $this->variable, message: $message);
 
         return $this;
     }
@@ -36,27 +36,51 @@ class FluentAssertions
      */
     public function not(mixed $expected, string $message = ''): self
     {
-        Assert::assertNotSame($expected, $this->data, $message);
+        Assert::assertNotSame(expected: $expected, actual: $this->variable, message: $message);
 
         return $this;
     }
 
     /**
-     * Asserts that a condition is true. Use strict comparison (value === true).
+     * Asserts that a variable is true.
+     * Use strict comparison (variable === true).
      */
     public function true(string $message = ''): self
     {
-        Assert::assertTrue($this->data, $message);
+        Assert::assertTrue(condition: $this->variable, message: $message);
 
         return $this;
     }
 
     /**
-     * Asserts that a condition is false. Use strict comparison (value === false).
+     * Asserts that a variable is not true.
+     * Use strict comparison (variable !== true).
+     */
+    public function notTrue(string $message = ''): self
+    {
+        Assert::assertNotTrue(condition: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is false.
+     * Use strict comparison (variable === false).
      */
     public function false(string $message = ''): self
     {
-        Assert::assertFalse($this->data, $message);
+        Assert::assertFalse(condition: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is not true.
+     * Use strict comparison (variable !== false).
+     */
+    public function notFalse(string $message = ''): self
+    {
+        Assert::assertNotFalse(condition: $this->variable, message: $message);
 
         return $this;
     }
@@ -66,7 +90,7 @@ class FluentAssertions
      */
     public function null(string $message = ''): self
     {
-        Assert::assertNull($this->data, $message);
+        Assert::assertNull(actual: $this->variable, message: $message);
 
         return $this;
     }
@@ -76,7 +100,7 @@ class FluentAssertions
      */
     public function notNull(string $message = ''): self
     {
-        Assert::assertNotNull($this->data, $message);
+        Assert::assertNotNull(actual: $this->variable, message: $message);
 
         return $this;
     }

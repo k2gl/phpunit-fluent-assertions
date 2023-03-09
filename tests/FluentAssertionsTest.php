@@ -16,26 +16,26 @@ class FluentAssertionsTest extends TestCase
     public function testConstructor(): void
     {
         // arrange
-        $value = random_bytes(16);
+        $variable = random_bytes(16);
 
         // act
-        $sut = new FluentAssertions($value);
+        $sut = new FluentAssertions(variable: $variable);
 
         // assert
         self::assertInstanceOf(expected: FluentAssertions::class, actual: $sut);
-        self::assertSame(expected: $value, actual: $sut->data);
+        self::assertSame(expected: $variable, actual: $sut->variable);
     }
 
     public function testStaticConstructor(): void
     {
         // arrange
-        $value = random_bytes(16);
+        $variable = random_bytes(16);
 
         // act
-        $sut = FluentAssertions::for($value);
+        $sut = FluentAssertions::for(variable: $variable);
 
         // assert
         self::assertInstanceOf(expected: FluentAssertions::class, actual: $sut);
-        self::assertSame(expected: $value, actual: $sut->data);
+        self::assertSame(expected: $variable, actual: $sut->variable);
     }
 }

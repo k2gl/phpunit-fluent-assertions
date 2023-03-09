@@ -13,8 +13,7 @@ use function k2gl\PHPUnitFluentAssertions\fact;
  */
 class TrueTest extends TestCase
 {
-
-    public function testPassedForStrictTrue(): void
+    public function testTrue(): void
     {
         // act
         fact(true)->true();
@@ -24,27 +23,29 @@ class TrueTest extends TestCase
     }
 
     /**
-     * @dataProvider dataThatShouldNotPass
+     * @dataProvider notTrueDataProvider
      */
-    public function testNotPassedForOtherValues(mixed $data): void
+    public function testNotTrue(mixed $variable): void
     {
         // assert
         $this->expectException(ExpectationFailedException::class);
 
         // act
-        fact($data)->true();
+        fact($variable)->true();
     }
 
-    public function dataThatShouldNotPass(): array
+    public function notTrueDataProvider(): array
     {
         return [
+            [null],
             [false],
             [0],
             [1],
             ['0'],
             ['1'],
+            ['foo'],
             [(object) ['foo' => 'bar']],
-            [fn() => false],
+            [fn() => null],
         ];
     }
 }

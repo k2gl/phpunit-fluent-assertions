@@ -15,39 +15,39 @@ class FunctionsTest extends TestCase
     public function testCheckMethod(): void
     {
         // arrange
-        $value = random_bytes(16);
+        $variable = random_bytes(16);
 
         // act
-        $sut = check($value);
+        $sut = check(variable: $variable);
 
         // assert
         self::assertInstanceOf(expected: FluentAssertions::class, actual: $sut);
-        self::assertSame(expected: $value, actual: $sut->data);
+        self::assertSame(expected: $variable, actual: $sut->variable);
     }
 
     public function testExpectMethod(): void
     {
         // arrange
-        $value = random_bytes(16);
+        $variable = random_bytes(16);
 
         // act
-        $sut = expect($value);
+        $sut = expect(variable: $variable);
 
         // assert
         self::assertInstanceOf(expected: FluentAssertions::class, actual: $sut);
-        self::assertSame(expected: $value, actual: $sut->data);
+        self::assertSame(expected: $variable, actual: $sut->variable);
     }
 
     public function testFactMethod(): void
     {
         // arrange
-        $value = random_bytes(16);
+        $variable = random_bytes(16);
 
         // act
-        $sut = fact($value);
+        $sut = fact(variable: $variable);
 
         // assert
         self::assertInstanceOf(expected: FluentAssertions::class, actual: $sut);
-        self::assertSame(expected: $value, actual: $sut->data);
+        self::assertSame(expected: $variable, actual: $sut->variable);
     }
 }
