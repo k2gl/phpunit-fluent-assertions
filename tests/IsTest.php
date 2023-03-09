@@ -13,21 +13,54 @@ use function k2gl\PHPUnitFluentAssertions\fact;
  */
 class IsTest extends TestCase
 {
-    public function testPassedForInt(): void
+    /**
+     * @dataProvider dataProviderWhereDataIsTheSameAsCompared
+     */
+    public function testDataIsTheSameAsCompared(mixed $data, mixed $compare): void
     {
         // act
-        FluentAssertions::for(7)->is(7);
+        fact($data)->is($compare);
 
         // assert
         self::assertSame(expected: 1, actual: Assert::getCount());
     }
 
-    public function testNotPassedForInt(): void
+    /**
+     * @dataProvider dataProviderWhereDataIsNotTheSameAsCompared
+     */
+    public function testDataIsNotTheSameAsCompared(mixed $data, mixed $compare): void
     {
         // assert
         $this->expectException(ExpectationFailedException::class);
 
         // act
-        FluentAssertions::for(7)->is(77);
+        fact($data)->is($compare);
+    }
+
+    public function dataProviderWhereDataIsTheSameAsCompared(): array
+    {
+        return [
+            [1, 1],
+            [false, false],
+            [null, null],
+            ['0', '0'],
+            [['foo' => 'bar'], ['foo' => 'bar']],
+            [$object = (object) ['foo' => 'bar'], $object],
+            [$fn = fn() => false, $fn],
+        ];
+    }
+
+    public function dataProviderWhereDataIsNotTheSameAsCompared(): array
+    {
+        return [
+            [1, 2],
+            [false, 0],
+            [0, false],
+            ['0', 0],
+            ['1', 1],
+            [['foo' => 'bar'], ['bar' => 'foo']],
+            [(object) ['foo' => 'bar'], (object) ['foo' => 'bar']],
+            [fn() => false, fn() => true],
+        ];
     }
 }

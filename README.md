@@ -35,6 +35,10 @@ self::assertNotSame(expected: $phoneBeforeAct, actual: $user->getPhone());
 fact($user->getPhone())
     ->is($phoneAfterAct)
     ->not($phoneBeforeAct)
+    ->true()
+    ->false()
+    ->null()
+    ->notNull()
     ...
     ;
 ```
