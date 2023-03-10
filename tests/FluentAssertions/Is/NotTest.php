@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\Is;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::not
  */
-class NotTest extends TestCase
+class NotTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider notSameDataProvider
@@ -22,7 +20,7 @@ class NotTest extends TestCase
         fact($variable)->not($compare);
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     /**
@@ -31,7 +29,7 @@ class NotTest extends TestCase
     public function testSame(mixed $variable, mixed $compare): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact($variable)->not($compare);

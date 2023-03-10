@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\ContainsString;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::containsString
  */
-class ContainsStringTest extends TestCase
+class ContainsStringTest extends FluentAssertionsTestCase
 {
     public function testContainsString(): void
     {
@@ -19,7 +17,7 @@ class ContainsStringTest extends TestCase
         fact('alpha beta gamma')->containsString('beta');
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     /**
@@ -28,7 +26,7 @@ class ContainsStringTest extends TestCase
     public function testNotContainsString(string $variable, string $string): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact($variable)->containsString($string);

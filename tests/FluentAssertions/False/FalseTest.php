@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\False;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::false
  */
-class FalseTest extends TestCase
+class FalseTest extends FluentAssertionsTestCase
 {
     public function testFalse(): void
     {
@@ -19,7 +17,7 @@ class FalseTest extends TestCase
         fact(false)->false();
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     /**
@@ -28,7 +26,7 @@ class FalseTest extends TestCase
     public function testNotFalse(mixed $variable): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact($variable)->false();

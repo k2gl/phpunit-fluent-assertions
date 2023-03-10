@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\MatchesRegularExpression;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notMatchesRegularExpression
  */
-class NotMatchesRegularExpressionTest extends TestCase
+class NotMatchesRegularExpressionTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider notMatchesRegularExpressionDataProvider
@@ -22,7 +20,7 @@ class NotMatchesRegularExpressionTest extends TestCase
         fact($variable)->notMatchesRegularExpression($pattern);
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     /**
@@ -31,7 +29,7 @@ class NotMatchesRegularExpressionTest extends TestCase
     public function testMatchesRegularExpression(string $variable, string $pattern): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact($variable)->notMatchesRegularExpression($pattern);

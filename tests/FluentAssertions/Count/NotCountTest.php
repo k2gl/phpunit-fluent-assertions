@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\Count;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notCount
  */
-class NotCountTest extends TestCase
+class NotCountTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider wrongElementsCountDataProvider
@@ -22,13 +20,13 @@ class NotCountTest extends TestCase
         fact($variable)->notCount($elementsCount);
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     public function testRightElementsCount(): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact(['alpha', 'beta', 'gamma'])->notCount(3);

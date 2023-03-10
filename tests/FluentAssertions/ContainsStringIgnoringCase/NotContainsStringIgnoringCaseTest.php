@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\ContainsStringIgnoringCase;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notContainsStringIgnoringCase
  */
-class NotContainsStringIgnoringCaseTest extends TestCase
+class NotContainsStringIgnoringCaseTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider notContainsStringDataProvider
@@ -22,7 +20,7 @@ class NotContainsStringIgnoringCaseTest extends TestCase
         fact($variable)->notContainsStringIgnoringCase($string);
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     /**
@@ -31,7 +29,7 @@ class NotContainsStringIgnoringCaseTest extends TestCase
     public function testContainsStringIgnoringCase(string $variable, string $string): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact($variable)->notContainsStringIgnoringCase($string);

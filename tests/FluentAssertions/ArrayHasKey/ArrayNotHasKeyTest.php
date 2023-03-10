@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\ArrayHasKey;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::arrayNotHasKey
  */
-class ArrayNotHasKeyTest extends TestCase
+class ArrayNotHasKeyTest extends FluentAssertionsTestCase
 {
     public function testNotHasKey(): void
     {
@@ -19,13 +17,13 @@ class ArrayNotHasKeyTest extends TestCase
         fact(['alpha' => 'beta'])->arrayNotHasKey('beta');
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     public function testHasKey(): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact(['alpha' => 'beta'])->arrayNotHasKey('alpha');

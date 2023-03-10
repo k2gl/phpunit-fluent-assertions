@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\Count;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::count
  */
-class CountTest extends TestCase
+class CountTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider expectedCountDataProvider
@@ -22,13 +20,13 @@ class CountTest extends TestCase
         fact($variable)->count($expectedCount);
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     public function testNotExpectedCount(): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact(['alpha', 'beta', 'gamma'])->count(44);

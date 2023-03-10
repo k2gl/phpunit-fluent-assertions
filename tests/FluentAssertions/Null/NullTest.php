@@ -2,16 +2,14 @@
 
 namespace App\Tests\FluentAssertions\Null;
 
+use App\Tests\Lib\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
-use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::null
  */
-class NullTest extends TestCase
+class NullTest extends FluentAssertionsTestCase
 {
     public function testNull(): void
     {
@@ -19,7 +17,7 @@ class NullTest extends TestCase
         fact(null)->null();
 
         // assert
-        self::assertSame(expected: 1, actual: Assert::getCount());
+        $this->correctAssertionExecuted();
     }
 
     /**
@@ -28,7 +26,7 @@ class NullTest extends TestCase
     public function testNotNull(mixed $variable): void
     {
         // assert
-        $this->expectException(ExpectationFailedException::class);
+        $this->incorrectAssertionExpected();
 
         // act
         fact($variable)->null();
