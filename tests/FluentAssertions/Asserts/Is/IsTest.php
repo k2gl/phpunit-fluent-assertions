@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\FluentAssertions\Is;
+namespace App\Tests\FluentAssertions\Asserts\Is;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::is
  */
-class IsTest extends FluentAssertionsTestCase
+final class IsTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider sameDataProvider

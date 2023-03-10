@@ -1,14 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests\Lib;
+namespace App\Tests\FluentAssertions;
 
+use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
-class FluentAssertionsTestCase extends TestCase
+abstract class FluentAssertionsTestCase extends TestCase
 {
+    protected function hasExpectedVariable(FluentAssertions $fluentAssertions, mixed $expected): void
+    {
+        self::assertSame(expected: $expected, actual: $fluentAssertions->variable);
+    }
+
     protected function correctAssertionExecuted(): void
     {
         $this->correctAssertionsExecuted(expected: 1);

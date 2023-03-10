@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\FluentAssertions\ArrayHasKey;
+namespace App\Tests\FluentAssertions\Asserts\ArrayHasKey;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::arrayNotHasKey
  */
-class ArrayNotHasKeyTest extends FluentAssertionsTestCase
+final class ArrayNotHasKeyTest extends FluentAssertionsTestCase
 {
     public function testNotHasKey(): void
     {

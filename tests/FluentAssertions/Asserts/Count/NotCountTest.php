@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\FluentAssertions\Count;
+namespace App\Tests\FluentAssertions\Asserts\Count;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notCount
  */
-class NotCountTest extends FluentAssertionsTestCase
+final class NotCountTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider wrongElementsCountDataProvider

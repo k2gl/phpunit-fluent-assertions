@@ -1,49 +1,49 @@
 <?php
 
-namespace App\Tests\FluentAssertions\True;
+namespace App\Tests\FluentAssertions\Asserts\False;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
- * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notTrue
+ * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notFalse
  */
-class NotTrueTest extends FluentAssertionsTestCase
+final class NotFalseTest extends FluentAssertionsTestCase
 {
-    public function testTrue(): void
+    public function testFalse(): void
     {
         // assert
         $this->incorrectAssertionExpected();
 
         // act
-        fact(true)->notTrue();
+        fact(false)->notFalse();
     }
 
     /**
-     * @dataProvider notTrueDataProvider
+     * @dataProvider notFalseDataProvider
      */
-    public function testNotTrue(mixed $variable): void
+    public function testNotFalse(mixed $variable): void
     {
         // act
-        fact($variable)->notTrue();
+        fact($variable)->notFalse();
 
         // assert
         $this->correctAssertionExecuted();
     }
 
-    private function notTrueDataProvider(): array
+    private function notFalseDataProvider(): array
     {
         return [
             [null],
-            [false],
+            [true],
             [0],
             [1],
             ['0'],
             ['1'],
             [['foo' => 'bar'], ['foo' => 'bar']],
             [(object) ['foo' => 'bar']],
-            [fn() => true],
+            [fn() => false],
         ];
     }
 }

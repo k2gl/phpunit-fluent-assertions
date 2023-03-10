@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\FluentAssertions\MatchesRegularExpression;
+namespace App\Tests\FluentAssertions\Asserts\MatchesRegularExpression;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notMatchesRegularExpression
  */
-class NotMatchesRegularExpressionTest extends FluentAssertionsTestCase
+final class NotMatchesRegularExpressionTest extends FluentAssertionsTestCase
 {
     /**
      * @dataProvider notMatchesRegularExpressionDataProvider

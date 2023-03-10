@@ -1,38 +1,38 @@
 <?php
 
-namespace App\Tests\FluentAssertions\ContainsStringIgnoringCase;
+namespace App\Tests\FluentAssertions\Asserts\ContainsStringIgnoringCase;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
- * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notContainsStringIgnoringCase
+ * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::containsStringIgnoringCase
  */
-class NotContainsStringIgnoringCaseTest extends FluentAssertionsTestCase
+final class ContainsStringIgnoringCaseTest extends FluentAssertionsTestCase
 {
     /**
-     * @dataProvider notContainsStringDataProvider
+     * @dataProvider containsStringDataProvider
      */
-    public function testNotContainsStringIgnoringCase(string $variable, string $string): void
+    public function testContainsStringIgnoringCase(string $variable, string $string): void
     {
         // act
-        fact($variable)->notContainsStringIgnoringCase($string);
+        fact($variable)->containsStringIgnoringCase($string);
 
         // assert
         $this->correctAssertionExecuted();
     }
 
     /**
-     * @dataProvider containsStringDataProvider
+     * @dataProvider notContainsStringDataProvider
      */
-    public function testContainsStringIgnoringCase(string $variable, string $string): void
+    public function testNotContainsStringIgnoringCase(string $variable, string $string): void
     {
         // assert
         $this->incorrectAssertionExpected();
 
         // act
-        fact($variable)->notContainsStringIgnoringCase($string);
+        fact($variable)->containsStringIgnoringCase($string);
     }
 
     private function containsStringDataProvider(): array

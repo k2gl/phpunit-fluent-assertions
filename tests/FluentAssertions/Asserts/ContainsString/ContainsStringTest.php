@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\FluentAssertions\ContainsString;
+namespace App\Tests\FluentAssertions\Asserts\ContainsString;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::containsString
  */
-class ContainsStringTest extends FluentAssertionsTestCase
+final class ContainsStringTest extends FluentAssertionsTestCase
 {
     public function testContainsString(): void
     {

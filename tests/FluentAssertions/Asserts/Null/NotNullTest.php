@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Tests\FluentAssertions\Null;
+namespace App\Tests\FluentAssertions\Asserts\Null;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
- * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::null
+ * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notNull
  */
-class NullTest extends FluentAssertionsTestCase
+final class NotNullTest extends FluentAssertionsTestCase
 {
     public function testNull(): void
     {
-        // act
-        fact(null)->null();
-
         // assert
-        $this->correctAssertionExecuted();
+        $this->incorrectAssertionExpected();
+
+        // act
+        fact(null)->notNull();
     }
 
     /**
@@ -25,17 +25,19 @@ class NullTest extends FluentAssertionsTestCase
      */
     public function testNotNull(mixed $variable): void
     {
-        // assert
-        $this->incorrectAssertionExpected();
-
         // act
-        fact($variable)->null();
+        fact($variable)->notNull();
+
+        // assert
+        $this->correctAssertionExecuted();
     }
 
     private function notNullDataProvider(): array
     {
         return [
             [true],
+            [false],
+            [0],
             [1],
             ['foo'],
             [['foo' => 'bar']],

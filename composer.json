@@ -27,7 +27,7 @@
       "k2gl\\PHPUnitFluentAssertions\\": "src/"
     },
     "files": [
-      "src/functions.php"
+      "src/aliases.php"
     ]
   },
   "autoload-dev": {

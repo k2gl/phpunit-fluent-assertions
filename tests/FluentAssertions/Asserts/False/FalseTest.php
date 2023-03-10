@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\FluentAssertions\False;
+namespace App\Tests\FluentAssertions\Asserts\False;
 
-use App\Tests\Lib\FluentAssertionsTestCase;
+use App\Tests\FluentAssertions\FluentAssertionsTestCase;
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
  * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::false
  */
-class FalseTest extends FluentAssertionsTestCase
+final class FalseTest extends FluentAssertionsTestCase
 {
     public function testFalse(): void
     {
