@@ -34,7 +34,7 @@ class NullTest extends TestCase
         fact($variable)->null();
     }
 
-    public function notNullDataProvider(): array
+    private function notNullDataProvider(): array
     {
         return [
             [true],

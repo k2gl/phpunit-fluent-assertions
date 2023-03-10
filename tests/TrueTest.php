@@ -34,7 +34,7 @@ class TrueTest extends TestCase
         fact($variable)->true();
     }
 
-    public function notTrueDataProvider(): array
+    private function notTrueDataProvider(): array
     {
         return [
             [null],

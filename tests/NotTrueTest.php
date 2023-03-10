@@ -34,7 +34,7 @@ class NotTrueTest extends TestCase
         self::assertSame(expected: 1, actual: Assert::getCount());
     }
 
-    public function notTrueDataProvider(): array
+    private function notTrueDataProvider(): array
     {
         return [
             [null],

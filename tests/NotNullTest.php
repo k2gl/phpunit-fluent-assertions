@@ -34,7 +34,7 @@ class NotNullTest extends TestCase
         self::assertSame(expected: 1, actual: Assert::getCount());
     }
 
-    public function notNullDataProvider(): array
+    private function notNullDataProvider(): array
     {
         return [
             [true],

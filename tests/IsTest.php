@@ -37,7 +37,7 @@ class IsTest extends TestCase
         fact($variable)->is($compare);
     }
 
-    public function sameDataProvider(): array
+    private function sameDataProvider(): array
     {
         return [
             [null, null],
@@ -52,7 +52,7 @@ class IsTest extends TestCase
         ];
     }
 
-    public function notSameDataProvider(): array
+    private function notSameDataProvider(): array
     {
         return [
             [null, false],

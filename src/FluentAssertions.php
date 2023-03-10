@@ -4,15 +4,16 @@ declare(strict_types=1);
 namespace k2gl\PHPUnitFluentAssertions;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Util\RegularExpression;
 
 class FluentAssertions
 {
     public function __construct(
-        public readonly mixed $variable
+        public readonly mixed $variable = null
     ) {
     }
 
-    public static function for(mixed $variable): self
+    public static function for(mixed $variable = null): self
     {
         return new FluentAssertions(variable: $variable);
     }
@@ -105,4 +106,23 @@ class FluentAssertions
         return $this;
     }
 
+    /**
+     * Asserts that a variable matches a given regular expression.
+     */
+    public function matchesRegularExpression(string $pattern, string $message = ''): self
+    {
+        Assert::assertMatchesRegularExpression(pattern: $pattern, string: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable does not match a given regular expression.
+     */
+    public function notMatchesRegularExpression(string $pattern, string $message = ''): self
+    {
+        Assert::assertDoesNotMatchRegularExpression(pattern: $pattern, string: $this->variable, message: $message);
+
+        return $this;
+    }
 }
