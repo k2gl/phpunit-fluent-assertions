@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace k2gl\PHPUnitFluentAssertions;
 
 use PHPUnit\Framework\Assert;
-use PHPUnit\Util\RegularExpression;
 
 class FluentAssertions
 {
@@ -182,6 +181,26 @@ class FluentAssertions
     public function notCount(int $elementsCount, string $message = ''): self
     {
         Assert::assertNotCount(expectedCount: $elementsCount, haystack: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts the variable has key.
+     */
+    public function arrayHasKey(int|string $key, string $message = ''): self
+    {
+        Assert::assertArrayHasKey(key: $key, array: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts the variable does not have key.
+     */
+    public function arrayNotHasKey(int|string $key, string $message = ''): self
+    {
+        Assert::assertArrayNotHasKey(key: $key, array: $this->variable, message: $message);
 
         return $this;
     }

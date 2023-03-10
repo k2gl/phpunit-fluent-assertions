@@ -44,11 +44,13 @@ fact($user->getPhone())
     ->matchesRegularExpression('#^\d+$#')
     ->notMatchesRegularExpression('#^\D+$#')
     ->containsString('alpha')
-    ->notContainsString('beta')
-    ->containsStringIgnoringCase('ALPHA')
-    ->notContainsStringIgnoringCase('BETA')
+    ->notContainsString('alpha')
+    ->containsStringIgnoringCase('beta')
+    ->notContainsStringIgnoringCase('beta')
     ->count(5)
     ->notCount(5)
+    ->arrayHasKey('echo')
+    ->arrayNotHasKey('echo')
     ...
     ;
 ```
