@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\FluentAssertions\True;
 
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
@@ -9,42 +9,43 @@ use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\fact;
 
 /**
- * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::false
+ * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::true
  */
-class FalseTest extends TestCase
+class TrueTest extends TestCase
 {
-    public function testFalse(): void
+    public function testTrue(): void
     {
         // act
-        fact(false)->false();
+        fact(true)->true();
 
         // assert
         self::assertSame(expected: 1, actual: Assert::getCount());
     }
 
     /**
-     * @dataProvider notFalseDataProvider
+     * @dataProvider notTrueDataProvider
      */
-    public function testNotFalse(mixed $variable): void
+    public function testNotTrue(mixed $variable): void
     {
         // assert
         $this->expectException(ExpectationFailedException::class);
 
         // act
-        fact($variable)->false();
+        fact($variable)->true();
     }
 
-    private function notFalseDataProvider(): array
+    private function notTrueDataProvider(): array
     {
         return [
             [null],
-            [true],
+            [false],
             [0],
             [1],
             ['0'],
             ['1'],
+            ['foo'],
             [(object) ['foo' => 'bar']],
-            [fn() => false],
+            [fn() => null],
         ];
     }
 }

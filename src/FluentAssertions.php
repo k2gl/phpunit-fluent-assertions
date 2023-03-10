@@ -165,4 +165,24 @@ class FluentAssertions
 
         return $this;
     }
+
+    /**
+     * Asserts the number of elements of an array, Countable or Traversable.
+     */
+    public function count(int $expectedCount, string $message = ''): self
+    {
+        Assert::assertCount(expectedCount: $expectedCount, haystack: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts the number of elements of an array, Countable or Traversable.
+     */
+    public function notCount(int $elementsCount, string $message = ''): self
+    {
+        Assert::assertNotCount(expectedCount: $elementsCount, haystack: $this->variable, message: $message);
+
+        return $this;
+    }
 }

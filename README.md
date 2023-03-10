@@ -47,6 +47,8 @@ fact($user->getPhone())
     ->notContainsString('beta')
     ->containsStringIgnoringCase('ALPHA')
     ->notContainsStringIgnoringCase('BETA')
+    ->count(5)
+    ->notCount(5)
     ...
     ;
 ```

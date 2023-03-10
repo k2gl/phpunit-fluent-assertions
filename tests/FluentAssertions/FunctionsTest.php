@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\FluentAssertions;
 
 use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use function k2gl\PHPUnitFluentAssertions\check;
 use function k2gl\PHPUnitFluentAssertions\expect;
