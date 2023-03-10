@@ -41,6 +41,12 @@ fact($user->getPhone())
     ->notFalse()
     ->null()
     ->notNull()
+    ->matchesRegularExpression('#^\d+$#')
+    ->notMatchesRegularExpression('#^\D+$#')
+    ->containsString('alpha')
+    ->notContainsString('beta')
+    ->containsStringIgnoringCase('ALPHA')
+    ->notContainsStringIgnoringCase('BETA')
     ...
     ;
 ```

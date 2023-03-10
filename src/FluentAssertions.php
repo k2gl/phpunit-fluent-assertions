@@ -125,4 +125,44 @@ class FluentAssertions
 
         return $this;
     }
+
+    /**
+     * Asserts that a variable contains string.
+     */
+    public function containsString(string $string, string $message = ''): self
+    {
+        Assert::assertStringContainsString(needle: $string, haystack: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable does not contain string.
+     */
+    public function notContainsString(string $string, string $message = ''): self
+    {
+        Assert::assertStringNotContainsString(needle: $string, haystack: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable contains string in any case.
+     */
+    public function containsStringIgnoringCase(string $string, string $message = ''): self
+    {
+        Assert::assertStringContainsStringIgnoringCase(needle: $string, haystack: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable does not contain string in any case.
+     */
+    public function notContainsStringIgnoringCase(string $string, string $message = ''): self
+    {
+        Assert::assertStringNotContainsStringIgnoringCase(needle: $string, haystack: $this->variable, message: $message);
+
+        return $this;
+    }
 }
