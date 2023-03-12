@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\FluentAssertions;
+namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions;
 
-use k2gl\PHPUnitFluentAssertions\FluentAssertions;
+use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;

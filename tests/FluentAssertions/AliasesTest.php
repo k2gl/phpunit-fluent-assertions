@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\FluentAssertions;
+namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions;
 
-use function k2gl\PHPUnitFluentAssertions\check;
-use function k2gl\PHPUnitFluentAssertions\expect;
-use function k2gl\PHPUnitFluentAssertions\fact;
+use function K2gl\PHPUnitFluentAssertions\check;
+use function K2gl\PHPUnitFluentAssertions\expect;
+use function K2gl\PHPUnitFluentAssertions\fact;
 
 final class AliasesTest extends FluentAssertionsTestCase
 {

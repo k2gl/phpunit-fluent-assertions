@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\FluentAssertions\Asserts\True;
+namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\True;
 
-use App\Tests\FluentAssertions\FluentAssertionsTestCase;
-use k2gl\PHPUnitFluentAssertions\FluentAssertions;
-use function k2gl\PHPUnitFluentAssertions\fact;
+use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
+use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use function K2gl\PHPUnitFluentAssertions\fact;
 
 /**
- * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions::notTrue
+ * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::notTrue
  */
 final class NotTrueTest extends FluentAssertionsTestCase
 {

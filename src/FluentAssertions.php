@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace k2gl\PHPUnitFluentAssertions;
+namespace K2gl\PHPUnitFluentAssertions;
 
 use PHPUnit\Framework\Assert;
 

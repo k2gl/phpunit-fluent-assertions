@@ -21,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "k2gl\\PHPUnitFluentAssertions\\": "src/"
+      "K2gl\\PHPUnitFluentAssertions\\": "src/"
     },
     "files": [
       "src/aliases.php"
@@ -29,7 +29,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "App\\Tests\\": "tests/"
+      "K2gl\\PHPUnitFluentAssertions\\Tests\\": "tests/"
     }
   }
 }

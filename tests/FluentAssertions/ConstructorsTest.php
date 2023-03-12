@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Tests\FluentAssertions;
+namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions;
 
-use k2gl\PHPUnitFluentAssertions\FluentAssertions;
+use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 
 /**
- * @covers \k2gl\PHPUnitFluentAssertions\FluentAssertions
+ * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions
  */
 final class ConstructorsTest extends FluentAssertionsTestCase
 {
