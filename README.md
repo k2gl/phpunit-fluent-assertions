@@ -51,6 +51,8 @@ fact($user->getPhone())
     ->notCount(5)
     ->arrayHasKey('echo')
     ->arrayNotHasKey('echo')
+    ->instanceOf(UserFactory::class)
+    ->notInstanceOf(UserFactory::class)
     ...
     ;
 ```

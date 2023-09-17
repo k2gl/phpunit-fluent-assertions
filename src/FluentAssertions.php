@@ -203,4 +203,24 @@ class FluentAssertions
 
         return $this;
     }
+
+    /**
+     * Asserts that a variable is of a given type.
+     */
+    public function instanceOf(mixed $expected, string $message = ''): self
+    {
+        Assert::assertInstanceOf(expected: $expected, actual: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is not of a given type.
+     */
+    public function notInstanceOf(mixed $expected, string $message = ''): self
+    {
+        Assert::assertNotInstanceOf(expected: $expected, actual: $this->variable, message: $message);
+
+        return $this;
+    }
 }

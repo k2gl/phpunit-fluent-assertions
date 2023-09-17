@@ -11,6 +11,18 @@ use function K2gl\PHPUnitFluentAssertions\fact;
  */
 final class ArrayHasKeyTest extends FluentAssertionsTestCase
 {
+    /**
+     * @dataProvider notHasKeyDataProvider
+     */
+    public function testFailArrayNotHasKey(array $variable, int|string $key): void
+    {
+        // assert
+        $this->incorrectAssertionExpected();
+
+        // act
+        fact($variable)->arrayHasKey($key);
+    }
+
     public function testHasKey(): void
     {
         // act
@@ -18,18 +30,6 @@ final class ArrayHasKeyTest extends FluentAssertionsTestCase
 
         // assert
         $this->correctAssertionExecuted();
-    }
-
-    /**
-     * @dataProvider notHasKeyDataProvider
-     */
-    public function testNotHasKey(array $variable, int|string $key): void
-    {
-        // assert
-        $this->incorrectAssertionExpected();
-
-        // act
-        fact($variable)->arrayHasKey($key);
     }
 
     private function notHasKeyDataProvider(): array
