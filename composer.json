@@ -31,5 +31,6 @@
     "psr-4": {
       "K2gl\\PHPUnitFluentAssertions\\Tests\\": "tests/"
     }
-  }
+  },
+  "minimum-stability": "stable"
 }
