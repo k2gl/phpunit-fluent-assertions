@@ -32,11 +32,12 @@ final class FalseTest extends FluentAssertionsTestCase
         fact($variable)->false();
     }
 
-    private function notFalseDataProvider(): array
+    public static function notFalseDataProvider(): array
     {
         return [
             [null],
             [true],
+            ['false'],
             [0],
             [1],
             ['0'],

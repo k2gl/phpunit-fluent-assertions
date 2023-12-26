@@ -35,7 +35,7 @@ final class IsTest extends FluentAssertionsTestCase
         fact($variable)->is($compare);
     }
 
-    private function sameDataProvider(): array
+    public static function sameDataProvider(): array
     {
         return [
             [null, null],
@@ -50,7 +50,7 @@ final class IsTest extends FluentAssertionsTestCase
         ];
     }
 
-    private function notSameDataProvider(): array
+    public static function notSameDataProvider(): array
     {
         return [
             [null, false],
@@ -62,8 +62,9 @@ final class IsTest extends FluentAssertionsTestCase
             ['1', 1],
             ['foo', 'baz'],
             [['foo' => 'bar'], ['bar' => 'foo']],
+            [['foo' => 'bar', 'miss' => 'kiss'], ['miss' => 'kiss', 'foo' => 'bar']],
             [(object) ['foo' => 'bar'], (object) ['foo' => 'bar']],
-            [fn() => false, fn() => true],
+            [fn() => false, fn() => false],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace K2gl\PHPUnitFluentAssertions;
 
+use K2gl\PHPUnitFluentAssertions\Reference\RegularExpressionPattern;
 use PHPUnit\Framework\Assert;
 
 class FluentAssertions
@@ -24,6 +25,16 @@ class FluentAssertions
     public function is(mixed $expected, string $message = ''): self
     {
         Assert::assertSame(expected: $expected, actual: $this->variable, message: $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that two variables are equal.
+     */
+    public function equals(mixed $expected, string $message = ''): self
+    {
+        Assert::assertEquals(expected: $expected, actual: $this->variable, message: $message);
 
         return $this;
     }
@@ -222,5 +233,10 @@ class FluentAssertions
         Assert::assertNotInstanceOf(expected: $expected, actual: $this->variable, message: $message);
 
         return $this;
+    }
+
+    public function ulid(): self
+    {
+        return $this->matchesRegularExpression(pattern: RegularExpressionPattern::ULID);
     }
 }

@@ -35,7 +35,7 @@ final class NotTest extends FluentAssertionsTestCase
         fact($variable)->not($compare);
     }
 
-    private function notSameDataProvider(): array
+    public static function notSameDataProvider(): array
     {
         return [
             [null, false],
@@ -47,11 +47,11 @@ final class NotTest extends FluentAssertionsTestCase
             ['foo', 'bar'],
             [['foo' => 'bar'], ['bar' => 'foo']],
             [(object) ['foo' => 'bar'], (object) ['foo' => 'bar']],
-            [fn() => false, fn() => true],
+            [fn() => false, fn() => false],
         ];
     }
 
-    private function sameDataProvider(): array
+    public static function sameDataProvider(): array
     {
         return [
             [null, null],

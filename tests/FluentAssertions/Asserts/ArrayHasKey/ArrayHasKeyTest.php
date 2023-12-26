@@ -32,7 +32,7 @@ final class ArrayHasKeyTest extends FluentAssertionsTestCase
         $this->correctAssertionExecuted();
     }
 
-    private function notHasKeyDataProvider(): array
+    public static function notHasKeyDataProvider(): array
     {
         return [
             [[], 0],

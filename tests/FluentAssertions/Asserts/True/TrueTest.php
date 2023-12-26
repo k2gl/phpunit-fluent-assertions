@@ -32,7 +32,7 @@ final class TrueTest extends FluentAssertionsTestCase
         fact($variable)->true();
     }
 
-    private function notTrueDataProvider(): array
+    public static function notTrueDataProvider(): array
     {
         return [
             [null],

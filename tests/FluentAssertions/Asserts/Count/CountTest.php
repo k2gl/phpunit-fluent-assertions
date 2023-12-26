@@ -32,7 +32,7 @@ final class CountTest extends FluentAssertionsTestCase
         fact(['alpha', 'beta', 'gamma'])->count(44);
     }
 
-    private function expectedCountDataProvider(): array
+    public static function expectedCountDataProvider(): array
     {
         return [
             [[], 0],

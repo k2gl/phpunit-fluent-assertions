@@ -35,7 +35,7 @@ final class ContainsStringIgnoringCaseTest extends FluentAssertionsTestCase
         fact($variable)->containsStringIgnoringCase($string);
     }
 
-    private function containsStringDataProvider(): array
+    public static function containsStringDataProvider(): array
     {
         return [
             ['alpha beta gamma', 'beta'],
@@ -44,7 +44,7 @@ final class ContainsStringIgnoringCaseTest extends FluentAssertionsTestCase
         ];
     }
 
-    private function notContainsStringDataProvider(): array
+    public static function notContainsStringDataProvider(): array
     {
         return [
             ['alpha beta gamma', 'echo'],

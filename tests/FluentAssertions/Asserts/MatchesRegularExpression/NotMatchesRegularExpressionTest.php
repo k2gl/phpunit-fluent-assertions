@@ -35,7 +35,7 @@ final class NotMatchesRegularExpressionTest extends FluentAssertionsTestCase
         fact($variable)->notMatchesRegularExpression($pattern);
     }
 
-    private function notMatchesRegularExpressionDataProvider(): array
+    public static function notMatchesRegularExpressionDataProvider(): array
     {
         return [
             ['123456', '#^\D+$#'],
@@ -44,7 +44,7 @@ final class NotMatchesRegularExpressionTest extends FluentAssertionsTestCase
         ];
     }
 
-    private function matchesRegularExpressionDataProvider(): array
+    public static function matchesRegularExpressionDataProvider(): array
     {
         return [
             ['123456', '#^\d+$#'],

@@ -32,7 +32,7 @@ final class NotCountTest extends FluentAssertionsTestCase
         fact(['alpha', 'beta', 'gamma'])->notCount(3);
     }
 
-    private function wrongElementsCountDataProvider(): array
+    public static function wrongElementsCountDataProvider(): array
     {
         return [
             [['alpha', 'beta', 'gamma'], 2],

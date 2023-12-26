@@ -32,7 +32,7 @@ final class ContainsStringTest extends FluentAssertionsTestCase
         fact($variable)->containsString($string);
     }
 
-    private function notContainsStringDataProvider(): array
+    public static function notContainsStringDataProvider(): array
     {
         return [
             ['alpha beta gamma', 'echo'],

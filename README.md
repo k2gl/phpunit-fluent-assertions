@@ -3,6 +3,8 @@
 This library is insperated by [Vladimir Khorikov](https://enterprisecraftsmanship.com/), the author
 of [Unit Testing: Principles, Patterns and Practices](https://enterprisecraftsmanship.com/book-amazon) and makes checks in tests more readable.
 
+[![GitHub Actions](https://github.com/k2gl/phpunit-fluent-assertions/workflows/CI/badge.svg)](https://github.com/k2gl/phpunit-fluent-assertions/actions?workflow=CI)
+
 ## Installation
 
 You can add this library as a local, per-project dependency to your project using [Composer](https://getcomposer.org/):
