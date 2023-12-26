@@ -8,6 +8,7 @@ use function K2gl\PHPUnitFluentAssertions\fact;
 
 final class AliasesTest extends FluentAssertionsTestCase
 {
+    /** @covers \K2gl\PHPUnitFluentAssertions\check */
     public function testCheckMethod(): void
     {
         // arrange
@@ -20,6 +21,7 @@ final class AliasesTest extends FluentAssertionsTestCase
         $this->hasExpectedVariable(fluentAssertions: $fluentAssertions, expected: $variable);
     }
 
+    /** @covers \K2gl\PHPUnitFluentAssertions\expect */
     public function testExpectMethod(): void
     {
         // arrange
@@ -32,6 +34,7 @@ final class AliasesTest extends FluentAssertionsTestCase
         $this->hasExpectedVariable(fluentAssertions: $fluentAssertions, expected: $variable);
     }
 
+    /** @covers \K2gl\PHPUnitFluentAssertions\fact */
     public function testFactMethod(): void
     {
         // arrange
