@@ -14,29 +14,30 @@ composer require --dev k2gl/phpunit-fluent-assertions
 ```
 
 ## Usage
-Write tests as usual, just use fluent assertions short aliases ``` check($x)->...; ```, ``` expect($x)->...; ```, ``` fact($x)->...; ```  instead of ```self::assert...($x, $y)```.
+Write tests as usual, just use fluent assertions short aliases ``` check($x)->...; ```, ``` expect($x)->...; ``` or ``` fact($x)->...; ```  instead of ```self::assert...($x, $y)```.
 
 ```php
 // arrange
-$phoneBeforeAct = faker()->e164PhoneNumber;
-$phoneAfterAct = faker()->e164PhoneNumber;
-
 $user = UserFactory::createOne([
-    'phone' => $phoneBeforeAct
+    'phone' => $phoneBefore = faker()->e164PhoneNumber;
 ]);
 
-
 // act
-...
+$user->setPhone(
+    $phoneAfter = faker()->e164PhoneNumber
+);
+
+// assert
 
 // traditional PHPUnit assertions
-self::assertSame(expected: $phoneAfterAct, actual: $user->getPhone());
-self::assertNotSame(expected: $phoneBeforeAct, actual: $user->getPhone());
+self::assertSame(expected: $phoneAfter, actual: $user->getPhone());
+self::assertNotSame(expected: $phoneBefore, actual: $user->getPhone());
 
 // fluent assertions
 fact($user->getPhone())
-    ->is($phoneAfterAct)
-    ->not($phoneBeforeAct)
+    ->is($phoneAfter)
+    ->equals($phoneAfter)
+    ->not($phoneBefore)
     ->true()
     ->notTrue()
     ->false()
@@ -55,6 +56,7 @@ fact($user->getPhone())
     ->arrayNotHasKey('echo')
     ->instanceOf(UserFactory::class)
     ->notInstanceOf(UserFactory::class)
+    ->ulid()
     ...
     ;
 ```
