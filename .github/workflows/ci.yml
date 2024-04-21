@@ -16,5 +16,7 @@ jobs:
           ini-values: post_max_size=256M, max_execution_time=180
           coverage: xdebug
           tools: php-cs-fixer, phpunit
+      - name: Run PHPStan
+        run: phpstan analyse src
       - run: composer install
       - run: vendor/bin/phpunit tests/
