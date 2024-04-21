@@ -4,11 +4,12 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\False;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::notFalse
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'notFalse')]
 final class NotFalseTest extends FluentAssertionsTestCase
 {
     public function testFalse(): void
@@ -20,9 +21,7 @@ final class NotFalseTest extends FluentAssertionsTestCase
         fact(false)->notFalse();
     }
 
-    /**
-     * @dataProvider notFalseDataProvider
-     */
+    #[DataProvider('notFalseDataProvider')]
     public function testNotFalse(mixed $variable): void
     {
         // act

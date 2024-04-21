@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\ContainsSt
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::containsStringIgnoringCase
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'containsStringIgnoringCase')]
 final class ContainsStringIgnoringCaseTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider containsStringDataProvider
-     */
+    #[DataProvider('containsStringDataProvider')]
     public function testContainsStringIgnoringCase(string $variable, string $string): void
     {
         // act
@@ -23,9 +22,7 @@ final class ContainsStringIgnoringCaseTest extends FluentAssertionsTestCase
         $this->correctAssertionExecuted();
     }
 
-    /**
-     * @dataProvider notContainsStringDataProvider
-     */
+    #[DataProvider('notContainsStringDataProvider')]
     public function testNotContainsStringIgnoringCase(string $variable, string $string): void
     {
         // assert

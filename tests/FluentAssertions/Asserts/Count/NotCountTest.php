@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Count;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::notCount
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'notCount')]
 final class NotCountTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider wrongElementsCountDataProvider
-     */
+    #[DataProvider('wrongElementsCountDataProvider')]
     public function testWrongElementsCount(array $variable, int $elementsCount): void
     {
         // act

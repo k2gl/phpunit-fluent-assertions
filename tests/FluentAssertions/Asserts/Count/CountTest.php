@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Count;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::count
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'count')]
 final class CountTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider expectedCountDataProvider
-     */
+    #[DataProvider('expectedCountDataProvider')]
     public function testExpectedCount(array $variable, int $expectedCount): void
     {
         // act

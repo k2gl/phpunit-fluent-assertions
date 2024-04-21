@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\ArrayHasKe
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::arrayHasKey
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'arrayHasKey')]
 final class ArrayHasKeyTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider notHasKeyDataProvider
-     */
+    #[DataProvider('notHasKeyDataProvider')]
     public function testFailArrayNotHasKey(array $variable, int|string $key): void
     {
         // assert

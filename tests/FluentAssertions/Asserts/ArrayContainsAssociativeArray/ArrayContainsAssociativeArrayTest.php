@@ -6,20 +6,17 @@ namespace FluentAssertions\Asserts\ArrayContainsAssociativeArray;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::arrayContainsAssociativeArray
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'arrayContainsAssociativeArray')]
 final class ArrayContainsAssociativeArrayTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider arrayContainsDataProvider
-     */
+    #[DataProvider('arrayContainsDataProvider')]
     public function testArrayContains1111(array $data, array $values): void
     {
-
         // act
         fact($data)->arrayContainsAssociativeArray($values);
 
@@ -49,9 +46,7 @@ final class ArrayContainsAssociativeArrayTest extends FluentAssertionsTestCase
         ];
     }
 
-    /**
-     * @dataProvider arrayNotContainsDataProvider
-     */
+    #[DataProvider('arrayNotContainsDataProvider')]
     public function testArrayNotContains2222(mixed $data, mixed $values): void
     {
         // assert

@@ -56,7 +56,7 @@ fact($user->getPhone())
     ->arrayNotHasKey('echo')
     ->instanceOf(UserFactory::class)
     ->notInstanceOf(UserFactory::class)
-    ->ulid()
+    ->ulid() // Universally Unique Lexicographically Sortable Identifier https://github.com/ulid/spec
     ...
     ;
 

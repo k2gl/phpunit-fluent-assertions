@@ -273,6 +273,10 @@ class FluentAssertions
         return $this;
     }
 
+    /**
+     * Asserts that a variable is valid ulid.
+     * @see https://github.com/ulid/spec
+     */
     public function ulid(): self
     {
         return $this->matchesRegularExpression(pattern: RegularExpressionPattern::ULID);

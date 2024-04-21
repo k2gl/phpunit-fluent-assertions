@@ -4,11 +4,12 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Null;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::notNull
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'notNull')]
 final class NotNullTest extends FluentAssertionsTestCase
 {
     public function testNull(): void
@@ -20,9 +21,7 @@ final class NotNullTest extends FluentAssertionsTestCase
         fact(null)->notNull();
     }
 
-    /**
-     * @dataProvider notNullDataProvider
-     */
+    #[DataProvider('notNullDataProvider')]
     public function testNotNull(mixed $variable): void
     {
         // act

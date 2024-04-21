@@ -5,12 +5,11 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\InstanceOf
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::instanceOf
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'instanceOf')]
 final class InstanceOfTest extends FluentAssertionsTestCase
 {
     public function testCorrectAssertion(): void

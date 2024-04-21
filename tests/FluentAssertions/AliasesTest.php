@@ -2,13 +2,17 @@
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions;
 
+use PHPUnit\Framework\Attributes\CoversFunction;
+
 use function K2gl\PHPUnitFluentAssertions\check;
 use function K2gl\PHPUnitFluentAssertions\expect;
 use function K2gl\PHPUnitFluentAssertions\fact;
 
+#[CoversFunction('K2gl\PHPUnitFluentAssertions\check')]
+#[CoversFunction('K2gl\PHPUnitFluentAssertions\expect')]
+#[CoversFunction('K2gl\PHPUnitFluentAssertions\fact')]
 final class AliasesTest extends FluentAssertionsTestCase
 {
-    /** @covers \K2gl\PHPUnitFluentAssertions\check */
     public function testCheckMethod(): void
     {
         // arrange
@@ -21,7 +25,6 @@ final class AliasesTest extends FluentAssertionsTestCase
         $this->hasExpectedVariable(fluentAssertions: $fluentAssertions, expected: $variable);
     }
 
-    /** @covers \K2gl\PHPUnitFluentAssertions\expect */
     public function testExpectMethod(): void
     {
         // arrange
@@ -34,7 +37,6 @@ final class AliasesTest extends FluentAssertionsTestCase
         $this->hasExpectedVariable(fluentAssertions: $fluentAssertions, expected: $variable);
     }
 
-    /** @covers \K2gl\PHPUnitFluentAssertions\fact */
     public function testFactMethod(): void
     {
         // arrange

@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Equals;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::equals
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'equals')]
 final class EqualsTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider equalsDataProvider
-     */
+    #[DataProvider('equalsDataProvider')]
     public function testEquals(mixed $variable, mixed $compare): void
     {
         // act
@@ -23,9 +22,7 @@ final class EqualsTest extends FluentAssertionsTestCase
         $this->correctAssertionExecuted();
     }
 
-    /**
-     * @dataProvider notEqualsDataProvider
-     */
+    #[DataProvider('notEqualsDataProvider')]
     public function testNotEquals(mixed $variable, mixed $compare): void
     {
         // assert

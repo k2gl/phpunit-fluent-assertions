@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\ContainsSt
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::notContainsString
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'notContainsString')]
 final class NotContainsStringTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider notContainsStringDataProvider
-     */
+    #[DataProvider('notContainsStringDataProvider')]
     public function testNotContainsString(string $variable, string $string): void
     {
         // act

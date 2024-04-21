@@ -4,11 +4,12 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\ContainsSt
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::containsString
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'containsString')]
 final class ContainsStringTest extends FluentAssertionsTestCase
 {
     public function testContainsString(): void
@@ -20,9 +21,7 @@ final class ContainsStringTest extends FluentAssertionsTestCase
         $this->correctAssertionExecuted();
     }
 
-    /**
-     * @dataProvider notContainsStringDataProvider
-     */
+    #[DataProvider('notContainsStringDataProvider')]
     public function testNotContainsString(string $variable, string $string): void
     {
         // assert

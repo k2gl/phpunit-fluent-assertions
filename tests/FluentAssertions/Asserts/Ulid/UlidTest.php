@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Ulid;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::ulid
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'ulid')]
 final class UlidTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider ulidDataProvider
-     */
+    #[DataProvider('ulidDataProvider')]
     public function testUlid(mixed $variable): void
     {
         // act
@@ -23,9 +22,7 @@ final class UlidTest extends FluentAssertionsTestCase
         $this->correctAssertionExecuted();
     }
 
-    /**
-     * @dataProvider notUlidDataProvider
-     */
+    #[DataProvider('notUlidDataProvider')]
     public function testNotUlid(mixed $variable): void
     {
         // assert

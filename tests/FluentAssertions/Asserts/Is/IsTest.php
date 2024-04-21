@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Is;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::is
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'is')]
 final class IsTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider sameDataProvider
-     */
+    #[DataProvider('sameDataProvider')]
     public function testSame(mixed $variable, mixed $compare): void
     {
         // act
@@ -23,9 +22,7 @@ final class IsTest extends FluentAssertionsTestCase
         $this->correctAssertionExecuted();
     }
 
-    /**
-     * @dataProvider notSameDataProvider
-     */
+    #[DataProvider('notSameDataProvider')]
     public function testNotSame(mixed $variable, mixed $compare): void
     {
         // assert

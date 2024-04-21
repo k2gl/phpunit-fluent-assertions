@@ -4,16 +4,15 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\MatchesReg
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function K2gl\PHPUnitFluentAssertions\fact;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions::notMatchesRegularExpression
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: 'notMatchesRegularExpression')]
 final class NotMatchesRegularExpressionTest extends FluentAssertionsTestCase
 {
-    /**
-     * @dataProvider notMatchesRegularExpressionDataProvider
-     */
+    #[DataProvider('notMatchesRegularExpressionDataProvider')]
     public function testNotMatchesRegularExpression(string $variable, string $pattern): void
     {
         // act
@@ -23,9 +22,7 @@ final class NotMatchesRegularExpressionTest extends FluentAssertionsTestCase
         $this->correctAssertionExecuted();
     }
 
-    /**
-     * @dataProvider matchesRegularExpressionDataProvider
-     */
+    #[DataProvider('matchesRegularExpressionDataProvider')]
     public function testMatchesRegularExpression(string $variable, string $pattern): void
     {
         // assert

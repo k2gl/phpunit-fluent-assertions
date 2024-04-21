@@ -17,7 +17,7 @@
   ],
   "require": {
     "php": ">=8.1",
-    "phpunit/phpunit": "^9|^10"
+    "phpunit/phpunit": "^9|^10|^11"
   },
   "autoload": {
     "psr-4": {
@@ -32,5 +32,8 @@
       "K2gl\\PHPUnitFluentAssertions\\Tests\\": "tests/"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "require-dev": {
+    "rector/rector": "^1.0"
+  }
 }

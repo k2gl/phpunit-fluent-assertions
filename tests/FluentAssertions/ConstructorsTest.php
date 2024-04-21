@@ -3,10 +3,10 @@
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions;
 
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use PHPUnit\Framework\Attributes\CoversMethod;
 
-/**
- * @covers \K2gl\PHPUnitFluentAssertions\FluentAssertions
- */
+#[CoversMethod(className: FluentAssertions::class, methodName: '__construct')]
+#[CoversMethod(className: FluentAssertions::class, methodName: 'for')]
 final class ConstructorsTest extends FluentAssertionsTestCase
 {
     public function testConstructor(): void
