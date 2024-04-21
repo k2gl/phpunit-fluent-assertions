@@ -10,10 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Dump autoload
-        uses: php-actions/composer@master
-        with:
-          command: validate
       - uses: php-actions/composer@v6
         with:
           dev: yes
