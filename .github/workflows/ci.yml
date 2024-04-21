@@ -10,5 +10,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Dump autoload
+        uses: php-actions/composer@master
+        with:
+          command: dump-autoload
+          only_args: --no-dev --no-interaction --classmap-authoritative
       - uses: php-actions/composer@v6
+        with:
+          dev: yes
+          args: --profile --ignore-platform-reqs
         run: vendor/bin/phpunit tests/
