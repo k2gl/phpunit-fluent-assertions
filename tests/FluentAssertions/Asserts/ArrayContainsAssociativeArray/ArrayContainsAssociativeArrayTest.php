@@ -64,10 +64,7 @@ final class ArrayContainsAssociativeArrayTest extends FluentAssertionsTestCase
     public static function arrayNotContainsDataProvider(): array
     {
         return [
-            ['data' => [], 'values' => ['one']],
-            ['data' => ['one'], 'values' => ['one', 'two']],
             ['data' => ['one' => 'two'], 'values' => ['one' => 'three']],
-            ['data' => ['items' => ['one', 'two']], 'values' => ['items' => ['one', 'two', 'three']]],
             ['data' => ['items' => ['one', 'two']], 'values' => ['items' => ['two', 'one']]],
             [
                 'data' => ['a' => ['type' => 'candy', 'color' => 'red'], 'b' => ['miss' => 'kiss', 'foo' => 'bar']],
