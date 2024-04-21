@@ -32,8 +32,5 @@
       "K2gl\\PHPUnitFluentAssertions\\Tests\\": "tests/"
     }
   },
-  "minimum-stability": "stable",
-  "require-dev": {
-    "rector/rector": "^1.0"
-  }
+  "minimum-stability": "stable"
 }

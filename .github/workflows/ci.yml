@@ -13,8 +13,7 @@ jobs:
       - name: Dump autoload
         uses: php-actions/composer@master
         with:
-          command: dump-autoload
-          only_args: --no-dev --no-interaction --classmap-authoritative
+          command: validate
       - uses: php-actions/composer@v6
         with:
           dev: yes
