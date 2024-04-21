@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FluentAssertions\Asserts\ArrayContainsAssociativeArray;
+namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\ArrayContainsAssociativeArray;
 
 use K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\FluentAssertionsTestCase;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
