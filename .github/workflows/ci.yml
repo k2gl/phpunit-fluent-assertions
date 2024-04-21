@@ -5,6 +5,11 @@ on: [push]
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    container:
+      image: php:${{ matrix.php_version }}
+    strategy:
+      matrix:
+        php_version: ["8.2"]
 
     steps:
       - uses: actions/checkout@v3
