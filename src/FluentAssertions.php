@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions;
 
@@ -170,7 +172,11 @@ class FluentAssertions
      */
     public function notContainsStringIgnoringCase(string $string, string $message = ''): self
     {
-        Assert::assertStringNotContainsStringIgnoringCase(needle: $string, haystack: $this->variable, message: $message);
+        Assert::assertStringNotContainsStringIgnoringCase(
+            needle: $string,
+            haystack: $this->variable,
+            message: $message
+        );
 
         return $this;
     }
@@ -193,6 +199,38 @@ class FluentAssertions
         Assert::assertNotCount(expectedCount: $elementsCount, haystack: $this->variable, message: $message);
 
         return $this;
+    }
+
+    /**
+     * Asserts contains another array.
+     */
+    public function arrayContainsAssociativeArray(array $values): self
+    {
+        Assert::assertTrue(
+            condition: $this->arrayContainsAssociativeArrayRecursive($this->variable, $values),
+            message: sprintf(
+                "Array does not contain associative array. \n\nArray: '%s' \n\nExpected values: '%s'",
+                var_export(value: $this->variable, return: true),
+                var_export(value: $values, return: true),
+            )
+        );
+
+        return $this;
+    }
+
+    protected function arrayContainsAssociativeArrayRecursive(array $data, array $values): bool
+    {
+        foreach ($values as $key => $value) {
+            if (is_array($value)) {
+                if (!$this->arrayContainsAssociativeArrayRecursive($data[$key], $value)) {
+                    return false;
+                }
+            } elseif ($data[$key] !== $value) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

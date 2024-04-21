@@ -59,6 +59,21 @@ fact($user->getPhone())
     ->ulid()
     ...
     ;
+
+fact(
+    [
+        'a' => ['any' => 'thing'],
+        'b' => ['any' => 'thing', 'type' => 'candy', 'color' => 'green'],
+        'c' => ['miss' => 'kiss', 'foo' => 'bar', 'any' => 'thing'],
+        'd' => ['any' => 'thing'],
+    ]
+)->arrayContainsAssociativeArray(
+    [
+        'c' => ['foo' => 'bar', 'miss' => 'kiss'],
+        'b' => ['color' => 'green'],
+    ]
+); // true
+
 ```
 
 ## Pull requests are always welcome
