@@ -19,4 +19,4 @@ jobs:
         with:
           dev: yes
           args: --profile --ignore-platform-reqs
-        run: vendor/bin/phpunit tests/
+      - run: vendor/bin/phpunit tests/
