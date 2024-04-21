@@ -42,7 +42,7 @@ final class FalseTest extends FluentAssertionsTestCase
             ['0'],
             ['1'],
             [(object) ['foo' => 'bar']],
-            [fn() => false],
+            [static fn(): bool => false],
         ];
     }
 }

@@ -44,7 +44,7 @@ final class NotTest extends FluentAssertionsTestCase
             ['foo', 'bar'],
             [['foo' => 'bar'], ['bar' => 'foo']],
             [(object) ['foo' => 'bar'], (object) ['foo' => 'bar']],
-            [fn() => false, fn() => false],
+            [static fn(): bool => false, static fn(): bool => false],
         ];
     }
 
@@ -59,7 +59,7 @@ final class NotTest extends FluentAssertionsTestCase
             ['foo', 'foo'],
             [['foo' => 'bar'], ['foo' => 'bar']],
             [$object = (object) ['foo' => 'bar'], $object],
-            [$fn = fn() => false, $fn],
+            [$fn = static fn(): bool => false, $fn],
         ];
     }
 }

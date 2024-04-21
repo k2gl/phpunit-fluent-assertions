@@ -39,7 +39,7 @@ final class NullTest extends FluentAssertionsTestCase
             ['foo'],
             [['foo' => 'bar']],
             [(object) ['foo' => 'bar']],
-            [fn() => false],
+            [static fn(): bool => false],
         ];
     }
 }

@@ -41,7 +41,7 @@ final class NotNullTest extends FluentAssertionsTestCase
             ['foo'],
             [['foo' => 'bar']],
             [(object) ['foo' => 'bar']],
-            [fn() => false],
+            [static fn(): bool => false],
         ];
     }
 }

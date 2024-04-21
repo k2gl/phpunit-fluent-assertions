@@ -42,7 +42,7 @@ final class TrueTest extends FluentAssertionsTestCase
             ['1'],
             ['foo'],
             [(object) ['foo' => 'bar']],
-            [fn() => null],
+            [static fn() => null],
         ];
     }
 }
