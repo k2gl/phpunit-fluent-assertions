@@ -23,7 +23,7 @@ trait StringAssertions
      * fact('abc123')->matchesRegularExpression('/^[a-z]+\d+$/'); // Passes
      * fact('123abc')->matchesRegularExpression('/^[a-z]+\d+$/'); // Fails
      *
-     * @param string $pattern The regular expression pattern to match against.
+     * @param non-empty-string $pattern The regular expression pattern to match against.
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
@@ -44,7 +44,7 @@ trait StringAssertions
      * fact('123abc')->notMatchesRegularExpression('/^[a-z]+\d+$/'); // Passes
      * fact('abc123')->notMatchesRegularExpression('/^[a-z]+\d+$/'); // Fails
      *
-     * @param string $pattern The regular expression pattern that should not match.
+     * @param non-empty-string $pattern The regular expression pattern that should not match.
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
@@ -69,7 +69,7 @@ trait StringAssertions
      * fact('hello world')->containsString('world'); // Passes
      * fact('hello world')->containsString('foo'); // Fails
      *
-     * @param string $string The substring to search for.
+     * @param non-empty-string $string The substring to search for.
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
@@ -90,7 +90,7 @@ trait StringAssertions
      * fact('hello world')->notContainsString('foo'); // Passes
      * fact('hello world')->notContainsString('world'); // Fails
      *
-     * @param string $string The substring that should not be present.
+     * @param non-empty-string $string The substring that should not be present.
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
@@ -132,7 +132,7 @@ trait StringAssertions
      * fact('Hello World')->notContainsStringIgnoringCase('foo'); // Passes
      * fact('Hello World')->notContainsStringIgnoringCase('world'); // Fails
      *
-     * @param string $string The substring that should not be present (case-insensitive).
+     * @param non-empty-string $string The substring that should not be present (case-insensitive).
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
@@ -152,23 +152,23 @@ trait StringAssertions
 
     // region Prefix/Suffix Methods
 
-    /**
-     * Asserts that a string starts with a given prefix.
-     *
-     * This method checks if the actual string starts with the specified prefix.
-     *
-     * @param non-empty-string $prefix The prefix to check for.
-     * @param string $message Optional custom error message.
-     *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
-     *
-     * Example usage:
-     * fact('hello world')->startsWith('hello'); // Passes
-     * fact('world hello')->startsWith('hello'); // Fails
-     */
+     /**
+      * Asserts that a string starts with a given prefix.
+      *
+      * This method checks if the actual string starts with the specified prefix.
+      *
+      * @param string $prefix The prefix to check for (must not be empty).
+      * @param string $message Optional custom error message.
+      *
+      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+      *
+      * Example usage:
+      * fact('hello world')->startsWith('hello'); // Passes
+      * fact('world hello')->startsWith('hello'); // Fails
+      */
     public function startsWith(string $prefix, string $message = ''): self
     {
-        if ($prefix === '') {
+        if (strlen($prefix) === 0) {
             Assert::fail('Prefix cannot be an empty string.');
         }
 
@@ -177,23 +177,23 @@ trait StringAssertions
         return $this;
     }
 
-    /**
-     * Asserts that a string ends with a given suffix.
-     *
-     * This method checks if the actual string ends with the specified suffix.
-     *
-     * @param non-empty-string $suffix The suffix to check for.
-     * @param string $message Optional custom error message.
-     *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
-     *
-     * Example usage:
-     * fact('file.txt')->endsWith('.txt'); // Passes
-     * fact('txt.file')->endsWith('.txt'); // Fails
-     */
+     /**
+      * Asserts that a string ends with a given suffix.
+      *
+      * This method checks if the actual string ends with the specified suffix.
+      *
+      * @param string $suffix The suffix to check for (must not be empty).
+      * @param string $message Optional custom error message.
+      *
+      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+      *
+      * Example usage:
+      * fact('file.txt')->endsWith('.txt'); // Passes
+      * fact('txt.file')->endsWith('.txt'); // Fails
+      */
     public function endsWith(string $suffix, string $message = ''): self
     {
-        if ($suffix === '') {
+        if (strlen($suffix) === 0) {
             Assert::fail('Suffix cannot be an empty string.');
         }
         Assert::assertStringEndsWith($suffix, $this->variable, $message);
