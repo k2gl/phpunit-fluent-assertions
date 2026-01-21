@@ -168,6 +168,9 @@ trait StringAssertions
      */
     public function startsWith(string $prefix, string $message = ''): self
     {
+        if ($prefix === '') {
+            Assert::fail('Prefix cannot be an empty string.');
+        }
         Assert::assertStringStartsWith($prefix, $this->variable, $message);
 
         return $this;
@@ -189,6 +192,9 @@ trait StringAssertions
      */
     public function endsWith(string $suffix, string $message = ''): self
     {
+        if ($suffix === '') {
+            Assert::fail('Suffix cannot be an empty string.');
+        }
         Assert::assertStringEndsWith($suffix, $this->variable, $message);
 
         return $this;
