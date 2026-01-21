@@ -5,7 +5,7 @@ This file outlines the requirements and best practices for adding new assertion 
 ## General Requirements
 
 - **Version Compliance**: Always use the most current version of AGENTS.md and do not rely on cached or outdated copies. Refresh and re-read AGENTS.md before every change to ensure compliance with the latest requirements.
-- **Branching and Commits**: It is forbidden to commit directly to the `main` branch. All changes must be added via pull request from a feature branch. If the current branch is `main`, MUST checkout to a new branch before changing any files.
+- **Branching and Commits**: It is forbidden to commit directly to the `main` branch. All changes must be added via pull request from a feature branch. If the current branch is `main`, MUST checkout to a new branch before changing any files. Do not push changes automatically—only push after explicit user request.
 - **Method Signature**: All new methods must be public, accept an optional `$message` parameter (string, default empty), and return `self` to enable fluent chaining.
 - **Type Safety**: Specify strict types for parameters where applicable (e.g., `int|float` for numeric comparisons). Avoid `mixed` unless necessary.
 - **PHPUnit Integration**: Use appropriate PHPUnit assertion methods (e.g., `Assert::assertLessThan`) without named parameters for compatibility.
