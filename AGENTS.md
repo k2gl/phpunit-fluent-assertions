@@ -4,11 +4,26 @@ This file outlines the requirements and best practices for adding new assertion 
 
 ## General Requirements
 
+- **Version Compliance**: Always use the most current version of AGENTS.md and do not rely on cached or outdated copies. Re-read the file as needed to ensure compliance with the latest requirements.
 - **Branching and Commits**: It is forbidden to commit directly to the `main` branch. All changes must be added via pull request from a feature branch.
 - **Method Signature**: All new methods must be public, accept an optional `$message` parameter (string, default empty), and return `self` to enable fluent chaining.
 - **Type Safety**: Specify strict types for parameters where applicable (e.g., `int|float` for numeric comparisons). Avoid `mixed` unless necessary.
 - **PHPUnit Integration**: Use appropriate PHPUnit assertion methods (e.g., `Assert::assertLessThan`) without named parameters for compatibility.
 - **Fluent Design**: Ensure the method integrates seamlessly with the fluent interface.
+
+## Code Organization
+
+- **Trait-Based Structure**: Methods are organized into separate traits in `src/Traits/` for better maintainability.
+  - `ComparisonAndEqualityAssertions`: Basic equality checks.
+  - `BooleanAssertions`: True/false assertions.
+  - `NullAssertions`: Null checks.
+  - `NumericAssertions`: Numeric comparisons (e.g., isPositive, isBetween).
+  - `StringAssertions`: String operations (e.g., startsWith, hasLength).
+  - `ArrayAssertions`: Array checks (e.g., contains, hasSize).
+  - `TypeCheckingAssertions`: Type validation (e.g., isInt, instanceOf, hasProperty).
+  - `SpecialAssertions`: Specialized checks (e.g., ULID).
+- Traits are imported into `FluentAssertions` class using `use` statements.
+- Place new methods in the appropriate trait based on functionality.
 
 ## Documentation
 
