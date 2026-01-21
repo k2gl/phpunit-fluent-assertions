@@ -30,7 +30,7 @@ This file outlines the requirements and best practices for adding new assertion 
 - **PHPDoc**: Provide comprehensive PHPDoc with:
   - Brief description of what the assertion does.
   - Detailed explanation of the method's behavior.
-  - Example usage in the docblock (placed before @param and @return).
+  - Example usage in the docblock (MUST always be placed before @param and @return sections—never violate this order).
   - `@param` tags for each parameter (including $message).
   - `@return self` tag for fluent chaining.
 - **README.md**: Update the usage section with an example of the new method in the fluent chain.
