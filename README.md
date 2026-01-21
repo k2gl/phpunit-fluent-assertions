@@ -60,7 +60,7 @@ fact('hello world')->matchesRegularExpression('/\w+/')->startsWith('hello')->end
 
 ### Array Methods
 ```php
-fact([1, 2, 3])->count(3)->contains(2)->doesNotContain(4)->hasSize(3)->isEmptyArray();
+fact([1, 2, 3])->count(3)->contains(2)->doesNotContain(4)->hasSize(3)->isEmptyArray()->isNotEmptyArray();
 ```
 
 ### Type Checking Methods

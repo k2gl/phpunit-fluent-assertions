@@ -216,4 +216,24 @@ trait ArrayAssertions
 
         return $this;
     }
+
+    /**
+     * Asserts that an array is not empty.
+     *
+     * This method checks if the actual value is not an empty array.
+     *
+     * Example usage:
+     * fact([1, 2])->isNotEmptyArray(); // Passes
+     * fact([])->isNotEmptyArray(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     */
+    public function isNotEmptyArray(string $message = ''): self
+    {
+        Assert::assertNotCount(0, $this->variable, $message);
+
+        return $this;
+    }
 }
