@@ -4,18 +4,33 @@ This file outlines the requirements and best practices for adding new assertion 
 
 ## General Requirements
 
-- **Branching and Commits**: It is forbidden to commit directly to the `main` branch. All changes must be added via pull request from a feature branch.
+- **Version Compliance**: Always use the most current version of AGENTS.md and do not rely on cached or outdated copies. Refresh and re-read AGENTS.md before every change to ensure compliance with the latest requirements.
+- **Branching and Commits**: It is forbidden to commit directly to the `main` branch. All changes must be added via pull request from a feature branch. If the current branch is `main`, MUST checkout to a new branch before changing any files. Do not push changes automatically—only push after explicit user request.
 - **Method Signature**: All new methods must be public, accept an optional `$message` parameter (string, default empty), and return `self` to enable fluent chaining.
 - **Type Safety**: Specify strict types for parameters where applicable (e.g., `int|float` for numeric comparisons). Avoid `mixed` unless necessary.
 - **PHPUnit Integration**: Use appropriate PHPUnit assertion methods (e.g., `Assert::assertLessThan`) without named parameters for compatibility.
 - **Fluent Design**: Ensure the method integrates seamlessly with the fluent interface.
+
+## Code Organization
+
+- **Trait-Based Structure**: Methods are organized into separate traits in `src/Traits/` for better maintainability.
+  - `ComparisonAndEqualityAssertions`: Basic equality checks.
+  - `BooleanAssertions`: True/false assertions.
+  - `NullAssertions`: Null checks.
+  - `NumericAssertions`: Numeric comparisons (e.g., isPositive, isBetween).
+  - `StringAssertions`: String operations (e.g., startsWith, hasLength).
+  - `ArrayAssertions`: Array checks (e.g., contains, hasSize).
+  - `TypeCheckingAssertions`: Type validation (e.g., isInt, instanceOf, hasProperty).
+  - `SpecialAssertions`: Specialized checks (e.g., ULID).
+- Traits are imported into `FluentAssertions` class using `use` statements.
+- Place new methods in the appropriate trait based on functionality.
 
 ## Documentation
 
 - **PHPDoc**: Provide comprehensive PHPDoc with:
   - Brief description of what the assertion does.
   - Detailed explanation of the method's behavior.
-  - Example usage in the docblock (placed before @param and @return).
+  - Example usage in the docblock (MUST always be placed before @param and @return sections—never violate this order).
   - `@param` tags for each parameter (including $message).
   - `@return self` tag for fluent chaining.
 - **README.md**: Update the usage section with an example of the new method in the fluent chain.

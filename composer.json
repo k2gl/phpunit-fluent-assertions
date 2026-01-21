@@ -27,10 +27,22 @@
       "src/aliases.php"
     ]
   },
-  "autoload-dev": {
-    "psr-4": {
-      "K2gl\\PHPUnitFluentAssertions\\Tests\\": "tests/"
-    }
-  },
-  "minimum-stability": "stable"
+   "autoload-dev": {
+     "psr-4": {
+       "K2gl\\PHPUnitFluentAssertions\\Tests\\": "tests/"
+     }
+   },
+   "minimum-stability": "stable",
+   "scripts": {
+     "analyze": [
+       "@phpstan",
+       "@psalm"
+     ],
+     "phpstan": "./vendor/bin/phpstan analyse",
+     "psalm": "./vendor/bin/psalm.phar --config=psalm.xml"
+   },
+   "require-dev": {
+    "psalm/phar": "^6.14",
+    "phpstan/phpstan": "^2.1"
+  }
 }
