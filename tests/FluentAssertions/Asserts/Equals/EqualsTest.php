@@ -49,7 +49,6 @@ final class EqualsTest extends FluentAssertionsTestCase
             [$object = (object) ['foo' => 'bar'], $object],
             [(object) ['miss' => 'kiss'], (object) ['miss' => 'kiss']],
             [(object) ['miss' => 'kiss', 'foo' => 'bar'], (object) ['foo' => 'bar', 'miss' => 'kiss']],
-            [static fn(): bool => false, static fn(): bool => true],
         ];
     }
 
@@ -76,6 +75,7 @@ final class EqualsTest extends FluentAssertionsTestCase
             [static fn(): bool => false, false],
             [static fn(): bool => false, true],
             [static fn(): bool => false, (object) ['foo' => 'bar']],
+            [static fn(): bool => false, static fn(): bool => true],
         ];
     }
 }

@@ -40,7 +40,7 @@ final class NotTrueTest extends FluentAssertionsTestCase
             [1],
             ['0'],
             ['1'],
-            [['foo' => 'bar'], ['foo' => 'bar']],
+            [['foo' => 'bar2']],
             [(object) ['foo' => 'bar']],
             [static fn(): bool => true],
         ];

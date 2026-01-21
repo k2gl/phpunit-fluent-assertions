@@ -57,6 +57,10 @@ fact($user->getPhone())
     ->instanceOf(UserFactory::class)
     ->notInstanceOf(UserFactory::class)
     ->ulid() // Universally Unique Lexicographically Sortable Identifier https://github.com/ulid/spec
+    ->isLowerThan(100)
+    ->isGreaterThan(50)
+    ->isEmptyArray()
+    ->isEmptyString()
     ...
     ;
 
