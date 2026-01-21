@@ -169,6 +169,9 @@ fact('hello')->isEmptyString(); // Fails
 
 fact('hello')->isNotEmptyString(); // Passes
 fact('')->isNotEmptyString(); // Fails
+
+fact('{"key": "value"}')->isJson(); // Passes
+fact('invalid json')->isJson(); // Fails
 ```
 
 ### Type Checking assertions
@@ -190,6 +193,15 @@ fact((object)['name' => 'John'])->hasProperty('age'); // Fails
 
 fact(new stdClass())->hasMethod('__construct'); // Passes
 fact(new stdClass())->hasMethod('nonExistentMethod'); // Fails
+
+fact(3.14)->isFloat(); // Passes
+fact(42)->isFloat(); // Fails
+
+fact(true)->isBool(); // Passes
+fact(1)->isBool(); // Fails
+
+fact([1, 2])->isArray(); // Passes
+fact('not array')->isArray(); // Fails
 ```
 
 ## Pull requests are always welcome

@@ -293,5 +293,25 @@ trait StringAssertions
         return $this;
     }
 
+    /**
+     * Asserts that a string is valid JSON.
+     *
+     * This method checks if the actual string is valid JSON.
+     *
+     * Example usage:
+     * fact('{"key": "value"}')->isJson(); // Passes
+     * fact('invalid json')->isJson(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isJson(string $message = ''): self
+    {
+        Assert::assertTrue(json_validate($this->variable), $message ?: 'String is not valid JSON.');
+
+        return $this;
+    }
+
     // endregion Length Methods
 }
