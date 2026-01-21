@@ -23,7 +23,7 @@ trait StringAssertions
      * fact('abc123')->matchesRegularExpression('/^[a-z]+\d+$/'); // Passes
      * fact('123abc')->matchesRegularExpression('/^[a-z]+\d+$/'); // Fails
      *
-     * @param non-empty-string $pattern The regular expression pattern to match against.
+     * @param string $pattern The regular expression pattern to match against.
      * @param string $message Optional custom error message.
      *
      * @return self Enables fluent chaining of assertion methods.
@@ -48,7 +48,7 @@ trait StringAssertions
      * fact('123abc')->notMatchesRegularExpression('/^[a-z]+\d+$/'); // Passes
      * fact('abc123')->notMatchesRegularExpression('/^[a-z]+\d+$/'); // Fails
      *
-     * @param non-empty-string $pattern The regular expression pattern that should not match.
+     * @param string $pattern The regular expression pattern that should not match.
      * @param string $message Optional custom error message.
      *
      * @return self Enables fluent chaining of assertion methods.
@@ -77,7 +77,7 @@ trait StringAssertions
      * fact('hello world')->containsString('world'); // Passes
      * fact('hello world')->containsString('foo'); // Fails
      *
-     * @param non-empty-string $string The substring to search for.
+     * @param string $string The substring to search for.
      * @param string $message Optional custom error message.
      *
      * @return self Enables fluent chaining of assertion methods.
@@ -102,7 +102,7 @@ trait StringAssertions
      * fact('hello world')->notContainsString('foo'); // Passes
      * fact('hello world')->notContainsString('world'); // Fails
      *
-     * @param non-empty-string $string The substring that should not be present.
+     * @param string $string The substring that should not be present.
      * @param string $message Optional custom error message.
      *
      * @return self  Enables fluent chaining of assertion methods.
@@ -127,7 +127,7 @@ trait StringAssertions
      * fact('Hello World')->containsStringIgnoringCase('world'); // Passes
      * fact('Hello World')->containsStringIgnoringCase('foo'); // Fails
      *
-     * @param non-empty-string $string The substring to search for (case-insensitive).
+     * @param string $string The substring to search for (case-insensitive).
      * @param string $message Optional custom error message.
      *
      * @return self  Enables fluent chaining of assertion methods.
@@ -152,7 +152,7 @@ trait StringAssertions
      * fact('Hello World')->notContainsStringIgnoringCase('foo'); // Passes
      * fact('Hello World')->notContainsStringIgnoringCase('world'); // Fails
      *
-     * @param non-empty-string $string The substring that should not be present (case-insensitive).
+     * @param string $string The substring that should not be present (case-insensitive).
      * @param string $message Optional custom error message.
      *
      * @return self  Enables fluent chaining of assertion methods.
@@ -185,7 +185,7 @@ trait StringAssertions
      * fact('hello world')->startsWith('hello'); // Passes
      * fact('world hello')->startsWith('hello'); // Fails
      *
-     * @param non-empty-string $prefix The prefix to check for (must not be empty).
+     * @param string $prefix The prefix to check for (must not be empty).
      * @param string $message Optional custom error message.
      *
      * @return self Enables fluent chaining of assertion methods.
@@ -211,7 +211,7 @@ trait StringAssertions
      * fact('file.txt')->endsWith('.txt'); // Passes
      * fact('txt.file')->endsWith('.txt'); // Fails
      *
-     * @param non-empty-string $suffix The suffix to check for (must not be empty).
+     * @param string $suffix The suffix to check for (must not be empty).
      * @param string $message Optional custom error message.
      *
      * @return self Enables fluent chaining of assertion methods.
