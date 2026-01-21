@@ -11,7 +11,7 @@ abstract class FluentAssertionsTestCase extends TestCase
 {
     protected function hasExpectedVariable(FluentAssertions $fluentAssertions, mixed $expected): void
     {
-        self::assertSame(expected: $expected, actual: $fluentAssertions->variable);
+        self::assertSame($expected, $fluentAssertions->variable);
     }
 
     protected function correctAssertionExecuted(): void
@@ -23,7 +23,7 @@ abstract class FluentAssertionsTestCase extends TestCase
     {
         $performedAssertionCounts = Assert::getCount();
 
-        self::assertSame(expected: $expected, actual: $performedAssertionCounts);
+        self::assertSame($expected, $performedAssertionCounts);
     }
 
     protected function incorrectAssertionExpected(): void
