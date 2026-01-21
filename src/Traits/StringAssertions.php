@@ -111,7 +111,7 @@ trait StringAssertions
      * fact('Hello World')->containsStringIgnoringCase('world'); // Passes
      * fact('Hello World')->containsStringIgnoringCase('foo'); // Fails
      *
-     * @param string $string The substring to search for (case-insensitive).
+     * @param non-empty-string $string The substring to search for (case-insensitive).
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
@@ -157,7 +157,7 @@ trait StringAssertions
      *
      * This method checks if the actual string starts with the specified prefix.
      *
-     * @param string $prefix The prefix to check for.
+     * @param non-empty-string $prefix The prefix to check for.
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
@@ -171,6 +171,7 @@ trait StringAssertions
         if ($prefix === '') {
             Assert::fail('Prefix cannot be an empty string.');
         }
+
         Assert::assertStringStartsWith($prefix, $this->variable, $message);
 
         return $this;
@@ -181,7 +182,7 @@ trait StringAssertions
      *
      * This method checks if the actual string ends with the specified suffix.
      *
-     * @param string $suffix The suffix to check for.
+     * @param non-empty-string $suffix The suffix to check for.
      * @param string $message Optional custom error message.
      *
      * @return self|fluentAssertions Enables fluent chaining of assertion methods.
