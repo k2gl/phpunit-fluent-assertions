@@ -619,4 +619,261 @@ class FluentAssertions
     {
         return $this->matchesRegularExpression(pattern: RegularExpressionPattern::ULID);
     }
+
+    /**
+     * Asserts that a numeric value is positive (greater than 0).
+     *
+     * This method checks if the actual value is greater than zero.
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact(5)->isPositive(); // Passes
+     * fact(-3)->isPositive(); // Fails
+     */
+    public function isPositive(string $message = ''): self
+    {
+        Assert::assertGreaterThan(0, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a numeric value is negative (less than 0).
+     *
+     * This method checks if the actual value is less than zero.
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact(-3)->isNegative(); // Passes
+     * fact(5)->isNegative(); // Fails
+     */
+    public function isNegative(string $message = ''): self
+    {
+        Assert::assertLessThan(0, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a numeric value is zero.
+     *
+     * This method checks if the actual value equals zero (supports int and float).
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact(0)->isZero(); // Passes
+     * fact(0.0)->isZero(); // Passes
+     * fact(1)->isZero(); // Fails
+     */
+    public function isZero(string $message = ''): self
+    {
+        Assert::assertEquals(0, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a numeric value is between two values (inclusive).
+     *
+     * This method checks if min <= value <= max.
+     *
+     * @param int|float $min The minimum value.
+     * @param int|float $max The maximum value.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact(5)->isBetween(1, 10); // Passes
+     * fact(15)->isBetween(1, 10); // Fails
+     */
+    public function isBetween(int|float $min, int|float $max, string $message = ''): self
+    {
+        Assert::assertTrue(
+            $this->variable >= $min && $this->variable <= $max,
+            $message ?: sprintf(
+                'Failed asserting that %s is between %s and %s.',
+                $this->variable,
+                $min,
+                $max
+            )
+        );
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a string starts with a given prefix.
+     *
+     * This method checks if the actual string starts with the specified prefix.
+     *
+     * @param string $prefix The prefix to check for.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact('hello world')->startsWith('hello'); // Passes
+     * fact('world hello')->startsWith('hello'); // Fails
+     */
+    public function startsWith(string $prefix, string $message = ''): self
+    {
+        Assert::assertStringStartsWith($prefix, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a string ends with a given suffix.
+     *
+     * This method checks if the actual string ends with the specified suffix.
+     *
+     * @param string $suffix The suffix to check for.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact('file.txt')->endsWith('.txt'); // Passes
+     * fact('txt.file')->endsWith('.txt'); // Fails
+     */
+    public function endsWith(string $suffix, string $message = ''): self
+    {
+        Assert::assertStringEndsWith($suffix, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a string has a specific length.
+     *
+     * This method checks if the length of the actual string equals the expected length.
+     *
+     * @param int $length The expected length.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact('abc')->hasLength(3); // Passes
+     * fact('abcd')->hasLength(3); // Fails
+     */
+    public function hasLength(int $length, string $message = ''): self
+    {
+        Assert::assertEquals($length, strlen($this->variable), $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that an array contains a specific value.
+     *
+     * This method checks if the actual array contains the specified value.
+     *
+     * @param mixed $value The value to check for.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact([1, 2, 3])->contains(2); // Passes
+     * fact([1, 2])->contains(3); // Fails
+     */
+    public function contains(mixed $value, string $message = ''): self
+    {
+        Assert::assertContains($value, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that an array does not contain a specific value.
+     *
+     * This method checks if the actual array does not contain the specified value.
+     *
+     * @param mixed $value The value that should not be present.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact([1, 2])->doesNotContain(3); // Passes
+     * fact([1, 2, 3])->doesNotContain(3); // Fails
+     */
+    public function doesNotContain(mixed $value, string $message = ''): self
+    {
+        Assert::assertNotContains($value, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that an array has a specific size.
+     *
+     * This method checks if the number of elements in the actual array equals the expected size.
+     *
+     * @param int $size The expected size.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact([1, 2])->hasSize(2); // Passes
+     * fact([1, 2, 3])->hasSize(2); // Fails
+     */
+    public function hasSize(int $size, string $message = ''): self
+    {
+        Assert::assertCount($size, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is of type int.
+     *
+     * This method checks if the actual value is an integer.
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact(42)->isInt(); // Passes
+     * fact('42')->isInt(); // Fails
+     */
+    public function isInt(string $message = ''): self
+    {
+        Assert::assertIsInt($this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is of type string.
+     *
+     * This method checks if the actual value is a string.
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Returns the FluentAssertions instance for method chaining.
+     *
+     * Example usage:
+     * fact('text')->isString(); // Passes
+     * fact(42)->isString(); // Fails
+     */
+    public function isString(string $message = ''): self
+    {
+        Assert::assertIsString($this->variable, $message);
+
+        return $this;
+    }
 }

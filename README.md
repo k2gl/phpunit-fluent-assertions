@@ -59,8 +59,20 @@ fact($user->getPhone())
     ->ulid() // Universally Unique Lexicographically Sortable Identifier https://github.com/ulid/spec
     ->isLowerThan(100)
     ->isGreaterThan(50)
+    ->isPositive()
+    ->isNegative()
+    ->isZero()
+    ->isBetween(1, 10)
+    ->startsWith('prefix')
+    ->endsWith('suffix')
+    ->hasLength(5)
+    ->contains('value')
+    ->doesNotContain('value')
+    ->hasSize(3)
     ->isEmptyArray()
     ->isEmptyString()
+    ->isInt()
+    ->isString()
     ...
     ;
 
