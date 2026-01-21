@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Traits;
 
+use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
 
+/**
+ * @phpstan-require-extends FluentAssertions
+ */
 trait BooleanAssertions
 {
     /**
@@ -20,7 +24,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function true(string $message = ''): self
     {
@@ -41,7 +45,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function notTrue(string $message = ''): self
     {
@@ -62,7 +66,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function false(string $message = ''): self
     {
@@ -83,7 +87,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function notFalse(string $message = ''): self
     {

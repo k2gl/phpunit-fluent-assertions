@@ -24,7 +24,7 @@ trait ArrayAssertions
      * @param int $expectedCount The expected number of elements.
      * @param string $message Optional custom error message.
      *
-     * @return ArrayAssertions|FluentAssertions Returns the FluentAssertions instance for method chaining.
+     * @return self|FluentAssertions Returns the FluentAssertions instance for method chaining.
      */
     public function count(int $expectedCount, string $message = ''): self
     {
@@ -45,7 +45,7 @@ trait ArrayAssertions
      * @param int $elementsCount The number of elements that should not match.
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function notCount(int $elementsCount, string $message = ''): self
     {
@@ -65,13 +65,13 @@ trait ArrayAssertions
      *
      * @param array $values The associative array that should be contained within the actual array.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function arrayContainsAssociativeArray(array $values): self
     {
         Assert::assertTrue(
-            condition: $this->arrayContainsAssociativeArrayRecursive($this->variable, $values),
-            message: sprintf(
+            $this->arrayContainsAssociativeArrayRecursive($this->variable, $values),
+            sprintf(
                 "Array does not contain associative array. \n\nArray: '%s' \n\nExpected values: '%s'",
                 var_export($this->variable, true),
                 var_export($values, true),
@@ -108,7 +108,7 @@ trait ArrayAssertions
      * @param int|string $key The key to check for existence.
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function arrayHasKey(int|string $key, string $message = ''): self
     {
@@ -129,7 +129,7 @@ trait ArrayAssertions
      * @param int|string $key The key that should not exist.
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function arrayNotHasKey(int|string $key, string $message = ''): self
     {
@@ -150,7 +150,7 @@ trait ArrayAssertions
      * @param mixed $value The value to check for.
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function contains(mixed $value, string $message = ''): self
     {
@@ -171,7 +171,7 @@ trait ArrayAssertions
      * @param mixed $value The value that should not be present.
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function doesNotContain(mixed $value, string $message = ''): self
     {
@@ -192,7 +192,7 @@ trait ArrayAssertions
      * @param int $size The expected size.
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function hasSize(int $size, string $message = ''): self
     {
@@ -212,7 +212,7 @@ trait ArrayAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function isEmptyArray(string $message = ''): self
     {
@@ -232,7 +232,7 @@ trait ArrayAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function isNotEmptyArray(string $message = ''): self
     {

@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Traits;
 
+use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use K2gl\PHPUnitFluentAssertions\Reference\RegularExpressionPattern;
 
+/**
+ * @phpstan-require-extends FluentAssertions
+ */
 trait SpecialAssertions
 {
     /**
@@ -19,7 +23,7 @@ trait SpecialAssertions
      * fact('01ARZ3NDEKTSV4RRFFQ69G5FAV')->ulid(); // Passes (if valid ULID)
      * fact('invalid-ulid')->ulid(); // Fails
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function ulid(): self
     {

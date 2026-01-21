@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Traits;
 
+use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
 
+/**
+ * @phpstan-require-extends FluentAssertions
+ */
 trait NullAssertions
 {
     /**
@@ -19,7 +23,7 @@ trait NullAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function null(string $message = ''): self
     {
@@ -39,7 +43,7 @@ trait NullAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
      */
     public function notNull(string $message = ''): self
     {
