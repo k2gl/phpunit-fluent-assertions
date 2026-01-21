@@ -20,7 +20,7 @@ trait TypeCheckingAssertions
      * @param mixed $expected The class or interface name.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function instanceOf(mixed $expected, string $message = ''): self
     {
@@ -41,7 +41,7 @@ trait TypeCheckingAssertions
      * @param mixed $expected The class or interface name that should not match.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function notInstanceOf(mixed $expected, string $message = ''): self
     {
@@ -61,7 +61,7 @@ trait TypeCheckingAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function isInt(string $message = ''): self
     {
@@ -81,7 +81,7 @@ trait TypeCheckingAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function isString(string $message = ''): self
     {
@@ -102,7 +102,7 @@ trait TypeCheckingAssertions
      * @param string $property The property name.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function hasProperty(string $property, string $message = ''): self
     {
@@ -123,7 +123,7 @@ trait TypeCheckingAssertions
      * @param string $method The method name.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function hasMethod(string $method, string $message = ''): self
     {

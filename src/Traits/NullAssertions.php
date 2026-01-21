@@ -19,7 +19,7 @@ trait NullAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function null(string $message = ''): self
     {
@@ -39,7 +39,7 @@ trait NullAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function notNull(string $message = ''): self
     {

@@ -22,7 +22,7 @@ trait StringAssertions
      * @param string $pattern The regular expression pattern to match against.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function matchesRegularExpression(string $pattern, string $message = ''): self
     {
@@ -43,7 +43,7 @@ trait StringAssertions
      * @param string $pattern The regular expression pattern that should not match.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function notMatchesRegularExpression(string $pattern, string $message = ''): self
     {
@@ -68,7 +68,7 @@ trait StringAssertions
      * @param string $string The substring to search for.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function containsString(string $string, string $message = ''): self
     {
@@ -89,7 +89,7 @@ trait StringAssertions
      * @param string $string The substring that should not be present.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function notContainsString(string $string, string $message = ''): self
     {
@@ -110,7 +110,7 @@ trait StringAssertions
      * @param string $string The substring to search for (case-insensitive).
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function containsStringIgnoringCase(string $string, string $message = ''): self
     {
@@ -131,7 +131,7 @@ trait StringAssertions
      * @param string $string The substring that should not be present (case-insensitive).
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function notContainsStringIgnoringCase(string $string, string $message = ''): self
     {
@@ -156,7 +156,7 @@ trait StringAssertions
      * @param string $prefix The prefix to check for.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      *
      * Example usage:
      * fact('hello world')->startsWith('hello'); // Passes
@@ -177,7 +177,7 @@ trait StringAssertions
      * @param string $suffix The suffix to check for.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      *
      * Example usage:
      * fact('file.txt')->endsWith('.txt'); // Passes
@@ -202,7 +202,7 @@ trait StringAssertions
      * @param int $length The expected length.
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      *
      * Example usage:
      * fact('abc')->hasLength(3); // Passes
@@ -222,7 +222,7 @@ trait StringAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      *
      * Example usage:
      * fact('')->isEmptyString(); // Passes

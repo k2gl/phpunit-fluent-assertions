@@ -19,7 +19,7 @@ trait SpecialAssertions
      * fact('01ARZ3NDEKTSV4RRFFQ69G5FAV')->ulid(); // Passes (if valid ULID)
      * fact('invalid-ulid')->ulid(); // Fails
      *
-     * @return self Returns the FluentAssertions instance for method chaining.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function ulid(): self
     {

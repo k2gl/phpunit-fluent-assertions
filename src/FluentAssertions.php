@@ -39,7 +39,7 @@ class FluentAssertions
      *
      * @param mixed $variable The variable to assert on.
      *
-     * @return self Returns a new FluentAssertions instance.
+     * @return self Enables fluent chaining of assertion methods.
      */
     public static function for(mixed $variable = null): self
     {
