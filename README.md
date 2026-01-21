@@ -166,6 +166,9 @@ fact('abcd')->hasLength(3); // Fails
 
 fact('')->isEmptyString(); // Passes
 fact('hello')->isEmptyString(); // Fails
+
+fact('hello')->isNotEmptyString(); // Passes
+fact('')->isNotEmptyString(); // Fails
 ```
 
 ### Type Checking assertions

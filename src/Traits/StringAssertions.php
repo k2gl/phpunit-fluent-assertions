@@ -273,5 +273,25 @@ trait StringAssertions
         return $this;
     }
 
+    /**
+     * Asserts that a string is not empty.
+     *
+     * This method checks if the actual value is not an empty string.
+     *
+     * Example usage:
+     * fact('hello')->isNotEmptyString(); // Passes
+     * fact('')->isNotEmptyString(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isNotEmptyString(string $message = ''): self
+    {
+        Assert::assertNotEmpty($this->variable, $message);
+
+        return $this;
+    }
+
     // endregion Length Methods
 }
