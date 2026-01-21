@@ -75,6 +75,7 @@ final class EqualsTest extends FluentAssertionsTestCase
             [static fn(): bool => false, false],
             [static fn(): bool => false, true],
             [static fn(): bool => false, (object) ['foo' => 'bar']],
+            [static fn(): bool => false, static fn(): bool => true],
         ];
     }
 }
