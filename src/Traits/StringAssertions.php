@@ -23,13 +23,17 @@ trait StringAssertions
      * fact('abc123')->matchesRegularExpression('/^[a-z]+\d+$/'); // Passes
      * fact('123abc')->matchesRegularExpression('/^[a-z]+\d+$/'); // Fails
      *
-      * @param string $pattern The regular expression pattern to match against.
-      * @param string $message Optional custom error message.
-      *
-      * @return self Enables fluent chaining of assertion methods.
+     * @param non-empty-string $pattern The regular expression pattern to match against.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function matchesRegularExpression(string $pattern, string $message = ''): self
     {
+        if (strlen($pattern) === 0) {
+            Assert::fail('Pattern cannot be an empty string.');
+        }
+
         Assert::assertMatchesRegularExpression($pattern, $this->variable, $message);
 
         return $this;
@@ -44,13 +48,17 @@ trait StringAssertions
      * fact('123abc')->notMatchesRegularExpression('/^[a-z]+\d+$/'); // Passes
      * fact('abc123')->notMatchesRegularExpression('/^[a-z]+\d+$/'); // Fails
      *
-      * @param string $pattern The regular expression pattern that should not match.
-      * @param string $message Optional custom error message.
-      *
-      * @return self Enables fluent chaining of assertion methods.
+     * @param non-empty-string $pattern The regular expression pattern that should not match.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function notMatchesRegularExpression(string $pattern, string $message = ''): self
     {
+        if (strlen($pattern) === 0) {
+            Assert::fail('Pattern cannot be an empty string.');
+        }
+
         Assert::assertDoesNotMatchRegularExpression($pattern, $this->variable, $message);
 
         return $this;
@@ -69,13 +77,17 @@ trait StringAssertions
      * fact('hello world')->containsString('world'); // Passes
      * fact('hello world')->containsString('foo'); // Fails
      *
-      * @param string $string The substring to search for.
-      * @param string $message Optional custom error message.
-      *
-      * @return self Enables fluent chaining of assertion methods.
+     * @param non-empty-string $string The substring to search for.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
      */
     public function containsString(string $string, string $message = ''): self
     {
+        if (strlen($string) === 0) {
+            Assert::fail('String cannot be an empty.');
+        }
+
         Assert::assertStringContainsString($string, $this->variable, $message);
 
         return $this;
@@ -93,10 +105,14 @@ trait StringAssertions
      * @param non-empty-string $string The substring that should not be present.
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function notContainsString(string $string, string $message = ''): self
     {
+        if (strlen($string) === 0) {
+            Assert::fail('String cannot be an empty.');
+        }
+
         Assert::assertStringNotContainsString($string, $this->variable, $message);
 
         return $this;
@@ -114,10 +130,14 @@ trait StringAssertions
      * @param non-empty-string $string The substring to search for (case-insensitive).
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function containsStringIgnoringCase(string $string, string $message = ''): self
     {
+        if (strlen($string) === 0) {
+            Assert::fail('String cannot be an empty.');
+        }
+
         Assert::assertStringContainsStringIgnoringCase($string, $this->variable, $message);
 
         return $this;
@@ -135,10 +155,14 @@ trait StringAssertions
      * @param non-empty-string $string The substring that should not be present (case-insensitive).
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function notContainsStringIgnoringCase(string $string, string $message = ''): self
     {
+        if (strlen($string) === 0) {
+            Assert::fail('String cannot be an empty.');
+        }
+
         Assert::assertStringNotContainsStringIgnoringCase(
             $string,
             $this->variable,
@@ -152,21 +176,21 @@ trait StringAssertions
 
     // region Prefix/Suffix Methods
 
-     /**
-      * Asserts that a string starts with a given prefix.
-      *
-      * This method checks if the actual string starts with the specified prefix.
-      *
-      * @param string $prefix The prefix to check for (must not be empty).
-      * @param string $message Optional custom error message.
-      *
-       * @return self Enables fluent chaining of assertion methods.
-       *
-       * Example usage:
-       * fact('hello world')->startsWith('hello'); // Passes
-       * fact('world hello')->startsWith('hello'); // Fails
-       */
-     public function startsWith(string $prefix, string $message = ''): self
+    /**
+     * Asserts that a string starts with a given prefix.
+     *
+     * This method checks if the actual string starts with the specified prefix.
+     *
+     * Example usage:
+     * fact('hello world')->startsWith('hello'); // Passes
+     * fact('world hello')->startsWith('hello'); // Fails
+     *
+     * @param non-empty-string $prefix The prefix to check for (must not be empty).
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function startsWith(string $prefix, string $message = ''): self
     {
         if (strlen($prefix) === 0) {
             Assert::fail('Prefix cannot be an empty string.');
@@ -178,21 +202,21 @@ trait StringAssertions
         return $this;
     }
 
-     /**
-      * Asserts that a string ends with a given suffix.
-      *
-      * This method checks if the actual string ends with the specified suffix.
-      *
-      * @param string $suffix The suffix to check for (must not be empty).
-      * @param string $message Optional custom error message.
-      *
-       * @return self Enables fluent chaining of assertion methods.
-       *
-       * Example usage:
-       * fact('file.txt')->endsWith('.txt'); // Passes
-       * fact('txt.file')->endsWith('.txt'); // Fails
-       */
-     public function endsWith(string $suffix, string $message = ''): self
+    /**
+     * Asserts that a string ends with a given suffix.
+     *
+     * This method checks if the actual string ends with the specified suffix.
+     *
+     * Example usage:
+     * fact('file.txt')->endsWith('.txt'); // Passes
+     * fact('txt.file')->endsWith('.txt'); // Fails
+     *
+     * @param non-empty-string $suffix The suffix to check for (must not be empty).
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function endsWith(string $suffix, string $message = ''): self
     {
         if (strlen($suffix) === 0) {
             Assert::fail('Suffix cannot be an empty string.');
@@ -208,20 +232,20 @@ trait StringAssertions
 
     // region Length Methods
 
-     /**
-      * Asserts that a string has a specific length.
-      *
-      * This method checks if the length of the actual string equals the expected length.
-      *
-      * @param int $length The expected length.
-      * @param string $message Optional custom error message.
-      *
-      * @return self Enables fluent chaining of assertion methods.
-      *
-      * Example usage:
-      * fact('abc')->hasLength(3); // Passes
-      * fact('abcd')->hasLength(3); // Fails
-      */
+    /**
+     * Asserts that a string has a specific length.
+     *
+     * This method checks if the length of the actual string equals the expected length.
+     *
+     * Example usage:
+     * fact('abc')->hasLength(3); // Passes
+     * fact('abcd')->hasLength(3); // Fails
+     *
+     * @param int $length The expected length.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
     public function hasLength(int $length, string $message = ''): self
     {
         Assert::assertEquals($length, strlen($this->variable), $message);
@@ -229,19 +253,19 @@ trait StringAssertions
         return $this;
     }
 
-     /**
-      * Asserts that a string is empty.
-      *
-      * This method checks if the actual value is an empty string.
-      *
-      * @param string $message Optional custom error message.
-      *
-      * @return self Enables fluent chaining of assertion methods.
-      *
-      * Example usage:
-      * fact('')->isEmptyString(); // Passes
-      * fact('hello')->isEmptyString(); // Fails
-      */
+    /**
+     * Asserts that a string is empty.
+     *
+     * This method checks if the actual value is an empty string.
+     *
+     * Example usage:
+     * fact('')->isEmptyString(); // Passes
+     * fact('hello')->isEmptyString(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
     public function isEmptyString(string $message = ''): self
     {
         Assert::assertEmpty($this->variable, $message);

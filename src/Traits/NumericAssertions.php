@@ -27,7 +27,7 @@ trait NumericAssertions
      * @param int|float $expected The value to compare against.
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function isLowerThan(int|float $expected, string $message = ''): self
     {
@@ -49,7 +49,7 @@ trait NumericAssertions
      * @param int|float $expected The value to compare against.
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function isGreaterThan(int|float $expected, string $message = ''): self
     {
@@ -73,7 +73,7 @@ trait NumericAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function isPositive(string $message = ''): self
     {
@@ -93,7 +93,7 @@ trait NumericAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function isNegative(string $message = ''): self
     {
@@ -118,7 +118,7 @@ trait NumericAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function isZero(string $message = ''): self
     {
@@ -140,7 +140,7 @@ trait NumericAssertions
      * @param int|float $max The maximum value.
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function isBetween(int|float $min, int|float $max, string $message = ''): self
     {

@@ -25,7 +25,7 @@ trait ComparisonAndEqualityAssertions
      * @param mixed $expected The expected value to compare against.
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function is(mixed $expected, string $message = ''): self
     {
@@ -46,7 +46,7 @@ trait ComparisonAndEqualityAssertions
      * @param mixed $expected The expected value to compare against.
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function equals(mixed $expected, string $message = ''): self
     {
@@ -68,7 +68,7 @@ trait ComparisonAndEqualityAssertions
      * @param mixed $expected The value that the actual value should not be.
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function not(mixed $expected, string $message = ''): self
     {

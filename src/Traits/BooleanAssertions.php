@@ -24,7 +24,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function true(string $message = ''): self
     {
@@ -45,7 +45,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function notTrue(string $message = ''): self
     {
@@ -66,7 +66,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function false(string $message = ''): self
     {
@@ -87,7 +87,7 @@ trait BooleanAssertions
      *
      * @param string $message Optional custom error message.
      *
-     * @return self|fluentAssertions Enables fluent chaining of assertion methods.
+     * @return self  Enables fluent chaining of assertion methods.
      */
     public function notFalse(string $message = ''): self
     {
