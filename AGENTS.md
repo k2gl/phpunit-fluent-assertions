@@ -4,6 +4,7 @@ This file outlines the requirements and best practices for adding new assertion 
 
 ## General Requirements
 
+- **Branching and Commits**: It is forbidden to commit directly to the `main` branch. All changes must be added via pull request from a feature branch.
 - **Method Signature**: All new methods must be public, accept an optional `$message` parameter (string, default empty), and return `self` to enable fluent chaining.
 - **Type Safety**: Specify strict types for parameters where applicable (e.g., `int|float` for numeric comparisons). Avoid `mixed` unless necessary.
 - **PHPUnit Integration**: Use appropriate PHPUnit assertion methods (e.g., `Assert::assertLessThan`) without named parameters for compatibility.
