@@ -259,18 +259,23 @@ trait ArrayAssertions
     public function every(callable $callback, string $message = ''): self
     {
         $array = $this->variable;
+
         if (!is_array($array)) {
             Assert::assertTrue(false, $message ?: 'Variable is not an array.');
         }
+
         if (empty($array)) {
             Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
         }
+
         foreach ($array as $key => $value) {
             if (!$callback($value, $key)) {
                 Assert::assertTrue(false, $message ?: 'Not all elements satisfy the condition.');
             }
         }
+
         Assert::assertTrue(true, $message);
+
         return $this;
     }
 
@@ -292,18 +297,23 @@ trait ArrayAssertions
     public function some(callable $callback, string $message = ''): self
     {
         $array = $this->variable;
+
         if (!is_array($array)) {
             Assert::assertTrue(false, $message ?: 'Variable is not an array.');
         }
+
         if (empty($array)) {
             Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
         }
+
         foreach ($array as $key => $value) {
             if ($callback($value, $key)) {
                 Assert::assertTrue(true, $message);
+
                 return $this;
             }
         }
+
         Assert::assertTrue(false, $message ?: 'No elements satisfy the condition.');
     }
 
@@ -325,18 +335,23 @@ trait ArrayAssertions
     public function none(callable $callback, string $message = ''): self
     {
         $array = $this->variable;
+
         if (!is_array($array)) {
             Assert::assertTrue(false, $message ?: 'Variable is not an array.');
         }
+
         if (empty($array)) {
             Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
         }
+
         foreach ($array as $key => $value) {
             if ($callback($value, $key)) {
                 Assert::assertTrue(false, $message ?: 'At least one element satisfies the condition.');
             }
         }
+
         Assert::assertTrue(true, $message);
+
         return $this;
     }
 }

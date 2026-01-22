@@ -77,6 +77,64 @@ fact([1, 2, 3])->none(fn($v) => $v > 10); // Passes
 fact([1, 2, 3])->none(fn($v) => $v > 2); // Fails
 ```
 
+### Boolean assertions
+```php
+fact(true)->true(); // Passes
+fact(1)->true(); // Fails due to strict comparison
+
+fact(false)->notTrue(); // Passes
+fact(true)->notTrue(); // Fails
+
+fact(false)->false(); // Passes
+fact(0)->false(); // Fails due to strict comparison
+
+fact(true)->notFalse(); // Passes
+fact(false)->notFalse(); // Fails
+```
+
+### Comparison and equality assertions
+```php
+fact(42)->is(42); // Passes
+fact(42)->is('42'); // Fails due to type difference
+
+fact(42)->equals(42); // Passes
+fact(42)->equals('42'); // Passes due to loose comparison
+
+fact(42)->not(43); // Passes
+fact(42)->not(42); // Fails
+```
+
+### Null assertions
+```php
+fact(null)->null(); // Passes
+fact('')->null(); // Fails
+
+fact(42)->notNull(); // Passes
+fact(null)->notNull(); // Fails
+```
+
+### Numeric assertions
+```php
+fact(5)->isLowerThan(10); // Passes
+fact(10)->isLowerThan(5); // Fails
+
+fact(10)->isGreaterThan(5); // Passes
+fact(5)->isGreaterThan(10); // Fails
+
+fact(5)->isPositive(); // Passes
+fact(-3)->isPositive(); // Fails
+
+fact(-3)->isNegative(); // Passes
+fact(5)->isNegative(); // Fails
+
+fact(0)->isZero(); // Passes
+fact(0.0)->isZero(); // Passes
+fact(1)->isZero(); // Fails
+
+fact(5)->isBetween(1, 10); // Passes
+fact(15)->isBetween(1, 10); // Fails
+```
+
 ### String assertions
 ```php
 fact('abc123')->matchesRegularExpression('/^[a-z]+\d+$/'); // Passes
