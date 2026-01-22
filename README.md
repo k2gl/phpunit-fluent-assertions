@@ -172,6 +172,9 @@ fact('')->isNotEmptyString(); // Fails
 
 fact('{"key": "value"}')->isJson(); // Passes
 fact('invalid json')->isJson(); // Fails
+
+fact('user@example.com')->isValidEmail(); // Passes
+fact('invalid-email')->isValidEmail(); // Fails
 ```
 
 ### Type Checking assertions

@@ -313,5 +313,25 @@ trait StringAssertions
         return $this;
     }
 
+    /**
+     * Asserts that a string is a valid email address.
+     *
+     * This method checks if the actual string is a valid email format.
+     *
+     * Example usage:
+     * fact('user@example.com')->isValidEmail(); // Passes
+     * fact('invalid-email')->isValidEmail(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isValidEmail(string $message = ''): self
+    {
+        Assert::assertTrue(filter_var($this->variable, FILTER_VALIDATE_EMAIL) !== false, $message ?: 'String is not a valid email address.');
+
+        return $this;
+    }
+
     // endregion Length Methods
 }
