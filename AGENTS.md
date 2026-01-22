@@ -7,6 +7,7 @@ This file outlines the requirements and best practices for adding new assertion 
 - **Version Compliance**: Always use the most current version of AGENTS.md and do not rely on cached or outdated copies. Refresh and re-read AGENTS.md before every change to ensure compliance with the latest requirements.
 - **Branching and Commits**: It is forbidden to commit directly to the `main` branch. All changes must be added via pull request from a feature branch. If the current branch is `main`, MUST checkout to a new branch before changing any files. Do not push changes automatically—only push after explicit user request.
 - **Pull Requests**: When creating a pull request, update the PR description with a detailed summary of changes, including new methods added, files modified, and any breaking changes. Ensure the description follows the format: Summary, Changes, Testing, Validation.
+- **Dependency Management**: Remove unused dependencies from composer.json. If a tool (e.g., Psalm) is no longer used, remove its require-dev entry and update scripts accordingly.
 - **Method Signature**: All new methods must be public, accept an optional `$message` parameter (string, default empty), and return `self` to enable fluent chaining.
 - **Type Safety**: Specify strict types for parameters where applicable (e.g., `int|float` for numeric comparisons). Avoid `mixed` unless necessary.
 - **PHPUnit Integration**: Use appropriate PHPUnit assertion methods (e.g., `Assert::assertLessThan`) without named parameters for compatibility.
@@ -49,7 +50,7 @@ This file outlines the requirements and best practices for adding new assertion 
 ## Validation Steps
 
 - **Run Tests**: Execute `./vendor/bin/phpunit tests/FluentAssertions/Asserts/MethodName/MethodNameTest.php` to verify implementation.
-- **Lint and Typecheck**: Run linting and type checking commands (e.g., via composer scripts or direct tools) to ensure code quality.
+- **Lint and Typecheck**: Run PHPStan static analysis via `composer run analyze` to ensure code quality.
 - **Integration**: Ensure the method works in the overall fluent chain without breaking existing functionality.
 
 ## Example Workflow for Adding `isGreaterThan`

@@ -195,4 +195,44 @@ trait TypeCheckingAssertions
 
         return $this;
     }
+
+    /**
+     * Asserts that a variable is of type resource.
+     *
+     * This method checks if the actual value is a resource.
+     *
+     * Example usage:
+     * fact(fopen('file.txt', 'r'))->isResource(); // Passes
+     * fact('string')->isResource(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isResource(string $message = ''): self
+    {
+        Assert::assertIsResource($this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is callable.
+     *
+     * This method checks if the actual value is callable (function, method, closure).
+     *
+     * Example usage:
+     * fact('strlen')->isCallable(); // Passes
+     * fact(123)->isCallable(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isCallable(string $message = ''): self
+    {
+        Assert::assertIsCallable($this->variable, $message);
+
+        return $this;
+    }
 }

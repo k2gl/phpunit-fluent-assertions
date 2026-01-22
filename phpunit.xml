@@ -4,6 +4,21 @@
     <testsuite name="default">
       <directory>tests</directory>
     </testsuite>
+    <testsuite name="array">
+      <directory suffix="Test.php">tests/FluentAssertions/Asserts</directory>
+    </testsuite>
+    <testsuite name="string">
+      <directory suffix="Test.php">tests/FluentAssertions/Asserts</directory>
+    </testsuite>
+    <testsuite name="numeric">
+      <directory suffix="Test.php">tests/FluentAssertions/Asserts</directory>
+    </testsuite>
+    <testsuite name="type">
+      <directory suffix="Test.php">tests/FluentAssertions/Asserts</directory>
+    </testsuite>
+    <testsuite name="comparison">
+      <directory suffix="Test.php">tests/FluentAssertions/Asserts</directory>
+    </testsuite>
   </testsuites>
   <source restrictNotices="true" restrictWarnings="true" ignoreIndirectDeprecations="true">
     <include>
