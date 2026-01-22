@@ -178,6 +178,9 @@ fact('invalid-email')->isValidEmail(); // Fails
 
 fact('01ARZ3NDEKTSV4RRFFQ69G5FAV')->ulid(); // Passes (if valid ULID)
 fact('invalid-ulid')->ulid(); // Fails
+
+fact('{"key": "value"}')->jsonEquals('{"key": "value"}'); // Passes
+fact('{"key": "value"}')->jsonEquals('{"key": "different"}'); // Fails
 ```
 
 ### Type Checking assertions
@@ -220,9 +223,6 @@ fact(42)->isFloat(); // Fails
 
 fact(true)->isBool(); // Passes
 fact(1)->isBool(); // Fails
-
-fact([1, 2])->isArray(); // Passes
-fact('not array')->isArray(); // Fails
 ```
 
 ## Pull requests are always welcome

@@ -335,6 +335,40 @@ trait StringAssertions
     }
 
     /**
+     * Asserts that two JSON strings are equal.
+     *
+     * This method decodes both JSON strings and compares the resulting data structures.
+     *
+     * Example usage:
+     * fact('{"key": "value"}')->jsonEquals('{"key": "value"}'); // Passes
+     * fact('{"key": "value"}')->jsonEquals('{"key": "different"}'); // Fails
+     *
+     * @param string $expectedJson The expected JSON string.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function jsonEquals(string $expectedJson, string $message = ''): self
+    {
+        $actual = json_decode($this->variable, true);
+        $actualError = json_last_error();
+
+        $expected = json_decode($expectedJson, true);
+        $expectedError = json_last_error();
+
+        if ($actualError !== JSON_ERROR_NONE) {
+            Assert::assertTrue(false, $message ?: 'Actual JSON is invalid.');
+        }
+        if ($expectedError !== JSON_ERROR_NONE) {
+            Assert::assertTrue(false, $message ?: 'Expected JSON is invalid.');
+        }
+
+        Assert::assertEquals($expected, $actual, $message ?: 'JSON strings are not equal.');
+
+        return $this;
+    }
+
+    /**
      * Asserts that a variable is a valid ULID.
      *
      * This method checks if the actual value matches the ULID (Universally Unique Lexicographically Sortable Identifier) format.
