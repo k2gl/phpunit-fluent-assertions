@@ -9,7 +9,6 @@ use K2gl\PHPUnitFluentAssertions\Traits\BooleanAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\ComparisonAndEqualityAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\NullAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\NumericAssertions;
-use K2gl\PHPUnitFluentAssertions\Traits\SpecialAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\StringAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\TypeCheckingAssertions;
 
@@ -22,7 +21,6 @@ class FluentAssertions
     use StringAssertions;
     use ArrayAssertions;
     use TypeCheckingAssertions;
-    use SpecialAssertions;
 
     public function __construct(
         public readonly mixed $variable = null

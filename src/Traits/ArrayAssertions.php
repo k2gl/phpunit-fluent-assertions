@@ -240,4 +240,103 @@ trait ArrayAssertions
 
         return $this;
     }
+
+    /**
+     * Asserts that every element in the array satisfies the given callback.
+     *
+     * This method checks if all elements pass the condition defined by the callback.
+     * The callback receives the value and optionally the key.
+     *
+     * Example usage:
+     * fact([2, 4, 6])->every(fn($v) => $v % 2 === 0); // Passes
+     * fact([1, 2, 3])->every(fn($v) => $v > 5); // Fails
+     *
+     * @param callable $callback The function to test each element (receives value and key).
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function every(callable $callback, string $message = ''): self
+    {
+        $array = $this->variable;
+        if (!is_array($array)) {
+            Assert::assertTrue(false, $message ?: 'Variable is not an array.');
+        }
+        if (empty($array)) {
+            Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
+        }
+        foreach ($array as $key => $value) {
+            if (!$callback($value, $key)) {
+                Assert::assertTrue(false, $message ?: 'Not all elements satisfy the condition.');
+            }
+        }
+        Assert::assertTrue(true, $message);
+        return $this;
+    }
+
+    /**
+     * Asserts that at least one element in the array satisfies the given callback.
+     *
+     * This method checks if any element passes the condition defined by the callback.
+     * The callback receives the value and optionally the key.
+     *
+     * Example usage:
+     * fact([1, 2, 3])->some(fn($v) => $v > 2); // Passes
+     * fact([1, 2, 3])->some(fn($v) => $v > 10); // Fails
+     *
+     * @param callable $callback The function to test each element (receives value and key).
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function some(callable $callback, string $message = ''): self
+    {
+        $array = $this->variable;
+        if (!is_array($array)) {
+            Assert::assertTrue(false, $message ?: 'Variable is not an array.');
+        }
+        if (empty($array)) {
+            Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
+        }
+        foreach ($array as $key => $value) {
+            if ($callback($value, $key)) {
+                Assert::assertTrue(true, $message);
+                return $this;
+            }
+        }
+        Assert::assertTrue(false, $message ?: 'No elements satisfy the condition.');
+    }
+
+    /**
+     * Asserts that no elements in the array satisfy the given callback.
+     *
+     * This method checks if none of the elements pass the condition defined by the callback.
+     * The callback receives the value and optionally the key.
+     *
+     * Example usage:
+     * fact([1, 2, 3])->none(fn($v) => $v > 10); // Passes
+     * fact([1, 2, 3])->none(fn($v) => $v > 2); // Fails
+     *
+     * @param callable $callback The function to test each element (receives value and key).
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function none(callable $callback, string $message = ''): self
+    {
+        $array = $this->variable;
+        if (!is_array($array)) {
+            Assert::assertTrue(false, $message ?: 'Variable is not an array.');
+        }
+        if (empty($array)) {
+            Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
+        }
+        foreach ($array as $key => $value) {
+            if ($callback($value, $key)) {
+                Assert::assertTrue(false, $message ?: 'At least one element satisfies the condition.');
+            }
+        }
+        Assert::assertTrue(true, $message);
+        return $this;
+    }
 }

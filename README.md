@@ -65,72 +65,16 @@ fact([])->isEmptyArray(); // Passes
 fact([1, 2])->isEmptyArray(); // Fails
      
 fact([1, 2])->isNotEmptyArray(); // Passes
-fact([])->isNotEmptyArray(); // Fails     
+fact([])->isNotEmptyArray(); // Fails
 
-```
+fact([2, 4, 6])->every(fn($v) => $v % 2 === 0); // Passes
+fact([1, 2, 3])->every(fn($v) => $v > 5); // Fails
 
-### Boolean assertions
-```php
-fact(true)->true(); // Passes
-fact(1)->true(); // Fails due to strict comparison
+fact([1, 2, 3])->some(fn($v) => $v > 2); // Passes
+fact([1, 2, 3])->some(fn($v) => $v > 10); // Fails
 
-fact(false)->notTrue(); // Passes
-fact(true)->notTrue(); // Fails
-
-fact(false)->false(); // Passes
-fact(0)->false(); // Fails due to strict comparison
-
-fact(true)->notFalse(); // Passes
-fact(false)->notFalse(); // Fails
-```
-
-
-### Comparison and equality assertions
-```php
-fact(42)->is(42); // Passes
-fact(42)->is('42'); // Fails due to type difference
-
-fact(42)->equals(42); // Passes
-fact(42)->equals('42'); // Passes due to loose comparison
-
-fact(42)->not(43); // Passes
-fact(42)->not(42); // Fails
-```
-
-
-### Null assertions
-```php
-fact(null)->null(); // Passes
-fact('')->null(); // Fails
-
-fact(42)->notNull(); // Passes
-fact(null)->notNull(); // Fails
-```
-
-### Numeric assertions
-```php
-fact(5)->isLowerThan(10); // Passes
-fact(10)->isLowerThan(5); // Fails
-
-fact(10)->isGreaterThan(5); // Passes
-fact(5)->isGreaterThan(10); // Fails
-     
-fact(5)->isPositive(); // Passes
-fact(-3)->isPositive(); // Fails
-
-fact(-3)->isNegative(); // Passes
-fact(5)->isNegative(); // Fails
-
-fact(0)->isZero(); // Passes
-fact(0.0)->isZero(); // Passes
-fact(1)->isZero(); // Fails
-
-fact(5)->isBetween(1, 10); // Passes
-fact(15)->isBetween(1, 10); // Fails
-```
-
-### Special assertions
-```php
+fact([1, 2, 3])->none(fn($v) => $v > 10); // Passes
+fact([1, 2, 3])->none(fn($v) => $v > 2); // Fails
 ```
 
 ### String assertions
@@ -174,6 +118,8 @@ fact('invalid json')->isJson(); // Fails
 fact('user@example.com')->isValidEmail(); // Passes
 fact('invalid-email')->isValidEmail(); // Fails
 
+fact('01ARZ3NDEKTSV4RRFFQ69G5FAV')->ulid(); // Passes (if valid ULID)
+fact('invalid-ulid')->ulid(); // Fails
 ```
 
 ### Type Checking assertions

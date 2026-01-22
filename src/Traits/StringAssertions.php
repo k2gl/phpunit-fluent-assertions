@@ -27,7 +27,7 @@ trait StringAssertions
      * @param string $pattern The regular expression pattern to match against.
      * @param string $message Optional custom error message.
      *
-     * @return self Enables fluent chaining of assertion methods.
+     * @return StringAssertions|FluentAssertions Enables fluent chaining of assertion methods.
      */
     public function matchesRegularExpression(string $pattern, string $message = ''): self
     {
