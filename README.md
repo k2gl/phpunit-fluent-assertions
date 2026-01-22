@@ -208,6 +208,21 @@ fact(1)->isBool(); // Fails
 
 fact([1, 2])->isArray(); // Passes
 fact('not array')->isArray(); // Fails
+
+fact(fopen('php://memory', 'r'))->isResource(); // Passes
+fact('string')->isResource(); // Fails
+
+fact('strlen')->isCallable(); // Passes
+fact(123)->isCallable(); // Fails
+
+fact(3.14)->isFloat(); // Passes
+fact(42)->isFloat(); // Fails
+
+fact(true)->isBool(); // Passes
+fact(1)->isBool(); // Fails
+
+fact([1, 2])->isArray(); // Passes
+fact('not array')->isArray(); // Fails
 ```
 
 ## Pull requests are always welcome
