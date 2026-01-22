@@ -85,7 +85,7 @@ fact(false)->notFalse(); // Fails
 ```
 
 
-### Comparison and Equality assertions
+### Comparison and equality assertions
 ```php
 fact(42)->is(42); // Passes
 fact(42)->is('42'); // Fails due to type difference
@@ -131,8 +131,6 @@ fact(15)->isBetween(1, 10); // Fails
 
 ### Special assertions
 ```php
-fact('01ARZ3NDEKTSV4RRFFQ69G5FAV')->ulid(); // Passes (if valid ULID)
-fact('invalid-ulid')->ulid(); // Fails
 ```
 
 ### String assertions
@@ -175,6 +173,7 @@ fact('invalid json')->isJson(); // Fails
 
 fact('user@example.com')->isValidEmail(); // Passes
 fact('invalid-email')->isValidEmail(); // Fails
+
 ```
 
 ### Type Checking assertions
