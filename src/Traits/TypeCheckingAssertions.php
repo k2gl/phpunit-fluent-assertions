@@ -135,4 +135,64 @@ trait TypeCheckingAssertions
 
         return $this;
     }
+
+    /**
+     * Asserts that a variable is of type float.
+     *
+     * This method checks if the actual value is a floating-point number.
+     *
+     * Example usage:
+     * fact(3.14)->isFloat(); // Passes
+     * fact(42)->isFloat(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isFloat(string $message = ''): self
+    {
+        Assert::assertIsFloat($this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is of type bool.
+     *
+     * This method checks if the actual value is a boolean.
+     *
+     * Example usage:
+     * fact(true)->isBool(); // Passes
+     * fact(1)->isBool(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isBool(string $message = ''): self
+    {
+        Assert::assertIsBool($this->variable, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is of type array.
+     *
+     * This method checks if the actual value is an array.
+     *
+     * Example usage:
+     * fact([1, 2])->isArray(); // Passes
+     * fact('not array')->isArray(); // Fails
+     *
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function isArray(string $message = ''): self
+    {
+        Assert::assertIsArray($this->variable, $message);
+
+        return $this;
+    }
 }
