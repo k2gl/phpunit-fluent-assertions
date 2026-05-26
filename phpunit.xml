@@ -26,4 +26,7 @@
     </include>
   </source>
   <logging/>
+  <extensions>
+    <bootstrap class="PHPStan\Testing\PHPUnit\PHPStanPHPUnitExtension"/>
+  </extensions>
 </phpunit>

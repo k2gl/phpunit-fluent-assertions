@@ -1,0 +1,5 @@
+services:
+    -
+        class: K2gl\PHPUnitFluentAssertions\PHPStan\FluentAssertionsTypeSpecifyingExtension
+        tags:
+            - phpstan.typeSpecifier.methodTypeSpecifyingExtension

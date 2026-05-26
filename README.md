@@ -1,6 +1,6 @@
 # Fluent assertions for PHPUnit
 
-This library is insperated by [Vladimir Khorikov](https://enterprisecraftsmanship.com/), the author
+This library is inspired by [Vladimir Khorikov](https://enterprisecraftsmanship.com/), the author
 of [Unit Testing: Principles, Patterns and Practices](https://enterprisecraftsmanship.com/book-amazon) and makes checks in tests more readable.
 
 [![GitHub Actions](https://github.com/k2gl/phpunit-fluent-assertions/workflows/CI/badge.svg)](https://github.com/k2gl/phpunit-fluent-assertions/actions?workflow=CI)
@@ -221,6 +221,74 @@ fact(42)->isFloat(); // Fails
 fact(true)->isBool(); // Passes
 fact(1)->isBool(); // Fails
 ```
+
+## PHPStan support
+
+The package ships a PHPStan extension that narrows the asserted value, so the analyser
+keeps following your types after a fluent assertion:
+
+```php
+/** @var array{something: string}|null $context */
+$context = $user->getContext();
+
+echo $context['something']; // PHPStan error: Cannot access offset 'something' on array{something: string}|null
+
+fact($context)->notNull();
+
+echo $context['something']; // OK: $context is narrowed to array{something: string}
+```
+
+More examples — every supported assertion narrows the subject in place:
+
+```php
+// instanceOf(): a union is narrowed to the concrete class
+/** @var DateTimeInterface|null $date */
+fact($date)->instanceOf(DateTimeImmutable::class);
+// → $date is DateTimeImmutable
+
+// notInstanceOf(): the class is subtracted from the union
+/** @var DateTime|DateTimeImmutable $createdAt */
+fact($createdAt)->notInstanceOf(DateTimeImmutable::class);
+// → $createdAt is DateTime
+
+// true() / false(): a bool is narrowed to the literal
+/** @var bool $flag */
+fact($flag)->true();      // → $flag is true
+/** @var bool $enabled */
+check($enabled)->false(); // → $enabled is false
+
+// is(): narrowed to the exact expected value (assertSame semantics)
+/** @var mixed $status */
+fact($status)->is('active');
+// → $status is 'active'
+
+// null(): narrowed to null
+/** @var string|null $token */
+fact($token)->null();
+// → $token is null
+
+// chains accumulate every supported step
+/** @var string|null $name */
+fact($name)->notNull()->is('admin');
+// → $name is 'admin'
+```
+
+The chain can be opened with any of `check()`, `expect()`, `fact()` or
+`FluentAssertions::for()`, and the subject may be a variable or a property
+(e.g. `fact($user->getContext())->notNull()`).
+
+If you use [`phpstan/extension-installer`](https://github.com/phpstan/extension-installer)
+it is picked up automatically. Otherwise include it manually in your `phpstan.neon`:
+
+```neon
+includes:
+    - vendor/k2gl/phpunit-fluent-assertions/extension.neon
+```
+
+Narrowing is applied for `notNull()`, `null()`, `true()`, `notTrue()`, `false()`,
+`notFalse()`, `instanceOf()`, `notInstanceOf()` and `is()`. Loose or negated assertions
+such as `equals()` (loose `==`) and `not()` would not narrow soundly, so they are
+intentionally left out and leave the type unchanged.
 
 ## Pull requests are always welcome
 [Collaborate with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
