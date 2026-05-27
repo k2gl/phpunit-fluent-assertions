@@ -3,12 +3,15 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build-test:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.1', '8.2', '8.3', '8.4']
+        # The library runtime targets PHP 8.1+, but the test suite uses PHPUnit 11.4+
+        # metadata (#[CoversMethod]) which requires PHP 8.2+. PHP 8.1 is covered by the
+        # separate source-php81 job below (install + static analysis).
+        php-version: ['8.2', '8.3', '8.4']
 
     name: PHP ${{ matrix.php-version }}
 
@@ -29,6 +32,27 @@ jobs:
 
       - name: PHPUnit
         run: vendor/bin/phpunit
+
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse
+
+  source-php81:
+    runs-on: ubuntu-latest
+    name: PHP 8.1 (source + static analysis)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl
+          coverage: none
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: PHPStan
         run: vendor/bin/phpstan analyse
