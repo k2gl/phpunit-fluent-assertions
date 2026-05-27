@@ -261,20 +261,24 @@ trait ArrayAssertions
         $array = $this->variable;
 
         if (!is_array($array)) {
-            Assert::assertTrue(false, $message ?: 'Variable is not an array.');
+            Assert::fail($message ?: 'Variable is not an array.');
         }
 
-        if (empty($array)) {
-            Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
+        if ($array === []) {
+            Assert::fail($message ?: 'Array is empty, cannot evaluate condition on elements.');
         }
+
+        $satisfied = true;
 
         foreach ($array as $key => $value) {
             if (!$callback($value, $key)) {
-                Assert::assertTrue(false, $message ?: 'Not all elements satisfy the condition.');
+                $satisfied = false;
+
+                break;
             }
         }
 
-        Assert::assertTrue(true, $message);
+        Assert::assertTrue($satisfied, $message ?: 'Not all elements satisfy the condition.');
 
         return $this;
     }
@@ -299,22 +303,26 @@ trait ArrayAssertions
         $array = $this->variable;
 
         if (!is_array($array)) {
-            Assert::assertTrue(false, $message ?: 'Variable is not an array.');
+            Assert::fail($message ?: 'Variable is not an array.');
         }
 
-        if (empty($array)) {
-            Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
+        if ($array === []) {
+            Assert::fail($message ?: 'Array is empty, cannot evaluate condition on elements.');
         }
+
+        $satisfied = false;
 
         foreach ($array as $key => $value) {
             if ($callback($value, $key)) {
-                Assert::assertTrue(true, $message);
+                $satisfied = true;
 
-                return $this;
+                break;
             }
         }
 
-        Assert::assertTrue(false, $message ?: 'No elements satisfy the condition.');
+        Assert::assertTrue($satisfied, $message ?: 'No elements satisfy the condition.');
+
+        return $this;
     }
 
     /**
@@ -337,20 +345,24 @@ trait ArrayAssertions
         $array = $this->variable;
 
         if (!is_array($array)) {
-            Assert::assertTrue(false, $message ?: 'Variable is not an array.');
+            Assert::fail($message ?: 'Variable is not an array.');
         }
 
-        if (empty($array)) {
-            Assert::assertTrue(false, $message ?: 'Array is empty, cannot evaluate condition on elements.');
+        if ($array === []) {
+            Assert::fail($message ?: 'Array is empty, cannot evaluate condition on elements.');
         }
+
+        $satisfied = true;
 
         foreach ($array as $key => $value) {
             if ($callback($value, $key)) {
-                Assert::assertTrue(false, $message ?: 'At least one element satisfies the condition.');
+                $satisfied = false;
+
+                break;
             }
         }
 
-        Assert::assertTrue(true, $message);
+        Assert::assertTrue($satisfied, $message ?: 'At least one element satisfies the condition.');
 
         return $this;
     }

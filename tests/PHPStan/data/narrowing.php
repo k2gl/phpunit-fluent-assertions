@@ -79,6 +79,48 @@ function chainedCase(?string $value): void
     assertType("'expected'", $value);
 }
 
+function isStringCase(mixed $value): void
+{
+    fact($value)->isString();
+    assertType('string', $value);
+}
+
+function isIntCase(mixed $value): void
+{
+    fact($value)->isInt();
+    assertType('int', $value);
+}
+
+function isFloatCase(mixed $value): void
+{
+    fact($value)->isFloat();
+    assertType('float', $value);
+}
+
+function isBoolCase(mixed $value): void
+{
+    fact($value)->isBool();
+    assertType('bool', $value);
+}
+
+function isArrayCase(mixed $value): void
+{
+    fact($value)->isArray();
+    assertType('array<mixed, mixed>', $value);
+}
+
+function isCallableCase(mixed $value): void
+{
+    fact($value)->isCallable();
+    assertType('callable(): mixed', $value);
+}
+
+function isResourceCase(mixed $value): void
+{
+    fact($value)->isResource();
+    assertType('resource', $value);
+}
+
 /** Unsupported assertions (equals is loose ==) must NOT narrow. */
 function unsupportedDoesNotNarrow(?string $value): void
 {

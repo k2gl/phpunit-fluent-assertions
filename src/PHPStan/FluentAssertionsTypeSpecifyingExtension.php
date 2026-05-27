@@ -179,12 +179,26 @@ final class FluentAssertionsTypeSpecifyingExtension implements
 
                 return $arg instanceof Arg ? new Identical($s, $arg->value) : null;
             },
+
+            // Type-check assertions narrow via the equivalent is_*() condition.
+            'isstring'   => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'isint'      => static fn (Expr $s): Expr => self::isType('is_int', $s),
+            'isfloat'    => static fn (Expr $s): Expr => self::isType('is_float', $s),
+            'isbool'     => static fn (Expr $s): Expr => self::isType('is_bool', $s),
+            'isarray'    => static fn (Expr $s): Expr => self::isType('is_array', $s),
+            'iscallable' => static fn (Expr $s): Expr => self::isType('is_callable', $s),
+            'isresource' => static fn (Expr $s): Expr => self::isType('is_resource', $s),
         ];
     }
 
     private static function const(string $name): ConstFetch
     {
         return new ConstFetch(new Name($name));
+    }
+
+    private static function isType(string $function, Expr $subject): FuncCall
+    {
+        return new FuncCall(new Name($function), [new Arg($subject)]);
     }
 
     /**

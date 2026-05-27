@@ -267,6 +267,11 @@ fact($status)->is('active');
 fact($token)->null();
 // → $token is null
 
+// type checks: narrowed to the asserted PHP type
+/** @var mixed $value */
+fact($value)->isString();
+// → $value is string  (likewise isInt/isFloat/isBool/isArray/isCallable/isResource)
+
 // chains accumulate every supported step
 /** @var string|null $name */
 fact($name)->notNull()->is('admin');
@@ -286,9 +291,10 @@ includes:
 ```
 
 Narrowing is applied for `notNull()`, `null()`, `true()`, `notTrue()`, `false()`,
-`notFalse()`, `instanceOf()`, `notInstanceOf()` and `is()`. Loose or negated assertions
-such as `equals()` (loose `==`) and `not()` would not narrow soundly, so they are
-intentionally left out and leave the type unchanged.
+`notFalse()`, `instanceOf()`, `notInstanceOf()`, `is()`, and the type checks `isString()`,
+`isInt()`, `isFloat()`, `isBool()`, `isArray()`, `isCallable()` and `isResource()`. Loose or
+negated assertions such as `equals()` (loose `==`) and `not()` would not narrow soundly, so they
+are intentionally left out and leave the type unchanged.
 
 ## Pull requests are always welcome
 [Collaborate with pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)

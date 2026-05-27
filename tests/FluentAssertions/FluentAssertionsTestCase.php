@@ -4,7 +4,7 @@ namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions;
 
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 
 abstract class FluentAssertionsTestCase extends TestCase
@@ -28,6 +28,6 @@ abstract class FluentAssertionsTestCase extends TestCase
 
     protected function incorrectAssertionExpected(): void
     {
-        $this->expectException(ExpectationFailedException::class);
+        $this->expectException(AssertionFailedError::class);
     }
 }
