@@ -15,6 +15,10 @@
       "email": "l0gic@ya.ru"
     }
   ],
+  "support": {
+    "issues": "https://github.com/k2gl/phpunit-fluent-assertions/issues",
+    "source": "https://github.com/k2gl/phpunit-fluent-assertions"
+  },
   "require": {
     "php": ">=8.1",
     "phpunit/phpunit": "^9|^10|^11|^12"
@@ -37,7 +41,10 @@
     "analyze": [
       "@phpstan"
     ],
-      "phpstan": "./vendor/bin/phpstan analyse"
+      "phpstan": "./vendor/bin/phpstan analyse",
+      "check": [
+        "@analyze"
+      ]
    },
     "require-dev": {
      "phpstan/phpstan": "^2.1"
