@@ -51,7 +51,7 @@
    },
     "require-dev": {
      "phpstan/phpstan": "^2.1",
-     "laravel/pint": "^1.29"
+     "laravel/pint": "~1.20.0"
    },
    "extra": {
      "phpstan": {
