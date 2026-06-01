@@ -1,6 +1,7 @@
 .* export-ignore
 *.dist export-ignore
 *.md export-ignore
+pint.json export-ignore
 tests/ export-ignore
 phpunit.xml export-ignore
 rector.php export-ignore

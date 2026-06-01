@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Some;
 
@@ -35,17 +37,17 @@ final class SomeTest extends FluentAssertionsTestCase
     public static function someDataProvider(): array
     {
         return [
-            [[1, 2, 3], fn($v) => $v > 2],
-            [['a' => 1, 'b' => 2], fn($v, $k) => $k === 'b'],
+            [[1, 2, 3], fn ($v) => $v > 2],
+            [['a' => 1, 'b' => 2], fn ($v, $k) => $k === 'b'],
         ];
     }
 
     public static function notSomeDataProvider(): array
     {
         return [
-            [[1, 2, 3], fn($v) => $v > 10],
-            [[], fn($v) => true], // empty array
-            ['not array', fn($v) => true], // not array
+            [[1, 2, 3], fn ($v) => $v > 10],
+            [[], fn ($v) => true], // empty array
+            ['not array', fn ($v) => true], // not array
         ];
     }
 }

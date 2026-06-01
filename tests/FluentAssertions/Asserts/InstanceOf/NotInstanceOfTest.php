@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\InstanceOf;
 
@@ -18,13 +20,13 @@ final class NotInstanceOfTest extends FluentAssertionsTestCase
         $this->incorrectAssertionExpected();
 
         // act
-        fact(new FluentAssertions())->notInstanceOf(FluentAssertions::class);
+        fact(new FluentAssertions)->notInstanceOf(FluentAssertions::class);
     }
 
     public function testCorrectAssertion(): void
     {
         // act
-        fact(new FluentAssertions())->notInstanceOf(Assert::class);
+        fact(new FluentAssertions)->notInstanceOf(Assert::class);
 
         // assert
         $this->correctAssertionExecuted();

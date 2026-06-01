@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\True;
 
@@ -42,7 +44,7 @@ final class TrueTest extends FluentAssertionsTestCase
             ['1'],
             ['foo'],
             [(object) ['foo' => 'bar']],
-            [static fn() => null],
+            [static fn () => null],
         ];
     }
 }

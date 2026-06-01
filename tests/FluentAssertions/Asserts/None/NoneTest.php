@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\None;
 
@@ -35,17 +37,17 @@ final class NoneTest extends FluentAssertionsTestCase
     public static function noneDataProvider(): array
     {
         return [
-            [[1, 2, 3], fn($v) => $v > 10],
-            [['a' => 1, 'b' => 2], fn($v, $k) => $k === 'c'],
+            [[1, 2, 3], fn ($v) => $v > 10],
+            [['a' => 1, 'b' => 2], fn ($v, $k) => $k === 'c'],
         ];
     }
 
     public static function notNoneDataProvider(): array
     {
         return [
-            [[1, 2, 3], fn($v) => $v > 2],
-            [[], fn($v) => true], // empty array
-            ['not array', fn($v) => true], // not array
+            [[1, 2, 3], fn ($v) => $v > 2],
+            [[], fn ($v) => true], // empty array
+            ['not array', fn ($v) => true], // not array
         ];
     }
 }

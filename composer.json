@@ -42,12 +42,16 @@
       "@phpstan"
     ],
       "phpstan": "./vendor/bin/phpstan analyse",
+      "cs": "pint --test",
+      "cs-fix": "pint",
       "check": [
-        "@analyze"
+        "@analyze",
+        "@cs"
       ]
    },
     "require-dev": {
-     "phpstan/phpstan": "^2.1"
+     "phpstan/phpstan": "^2.1",
+     "laravel/pint": "^1.29"
    },
    "extra": {
      "phpstan": {

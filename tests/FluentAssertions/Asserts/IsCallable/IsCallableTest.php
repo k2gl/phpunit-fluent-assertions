@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\IsCallable;
 
@@ -36,7 +38,7 @@ final class IsCallableTest extends FluentAssertionsTestCase
     {
         return [
             ['strlen'],
-            [fn() => true],
+            [fn () => true],
         ];
     }
 

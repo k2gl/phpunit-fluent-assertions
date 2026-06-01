@@ -24,8 +24,7 @@ class FluentAssertions
 
     public function __construct(
         public readonly mixed $variable = null
-    ) {
-    }
+    ) {}
 
     /**
      * Creates a new FluentAssertions instance for the given variable.

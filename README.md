@@ -3,7 +3,11 @@
 This library is inspired by [Vladimir Khorikov](https://enterprisecraftsmanship.com/), the author
 of [Unit Testing: Principles, Patterns and Practices](https://enterprisecraftsmanship.com/book-amazon) and makes checks in tests more readable.
 
-[![GitHub Actions](https://github.com/k2gl/phpunit-fluent-assertions/workflows/CI/badge.svg)](https://github.com/k2gl/phpunit-fluent-assertions/actions?workflow=CI)
+[![CI](https://img.shields.io/github/actions/workflow/status/k2gl/phpunit-fluent-assertions/ci.yml?branch=main&label=CI&logo=github)](https://github.com/k2gl/phpunit-fluent-assertions/actions/workflows/ci.yml)
+[![Latest Stable Version](https://img.shields.io/packagist/v/k2gl/phpunit-fluent-assertions?logo=packagist&logoColor=white)](https://packagist.org/packages/k2gl/phpunit-fluent-assertions)
+[![Total Downloads](https://img.shields.io/packagist/dt/k2gl/phpunit-fluent-assertions?logo=packagist&logoColor=white)](https://packagist.org/packages/k2gl/phpunit-fluent-assertions)
+[![PHPStan Level](https://img.shields.io/badge/PHPStan-level%205-2a5ea7?logo=php&logoColor=white)](https://phpstan.org)
+[![License](https://img.shields.io/packagist/l/k2gl/phpunit-fluent-assertions?color=yellowgreen)](https://packagist.org/packages/k2gl/phpunit-fluent-assertions)
 
 ## Installation
 

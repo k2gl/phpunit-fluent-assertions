@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\PHPStan;
 
@@ -92,18 +94,21 @@ final class FluentAssertionsTypeSpecifyingExtension implements
         TypeSpecifierContext $context,
     ): SpecifiedTypes {
         $subject = $this->resolveSubject($node, $scope);
+
         if ($subject === null) {
-            return new SpecifiedTypes();
+            return new SpecifiedTypes;
         }
 
         $resolver = self::getResolvers()[strtolower($methodReflection->getName())] ?? null;
+
         if ($resolver === null) {
-            return new SpecifiedTypes();
+            return new SpecifiedTypes;
         }
 
         $condition = $resolver($subject, $node->getArgs(), $scope);
+
         if ($condition === null) {
-            return new SpecifiedTypes();
+            return new SpecifiedTypes;
         }
 
         return $this->typeSpecifier->specifyTypesInCondition(
@@ -207,11 +212,13 @@ final class FluentAssertionsTypeSpecifyingExtension implements
     private static function classNameNode(array $args, Scope $scope): ?Name
     {
         $arg = $args[0] ?? null;
-        if (!$arg instanceof Arg) {
+
+        if (! $arg instanceof Arg) {
             return null;
         }
 
         $classStrings = $scope->getType($arg->value)->getConstantStrings();
+
         if (count($classStrings) !== 1) {
             return null;
         }

@@ -85,7 +85,7 @@ trait ArrayAssertions
     {
         foreach ($values as $key => $value) {
             if (is_array($value)) {
-                if (!$this->arrayContainsAssociativeArrayRecursive($data[$key], $value)) {
+                if (! $this->arrayContainsAssociativeArrayRecursive($data[$key], $value)) {
                     return false;
                 }
             } elseif ($data[$key] !== $value) {
@@ -260,7 +260,7 @@ trait ArrayAssertions
     {
         $array = $this->variable;
 
-        if (!is_array($array)) {
+        if (! is_array($array)) {
             Assert::fail($message ?: 'Variable is not an array.');
         }
 
@@ -271,7 +271,7 @@ trait ArrayAssertions
         $satisfied = true;
 
         foreach ($array as $key => $value) {
-            if (!$callback($value, $key)) {
+            if (! $callback($value, $key)) {
                 $satisfied = false;
 
                 break;
@@ -302,7 +302,7 @@ trait ArrayAssertions
     {
         $array = $this->variable;
 
-        if (!is_array($array)) {
+        if (! is_array($array)) {
             Assert::fail($message ?: 'Variable is not an array.');
         }
 
@@ -344,7 +344,7 @@ trait ArrayAssertions
     {
         $array = $this->variable;
 
-        if (!is_array($array)) {
+        if (! is_array($array)) {
             Assert::fail($message ?: 'Variable is not an array.');
         }
 

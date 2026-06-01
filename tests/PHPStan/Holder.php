@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\PHPStan;
 
@@ -11,6 +13,5 @@ final class Holder
     /** @param array{something: string}|null $context */
     public function __construct(
         public readonly ?array $context = null,
-    ) {
-    }
+    ) {}
 }

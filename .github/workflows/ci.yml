@@ -56,3 +56,6 @@ jobs:
 
       - name: PHPStan
         run: vendor/bin/phpstan analyse
+
+      - name: Pint (dry-run)
+        run: vendor/bin/pint --test

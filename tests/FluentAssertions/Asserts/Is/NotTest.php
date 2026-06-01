@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Is;
 
@@ -44,7 +46,7 @@ final class NotTest extends FluentAssertionsTestCase
             ['foo', 'bar'],
             [['foo' => 'bar'], ['bar' => 'foo']],
             [(object) ['foo' => 'bar'], (object) ['foo' => 'bar']],
-            [static fn(): bool => false, static fn(): bool => false],
+            [static fn (): bool => false, static fn (): bool => false],
         ];
     }
 
@@ -59,7 +61,7 @@ final class NotTest extends FluentAssertionsTestCase
             ['foo', 'foo'],
             [['foo' => 'bar'], ['foo' => 'bar']],
             [$object = (object) ['foo' => 'bar'], $object],
-            [$fn = static fn(): bool => false, $fn],
+            [$fn = static fn (): bool => false, $fn],
         ];
     }
 }

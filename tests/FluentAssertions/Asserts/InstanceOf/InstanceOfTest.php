@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\InstanceOf;
 
@@ -15,7 +17,7 @@ final class InstanceOfTest extends FluentAssertionsTestCase
     public function testCorrectAssertion(): void
     {
         // act
-        fact(new FluentAssertions())->instanceOf(FluentAssertions::class);
+        fact(new FluentAssertions)->instanceOf(FluentAssertions::class);
 
         // assert
         $this->correctAssertionExecuted();
@@ -27,6 +29,6 @@ final class InstanceOfTest extends FluentAssertionsTestCase
         $this->incorrectAssertionExpected();
 
         // act
-        fact(new FluentAssertions())->instanceOf(Assert::class);
+        fact(new FluentAssertions)->instanceOf(Assert::class);
     }
 }

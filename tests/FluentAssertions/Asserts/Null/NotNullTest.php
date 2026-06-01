@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Null;
 
@@ -41,7 +43,7 @@ final class NotNullTest extends FluentAssertionsTestCase
             ['foo'],
             [['foo' => 'bar']],
             [(object) ['foo' => 'bar']],
-            [static fn(): bool => false],
+            [static fn (): bool => false],
         ];
     }
 }

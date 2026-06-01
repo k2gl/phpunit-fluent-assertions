@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace K2gl\PHPUnitFluentAssertions\Tests\FluentAssertions\Asserts\Every;
 
@@ -35,17 +37,17 @@ final class EveryTest extends FluentAssertionsTestCase
     public static function everyDataProvider(): array
     {
         return [
-            [[2, 4, 6], fn($v) => $v % 2 === 0],
-            [['a' => 1, 'b' => 3], fn($v, $k) => $v > 0],
+            [[2, 4, 6], fn ($v) => $v % 2 === 0],
+            [['a' => 1, 'b' => 3], fn ($v, $k) => $v > 0],
         ];
     }
 
     public static function notEveryDataProvider(): array
     {
         return [
-            [[1, 2, 3], fn($v) => $v > 5],
-            [[], fn($v) => true], // empty array
-            ['not array', fn($v) => true], // not array
+            [[1, 2, 3], fn ($v) => $v > 5],
+            [[], fn ($v) => true], // empty array
+            ['not array', fn ($v) => true], // not array
         ];
     }
 }
