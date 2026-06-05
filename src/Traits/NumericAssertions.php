@@ -144,6 +144,10 @@ trait NumericAssertions
      */
     public function isBetween(int|float $min, int|float $max, string $message = ''): self
     {
+        if (! is_int($this->variable) && ! is_float($this->variable)) {
+            Assert::fail($message ?: 'Variable is not numeric.');
+        }
+
         Assert::assertTrue(
             $this->variable >= $min && $this->variable <= $max,
             $message ?: sprintf(

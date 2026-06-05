@@ -6,6 +6,8 @@ namespace K2gl\PHPUnitFluentAssertions\Traits;
 
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PHPUnit\Framework\Assert;
+use ArrayAccess;
+use Countable;
 
 /**
  * @phpstan-require-extends FluentAssertions
@@ -28,6 +30,10 @@ trait ArrayAssertions
      */
     public function count(int $expectedCount, string $message = ''): self
     {
+        if (! is_iterable($this->variable) && ! $this->variable instanceof Countable) {
+            Assert::fail($message ?: 'Variable is not countable.');
+        }
+
         Assert::assertCount($expectedCount, $this->variable, $message);
 
         return $this;
@@ -49,6 +55,10 @@ trait ArrayAssertions
      */
     public function notCount(int $elementsCount, string $message = ''): self
     {
+        if (! is_iterable($this->variable) && ! $this->variable instanceof Countable) {
+            Assert::fail($message ?: 'Variable is not countable.');
+        }
+
         Assert::assertNotCount($elementsCount, $this->variable, $message);
 
         return $this;
@@ -63,12 +73,16 @@ trait ArrayAssertions
      * fact(['a' => ['b' => 'c']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Passes
      * fact(['a' => ['b' => 'd']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Fails
      *
-     * @param array $values The associative array that should be contained within the actual array.
+     * @param array<array-key, mixed> $values The associative array that should be contained within the actual array.
      *
       * @return self Enables fluent chaining of assertion methods.
      */
     public function arrayContainsAssociativeArray(array $values): self
     {
+        if (! is_array($this->variable)) {
+            Assert::fail('Variable is not an array.');
+        }
+
         Assert::assertTrue(
             $this->arrayContainsAssociativeArrayRecursive($this->variable, $values),
             sprintf(
@@ -81,14 +95,20 @@ trait ArrayAssertions
         return $this;
     }
 
+    /**
+     * @param array<array-key, mixed> $data
+     * @param array<array-key, mixed> $values
+     */
     protected function arrayContainsAssociativeArrayRecursive(array $data, array $values): bool
     {
         foreach ($values as $key => $value) {
+            $actual = $data[$key] ?? null;
+
             if (is_array($value)) {
-                if (! $this->arrayContainsAssociativeArrayRecursive($data[$key], $value)) {
+                if (! is_array($actual) || ! $this->arrayContainsAssociativeArrayRecursive($actual, $value)) {
                     return false;
                 }
-            } elseif ($data[$key] !== $value) {
+            } elseif ($actual !== $value) {
                 return false;
             }
         }
@@ -112,6 +132,10 @@ trait ArrayAssertions
      */
     public function arrayHasKey(int|string $key, string $message = ''): self
     {
+        if (! is_array($this->variable) && ! $this->variable instanceof ArrayAccess) {
+            Assert::fail($message ?: 'Variable is not an array or ArrayAccess.');
+        }
+
         Assert::assertArrayHasKey($key, $this->variable, $message);
 
         return $this;
@@ -133,6 +157,10 @@ trait ArrayAssertions
      */
     public function arrayNotHasKey(int|string $key, string $message = ''): self
     {
+        if (! is_array($this->variable) && ! $this->variable instanceof ArrayAccess) {
+            Assert::fail($message ?: 'Variable is not an array or ArrayAccess.');
+        }
+
         Assert::assertArrayNotHasKey($key, $this->variable, $message);
 
         return $this;
@@ -154,6 +182,10 @@ trait ArrayAssertions
      */
     public function contains(mixed $value, string $message = ''): self
     {
+        if (! is_iterable($this->variable)) {
+            Assert::fail($message ?: 'Variable is not iterable.');
+        }
+
         Assert::assertContains($value, $this->variable, $message);
 
         return $this;
@@ -175,6 +207,10 @@ trait ArrayAssertions
      */
     public function doesNotContain(mixed $value, string $message = ''): self
     {
+        if (! is_iterable($this->variable)) {
+            Assert::fail($message ?: 'Variable is not iterable.');
+        }
+
         Assert::assertNotContains($value, $this->variable, $message);
 
         return $this;
@@ -196,6 +232,10 @@ trait ArrayAssertions
      */
     public function hasSize(int $size, string $message = ''): self
     {
+        if (! is_iterable($this->variable) && ! $this->variable instanceof Countable) {
+            Assert::fail($message ?: 'Variable is not countable.');
+        }
+
         Assert::assertCount($size, $this->variable, $message);
 
         return $this;
@@ -216,6 +256,10 @@ trait ArrayAssertions
      */
     public function isEmptyArray(string $message = ''): self
     {
+        if (! is_iterable($this->variable) && ! $this->variable instanceof Countable) {
+            Assert::fail($message ?: 'Variable is not countable.');
+        }
+
         Assert::assertCount(0, $this->variable, $message);
 
         return $this;
@@ -236,6 +280,10 @@ trait ArrayAssertions
      */
     public function isNotEmptyArray(string $message = ''): self
     {
+        if (! is_iterable($this->variable) && ! $this->variable instanceof Countable) {
+            Assert::fail($message ?: 'Variable is not countable.');
+        }
+
         Assert::assertNotCount(0, $this->variable, $message);
 
         return $this;

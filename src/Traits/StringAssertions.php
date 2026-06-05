@@ -35,6 +35,10 @@ trait StringAssertions
             Assert::fail('Pattern cannot be an empty string.');
         }
 
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
         Assert::assertMatchesRegularExpression($pattern, $this->variable, $message);
 
         return $this;
@@ -58,6 +62,10 @@ trait StringAssertions
     {
         if (strlen($pattern) === 0) {
             Assert::fail('Pattern cannot be an empty string.');
+        }
+
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
         }
 
         Assert::assertDoesNotMatchRegularExpression($pattern, $this->variable, $message);
@@ -89,6 +97,10 @@ trait StringAssertions
             Assert::fail('String cannot be an empty.');
         }
 
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
         Assert::assertStringContainsString($string, $this->variable, $message);
 
         return $this;
@@ -112,6 +124,10 @@ trait StringAssertions
     {
         if (strlen($string) === 0) {
             Assert::fail('String cannot be an empty.');
+        }
+
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
         }
 
         Assert::assertStringNotContainsString($string, $this->variable, $message);
@@ -139,6 +155,10 @@ trait StringAssertions
             Assert::fail('String cannot be an empty.');
         }
 
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
         Assert::assertStringContainsStringIgnoringCase($string, $this->variable, $message);
 
         return $this;
@@ -162,6 +182,10 @@ trait StringAssertions
     {
         if (strlen($string) === 0) {
             Assert::fail('String cannot be an empty.');
+        }
+
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
         }
 
         Assert::assertStringNotContainsStringIgnoringCase(
@@ -197,6 +221,10 @@ trait StringAssertions
             Assert::fail('Prefix cannot be an empty string.');
         }
 
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
         /** @var non-empty-string $prefix */
         Assert::assertStringStartsWith($prefix, $this->variable, $message);
 
@@ -221,6 +249,10 @@ trait StringAssertions
     {
         if (strlen($suffix) === 0) {
             Assert::fail('Suffix cannot be an empty string.');
+        }
+
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
         }
 
         /** @var non-empty-string $suffix */
@@ -249,6 +281,10 @@ trait StringAssertions
      */
     public function hasLength(int $length, string $message = ''): self
     {
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
         Assert::assertEquals($length, strlen($this->variable), $message);
 
         return $this;
@@ -309,6 +345,10 @@ trait StringAssertions
      */
     public function isJson(string $message = ''): self
     {
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
         Assert::assertTrue(json_validate($this->variable), $message ?: 'String is not valid JSON.');
 
         return $this;
