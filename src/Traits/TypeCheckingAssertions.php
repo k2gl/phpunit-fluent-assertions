@@ -21,12 +21,12 @@ trait TypeCheckingAssertions
      * fact(new stdClass())->instanceOf(stdClass::class); // Passes
      * fact(new stdClass())->instanceOf(Exception::class); // Fails
      *
-     * @param mixed $expected The class or interface name.
+     * @param class-string $expected The class or interface name.
      * @param string $message Optional custom error message.
      *
      * @return self  Enables fluent chaining of assertion methods.
      */
-    public function instanceOf(mixed $expected, string $message = ''): self
+    public function instanceOf(string $expected, string $message = ''): self
     {
         Assert::assertInstanceOf($expected, $this->variable, $message);
 
@@ -42,12 +42,12 @@ trait TypeCheckingAssertions
      * fact(new stdClass())->notInstanceOf(Exception::class); // Passes
      * fact(new stdClass())->notInstanceOf(stdClass::class); // Fails
      *
-     * @param mixed $expected The class or interface name that should not match.
+     * @param class-string $expected The class or interface name that should not match.
      * @param string $message Optional custom error message.
      *
      * @return self  Enables fluent chaining of assertion methods.
      */
-    public function notInstanceOf(mixed $expected, string $message = ''): self
+    public function notInstanceOf(string $expected, string $message = ''): self
     {
         Assert::assertNotInstanceOf($expected, $this->variable, $message);
 
@@ -110,6 +110,10 @@ trait TypeCheckingAssertions
      */
     public function hasProperty(string $property, string $message = ''): self
     {
+        if (! is_object($this->variable)) {
+            Assert::fail($message ?: 'Variable is not an object.');
+        }
+
         Assert::assertObjectHasProperty($property, $this->variable, $message);
 
         return $this;
@@ -131,6 +135,10 @@ trait TypeCheckingAssertions
      */
     public function hasMethod(string $method, string $message = ''): self
     {
+        if (! is_object($this->variable) && ! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not an object or a class name.');
+        }
+
         Assert::assertTrue(method_exists($this->variable, $method), $message ?: "Object does not have method '$method'.");
 
         return $this;
