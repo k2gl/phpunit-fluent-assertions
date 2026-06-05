@@ -50,7 +50,7 @@ This file outlines the requirements and best practices for adding new assertion 
 ## Validation Steps
 
 - **Run Tests**: Execute `./vendor/bin/phpunit tests/FluentAssertions/Asserts/MethodName/MethodNameTest.php` to verify implementation.
-- **Lint and Typecheck**: Run PHPStan static analysis via `composer run analyze` to ensure code quality.
+- **Lint and Typecheck**: Run PHPStan static analysis via `composer phpstan` to ensure code quality.
 - **Integration**: Ensure the method works in the overall fluent chain without breaking existing functionality.
 
 ## Example Workflow for Adding `isGreaterThan`
