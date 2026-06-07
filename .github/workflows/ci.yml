@@ -11,7 +11,7 @@ jobs:
         # The library runtime targets PHP 8.1+, but the test suite uses PHPUnit 11.4+
         # metadata (#[CoversMethod]) which requires PHP 8.2+. PHP 8.1 is covered by the
         # separate source-php81 job below (install + static analysis).
-        php-version: ['8.2', '8.3', '8.4']
+        php-version: ['8.2', '8.3', '8.4', '8.5']
 
     name: PHP ${{ matrix.php-version }}
 
