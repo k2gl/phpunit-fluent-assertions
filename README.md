@@ -226,6 +226,31 @@ fact(true)->isBool(); // Passes
 fact(1)->isBool(); // Fails
 ```
 
+### Exception assertions
+The subject is a callable; `throws()` invokes it and asserts the expected exception is thrown.
+Pass a message substring to also assert on the exception message.
+```php
+fact(fn () => throw new RuntimeException('boom'))->throws(RuntimeException::class); // Passes
+fact(fn () => $service->run())->throws(DomainException::class, 'invalid'); // Passes if message contains "invalid"
+fact(fn () => 42)->throws(RuntimeException::class); // Fails — nothing thrown
+```
+
+### Date/time assertions
+The subject is a `DateTimeInterface`; a string expectation is parsed as a `DateTimeImmutable`.
+```php
+fact(new DateTimeImmutable('2024-01-01'))->isBefore('2024-12-31'); // Passes
+fact(new DateTimeImmutable('2024-12-31'))->isAfter('2024-01-01'); // Passes
+fact(new DateTimeImmutable('2024-06-13 23:59'))->isSameDate('2024-06-13'); // Passes — same calendar date, time ignored
+```
+
+### Enum assertions
+Work on any native `UnitEnum` / `BackedEnum`.
+```php
+fact($order->status)->isEnum(Status::Paid);   // identity: the subject is that case
+fact(Status::Paid)->hasValue('paid');          // BackedEnum backing value
+fact(Status::Paid)->hasName('Paid');           // case name
+```
+
 ## PHPStan support
 
 The package ships a PHPStan extension that narrows the asserted value, so the analyser
