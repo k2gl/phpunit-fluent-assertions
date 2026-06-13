@@ -7,6 +7,9 @@ namespace K2gl\PHPUnitFluentAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\ArrayAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\BooleanAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\ComparisonAndEqualityAssertions;
+use K2gl\PHPUnitFluentAssertions\Traits\DateTimeAssertions;
+use K2gl\PHPUnitFluentAssertions\Traits\EnumAssertions;
+use K2gl\PHPUnitFluentAssertions\Traits\ExceptionAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\NullAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\NumericAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\StringAssertions;
@@ -21,6 +24,9 @@ class FluentAssertions
     use StringAssertions;
     use ArrayAssertions;
     use TypeCheckingAssertions;
+    use ExceptionAssertions;
+    use DateTimeAssertions;
+    use EnumAssertions;
 
     public function __construct(
         public readonly mixed $variable = null
