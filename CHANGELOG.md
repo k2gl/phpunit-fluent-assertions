@@ -4,6 +4,16 @@ All notable changes to this package are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.9.0] - 2026-07-01
+
+### Added
+
+- JSON assertions `matchesJson()` / `notMatchesJson()` — compare a JSON-string
+  subject to an expected document by value, ignoring object key order and
+  formatting (array element order stays significant). Both sides must be valid JSON.
+- The PHPStan extension now narrows the subject of `isJson()`, `matchesJson()` and
+  `notMatchesJson()` to `string`.
+
 ## [12.8.0] - 2026-06-13
 
 ### Added
@@ -35,6 +45,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Fixed latent static-analysis errors and ran the CI matrix across PHP 8.2–8.5
   (with a PHP 8.1 source/static-analysis job).
 
+[12.9.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.8.0...12.9.0
 [12.8.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.7.0...12.8.0
 [12.7.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.6.0...12.7.0
 [12.6.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.5.0...12.6.0

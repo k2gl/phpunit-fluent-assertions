@@ -177,6 +177,12 @@ fact('')->isNotEmptyString(); // Fails
 fact('{"key": "value"}')->isJson(); // Passes
 fact('invalid json')->isJson(); // Fails
 
+fact('{"a":1,"b":2}')->matchesJson('{"b":2,"a":1}'); // Passes (key order ignored)
+fact('{"a":1}')->matchesJson('{"a":2}'); // Fails
+
+fact('{"a":1}')->notMatchesJson('{"a":2}'); // Passes
+fact('{"a":1,"b":2}')->notMatchesJson('{"b":2,"a":1}'); // Fails
+
 fact('user@example.com')->isValidEmail(); // Passes
 fact('invalid-email')->isValidEmail(); // Fails
 
@@ -320,9 +326,10 @@ includes:
 ```
 
 Narrowing is applied for `notNull()`, `null()`, `true()`, `notTrue()`, `false()`,
-`notFalse()`, `instanceOf()`, `notInstanceOf()`, `is()`, and the type checks `isString()`,
-`isInt()`, `isFloat()`, `isBool()`, `isArray()`, `isCallable()` and `isResource()`. Loose or
-negated assertions such as `equals()` (loose `==`) and `not()` would not narrow soundly, so they
+`notFalse()`, `instanceOf()`, `notInstanceOf()`, `is()`, the type checks `isString()`,
+`isInt()`, `isFloat()`, `isBool()`, `isArray()`, `isCallable()` and `isResource()`, and the JSON
+assertions `isJson()`, `matchesJson()` and `notMatchesJson()` (subject narrowed to `string`). Loose
+or negated assertions such as `equals()` (loose `==`) and `not()` would not narrow soundly, so they
 are intentionally left out and leave the type unchanged.
 
 ## Pull requests are always welcome
