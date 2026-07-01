@@ -123,6 +123,24 @@ function isResourceCase(mixed $value): void
     assertType('resource', $value);
 }
 
+function isJsonCase(mixed $value): void
+{
+    fact($value)->isJson();
+    assertType('string', $value);
+}
+
+function matchesJsonCase(mixed $value): void
+{
+    fact($value)->matchesJson('{}');
+    assertType('string', $value);
+}
+
+function notMatchesJsonCase(mixed $value): void
+{
+    fact($value)->notMatchesJson('{}');
+    assertType('string', $value);
+}
+
 /** Unsupported assertions (equals is loose ==) must NOT narrow. */
 function unsupportedDoesNotNarrow(?string $value): void
 {

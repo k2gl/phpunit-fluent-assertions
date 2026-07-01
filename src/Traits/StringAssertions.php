@@ -355,6 +355,83 @@ trait StringAssertions
     }
 
     /**
+     * Asserts that a variable is a JSON string semantically equal to the expected JSON.
+     *
+     * Both documents are decoded and compared by value, so object key order and
+     * formatting are ignored (`{"a":1,"b":2}` matches `{"b":2,"a":1}`); array element
+     * order stays significant. Both sides must be valid JSON.
+     *
+     * Example usage:
+     * fact('{"a":1,"b":2}')->matchesJson('{"b":2,"a":1}'); // Passes
+     * fact('{"a":1}')->matchesJson('{"a":2}'); // Fails
+     *
+     * @param string $expectedJson The expected JSON document.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function matchesJson(string $expectedJson, string $message = ''): self
+    {
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
+        $actual = json_decode($this->variable);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            Assert::fail($message ?: 'Variable is not valid JSON.');
+        }
+
+        $expected = json_decode($expectedJson);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            Assert::fail($message ?: 'Expected value is not valid JSON.');
+        }
+
+        Assert::assertEquals($expected, $actual, $message);
+
+        return $this;
+    }
+
+    /**
+     * Asserts that a variable is a JSON string not equal to the given JSON.
+     *
+     * The inverse of matchesJson(): both sides must be valid JSON and must differ by
+     * value (object key order and formatting are still ignored).
+     *
+     * Example usage:
+     * fact('{"a":1}')->notMatchesJson('{"a":2}'); // Passes
+     * fact('{"a":1,"b":2}')->notMatchesJson('{"b":2,"a":1}'); // Fails
+     *
+     * @param string $expectedJson The JSON document the variable must not equal.
+     * @param string $message Optional custom error message.
+     *
+     * @return self Enables fluent chaining of assertion methods.
+     */
+    public function notMatchesJson(string $expectedJson, string $message = ''): self
+    {
+        if (! is_string($this->variable)) {
+            Assert::fail($message ?: 'Variable is not a string.');
+        }
+
+        $actual = json_decode($this->variable);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            Assert::fail($message ?: 'Variable is not valid JSON.');
+        }
+
+        $expected = json_decode($expectedJson);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            Assert::fail($message ?: 'Expected value is not valid JSON.');
+        }
+
+        Assert::assertNotEquals($expected, $actual, $message);
+
+        return $this;
+    }
+
+    /**
      * Asserts that a string is a valid email address.
      *
      * This method checks if the actual string is a valid email format.

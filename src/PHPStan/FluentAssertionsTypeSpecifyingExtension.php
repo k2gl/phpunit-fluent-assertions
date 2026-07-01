@@ -193,6 +193,11 @@ final class FluentAssertionsTypeSpecifyingExtension implements
             'isarray'    => static fn (Expr $s): Expr => self::isType('is_array', $s),
             'iscallable' => static fn (Expr $s): Expr => self::isType('is_callable', $s),
             'isresource' => static fn (Expr $s): Expr => self::isType('is_resource', $s),
+
+            // JSON assertions can only pass on a (valid JSON) string subject.
+            'isjson'         => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'matchesjson'    => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'notmatchesjson' => static fn (Expr $s): Expr => self::isType('is_string', $s),
         ];
     }
 
