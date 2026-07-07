@@ -1,6 +1,6 @@
 {
   "name": "k2gl/phpunit-fluent-assertions",
-  "description": "Improves test code readability.",
+  "description": "Improves test code readability",
   "homepage": "https://github.com/k2gl/phpunit-fluent-assertions",
   "type": "library",
   "license": "MIT",
