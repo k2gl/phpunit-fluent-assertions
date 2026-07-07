@@ -4,6 +4,13 @@ All notable changes to this package are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.10.0] - 2026-07-07
+
+### Added
+
+- `notHasProperty()` — the negative counterpart of `hasProperty()`, asserting
+  that an object lacks a property (replaces `assertObjectNotHasProperty`).
+
 ## [12.9.0] - 2026-07-01
 
 ### Added

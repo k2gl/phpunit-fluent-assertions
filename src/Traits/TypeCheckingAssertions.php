@@ -120,6 +120,31 @@ trait TypeCheckingAssertions
     }
 
     /**
+     * Asserts that an object does not have a specific property.
+     *
+     * This method checks that the actual object lacks the specified property.
+     *
+     * Example usage:
+     * fact((object)['name' => 'John'])->notHasProperty('age'); // Passes
+     * fact((object)['name' => 'John'])->notHasProperty('name'); // Fails
+     *
+     * @param string $property The property name.
+     * @param string $message Optional custom error message.
+     *
+     * @return self  Enables fluent chaining of assertion methods.
+     */
+    public function notHasProperty(string $property, string $message = ''): self
+    {
+        if (! is_object($this->variable)) {
+            Assert::fail($message ?: 'Variable is not an object.');
+        }
+
+        Assert::assertObjectNotHasProperty($property, $this->variable, $message);
+
+        return $this;
+    }
+
+    /**
      * Asserts that an object has a specific method.
      *
      * This method checks if the actual object has the specified method.
