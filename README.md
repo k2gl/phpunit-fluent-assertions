@@ -207,6 +207,9 @@ fact(42)->isString(); // Fails
 fact((object)['name' => 'John'])->hasProperty('name'); // Passes
 fact((object)['name' => 'John'])->hasProperty('age'); // Fails
 
+fact((object)['name' => 'John'])->notHasProperty('age'); // Passes
+fact((object)['name' => 'John'])->notHasProperty('name'); // Fails
+
 fact(new stdClass())->hasMethod('__construct'); // Passes
 fact(new stdClass())->hasMethod('nonExistentMethod'); // Fails
 
