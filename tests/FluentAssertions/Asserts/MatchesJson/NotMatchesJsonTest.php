@@ -15,30 +15,31 @@ use function K2gl\PHPUnitFluentAssertions\fact;
 final class NotMatchesJsonTest extends FluentAssertionsTestCase
 {
     #[DataProvider('differingDataProvider')]
-    public function testNotMatchesJson(string $variable, string $expectedJson): void
+    public function testNotMatchesJson(string $variable, string|array|object $expected): void
     {
         // act
-        fact($variable)->notMatchesJson($expectedJson);
+        fact($variable)->notMatchesJson($expected);
 
         // assert
         $this->correctAssertionExecuted();
     }
 
     #[DataProvider('equalOrInvalidDataProvider')]
-    public function testFailsWhenEqualOrInvalid(string $variable, string $expectedJson): void
+    public function testFailsWhenEqualOrInvalid(string $variable, string|array|object $expected): void
     {
         // assert
         $this->incorrectAssertionExpected();
 
         // act
-        fact($variable)->notMatchesJson($expectedJson);
+        fact($variable)->notMatchesJson($expected);
     }
 
     public static function differingDataProvider(): array
     {
         return [
-            'different value' => ['{"a":1}', '{"a":2}'],
-            'array order'     => ['[1,2]', '[2,1]'],
+            'different value'   => ['{"a":1}', '{"a":2}'],
+            'array order'       => ['[1,2]', '[2,1]'],
+            'array expectation' => ['{"a":1}', ['a' => 2]],
         ];
     }
 
@@ -47,6 +48,7 @@ final class NotMatchesJsonTest extends FluentAssertionsTestCase
         return [
             'equal ignoring key order' => ['{"a":1,"b":2}', '{"b":2,"a":1}'],
             'invalid actual'           => ['not json', '{}'],
+            'equal array expectation'  => ['{"a":1}', ['a' => 1]],
         ];
     }
 }

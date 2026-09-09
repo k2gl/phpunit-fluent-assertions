@@ -141,6 +141,66 @@ function notMatchesJsonCase(mixed $value): void
     assertType('string', $value);
 }
 
+function matchesJsonFileCase(mixed $value): void
+{
+    fact($value)->matchesJsonFile(__DIR__ . '/fixture.json');
+    assertType('string', $value);
+}
+
+function containsJsonCase(mixed $value): void
+{
+    fact($value)->containsJson(['a' => 1]);
+    assertType('string', $value);
+}
+
+function notContainsJsonCase(mixed $value): void
+{
+    fact($value)->notContainsJson(['a' => 1]);
+    assertType('string', $value);
+}
+
+function jsonPathCase(mixed $value): void
+{
+    fact($value)->jsonPath('a.b', 1);
+    assertType('string', $value);
+}
+
+function hasJsonPathCase(mixed $value): void
+{
+    fact($value)->hasJsonPath('a.b');
+    assertType('string', $value);
+}
+
+function notHasJsonPathCase(mixed $value): void
+{
+    fact($value)->notHasJsonPath('a.b');
+    assertType('string', $value);
+}
+
+function isCloseToCase(mixed $value): void
+{
+    fact($value)->isCloseTo(1.0);
+    assertType('float|int', $value);
+}
+
+function notCloseToCase(mixed $value): void
+{
+    fact($value)->notCloseTo(1.0);
+    assertType('float|int', $value);
+}
+
+function isFiniteCase(mixed $value): void
+{
+    fact($value)->isFinite();
+    assertType('float|int', $value);
+}
+
+function isNanCase(mixed $value): void
+{
+    fact($value)->isNan();
+    assertType('float', $value);
+}
+
 /** Unsupported assertions (equals is loose ==) must NOT narrow. */
 function unsupportedDoesNotNarrow(?string $value): void
 {

@@ -10,6 +10,7 @@ use K2gl\PHPUnitFluentAssertions\Traits\ComparisonAndEqualityAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\DateTimeAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\EnumAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\ExceptionAssertions;
+use K2gl\PHPUnitFluentAssertions\Traits\JsonAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\NullAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\NumericAssertions;
 use K2gl\PHPUnitFluentAssertions\Traits\StringAssertions;
@@ -22,6 +23,7 @@ class FluentAssertions
     use NullAssertions;
     use NumericAssertions;
     use StringAssertions;
+    use JsonAssertions;
     use ArrayAssertions;
     use TypeCheckingAssertions;
     use ExceptionAssertions;

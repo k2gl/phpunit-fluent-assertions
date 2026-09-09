@@ -8,6 +8,7 @@ use Closure;
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\BinaryOp\BooleanOr;
 use PhpParser\Node\Expr\BinaryOp\Identical;
 use PhpParser\Node\Expr\BinaryOp\NotIdentical;
 use PhpParser\Node\Expr\BooleanNot;
@@ -195,9 +196,21 @@ final class FluentAssertionsTypeSpecifyingExtension implements
             'isresource' => static fn (Expr $s): Expr => self::isType('is_resource', $s),
 
             // JSON assertions can only pass on a (valid JSON) string subject.
-            'isjson'         => static fn (Expr $s): Expr => self::isType('is_string', $s),
-            'matchesjson'    => static fn (Expr $s): Expr => self::isType('is_string', $s),
-            'notmatchesjson' => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'isjson'          => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'matchesjson'     => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'notmatchesjson'  => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'matchesjsonfile' => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'containsjson'    => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'notcontainsjson' => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'jsonpath'        => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'hasjsonpath'     => static fn (Expr $s): Expr => self::isType('is_string', $s),
+            'nothasjsonpath'  => static fn (Expr $s): Expr => self::isType('is_string', $s),
+
+            // Numeric assertions that guard the subject type before comparing.
+            'iscloseto'  => static fn (Expr $s): Expr => self::isNumeric($s),
+            'notcloseto' => static fn (Expr $s): Expr => self::isNumeric($s),
+            'isfinite'   => static fn (Expr $s): Expr => self::isNumeric($s),
+            'isnan'      => static fn (Expr $s): Expr => self::isType('is_float', $s),
         ];
     }
 
@@ -209,6 +222,11 @@ final class FluentAssertionsTypeSpecifyingExtension implements
     private static function isType(string $function, Expr $subject): FuncCall
     {
         return new FuncCall(new Name($function), [new Arg($subject)]);
+    }
+
+    private static function isNumeric(Expr $subject): BooleanOr
+    {
+        return new BooleanOr(self::isType('is_int', $subject), self::isType('is_float', $subject));
     }
 
     /**

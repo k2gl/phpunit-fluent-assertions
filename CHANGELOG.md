@@ -4,6 +4,31 @@ All notable changes to this package are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.11.0] - 2026-09-09
+
+### Added
+
+- Numeric assertions `isCloseTo()` / `notCloseTo()`, comparing within a tolerance that
+  defaults to `PHP_FLOAT_EPSILON` — enough for accumulated float noise, while money and
+  percentages pass a delta of their own.
+- The non-strict comparisons `isGreaterThanOrEqual()` / `isLowerThanOrEqual()`, plus
+  `isNotZero()`, `isFinite()` and `isNan()`.
+- JSON subset matching with `containsJson()` / `notContainsJson()`: only the keys named in
+  the expectation are compared, so volatile fields in a response no longer have to be
+  spelled out.
+- JSON path assertions `jsonPath()`, `hasJsonPath()` and `notHasJsonPath()`, addressing a
+  single value by a dot-separated path (`data.0.id`).
+- `matchesJsonFile()`, the fixture-file counterpart of `matchesJson()`.
+- `matchesJson()` and `notMatchesJson()` now also accept the expectation as an array or
+  object, which keeps `json_encode()` out of the test.
+- The PHPStan extension narrows the subject of every JSON assertion to `string`, of
+  `isCloseTo()` / `notCloseTo()` / `isFinite()` to `int|float`, and of `isNan()` to `float`.
+
+### Changed
+
+- The JSON assertions moved from `StringAssertions` into a `JsonAssertions` trait. The
+  public API is unchanged; only code using the trait directly is affected.
+
 ## [12.10.0] - 2026-07-07
 
 ### Added
@@ -52,6 +77,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Fixed latent static-analysis errors and ran the CI matrix across PHP 8.2–8.5
   (with a PHP 8.1 source/static-analysis job).
 
+[12.11.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.10.0...12.11.0
+[12.10.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.9.0...12.10.0
 [12.9.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.8.0...12.9.0
 [12.8.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.7.0...12.8.0
 [12.7.0]: https://github.com/k2gl/phpunit-fluent-assertions/compare/12.6.0...12.7.0
