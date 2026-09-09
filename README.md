@@ -226,19 +226,24 @@ fact('{"a":1,"b":2}')->notMatchesJson('{"b":2,"a":1}'); // Fails
 fact($canonicalJson)->matchesJsonFile(__DIR__ . '/fixtures/bundle.json'); // Passes when equal
 ```
 
-`containsJson()` matches a subset: every key named in the expectation must be present with
-a matching value, and everything else in the document is ignored. That is what makes it
-usable against responses carrying volatile fields. Nesting is walked recursively and list
-positions count as keys, so `['tags' => ['a']]` matches `{"tags":["a","b"]}` but not
-`{"tags":["b","a"]}`. Scalars are compared strictly.
+`containsJson()` matches a subset. In an object, the keys you name must be present with a
+matching value and everything else is ignored — which is what makes it usable against
+responses carrying volatile fields. In a list, each expected element must match *some*
+element of the document, at any position, and two expectations never claim the same one.
+Scalars are compared strictly.
 ```php
 fact('{"id":42,"created_at":"2026-01-01"}')->containsJson(['id' => 42]); // Passes
 fact('{"data":{"id":42,"role":"admin"}}')->containsJson(['data' => ['id' => 42]]); // Passes
+fact('{"items":[{"id":1},{"id":2}]}')->containsJson(['items' => [['id' => 2]]]); // Passes
+fact('{"tags":["b","a"]}')->containsJson(['tags' => ['a']]); // Passes — position is not identity
+fact('{"tags":["a"]}')->containsJson(['tags' => ['a', 'a']]); // Fails — only one to go around
 fact('{"id":42}')->containsJson(['id' => '42']); // Fails — strict comparison
 
 fact('{"id":42}')->notContainsJson(['id' => 43]); // Passes
 fact('{"id":42}')->notContainsJson(['id' => 42]); // Fails
 ```
+
+Element order and the exact shape of a list are `matchesJson()`'s job, not this one's.
 
 Single values are reachable by a dot-separated path; segments address object keys and list
 positions alike. Keys that contain a dot are not addressable this way.

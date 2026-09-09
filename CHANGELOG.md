@@ -15,7 +15,9 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `isNotZero()`, `isFinite()` and `isNan()`.
 - JSON subset matching with `containsJson()` / `notContainsJson()`: only the keys named in
   the expectation are compared, so volatile fields in a response no longer have to be
-  spelled out.
+  spelled out. Lists are matched by membership — an expected element may sit anywhere in
+  the document, since an index is not the identity of an element the way a key is the
+  identity of a value.
 - JSON path assertions `jsonPath()`, `hasJsonPath()` and `notHasJsonPath()`, addressing a
   single value by a dot-separated path (`data.0.id`).
 - `matchesJsonFile()`, the fixture-file counterpart of `matchesJson()`.

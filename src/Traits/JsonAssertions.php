@@ -129,15 +129,16 @@ trait JsonAssertions
     /**
      * Asserts that a JSON document contains the expected subset.
      *
-     * Every key named in the expectation must exist in the document with a matching
-     * value; keys that are not named are ignored, which is what makes this usable
-     * against responses carrying volatile fields (`created_at`, `_links`, ...).
-     * Nesting is walked recursively, and list positions count as keys — so
-     * `['tags' => ['a']]` matches `{"tags":["a","b"]}` (index 0 is "a") but not
-     * `{"tags":["b","a"]}`. Scalars are compared strictly.
+     * In an object, every key named in the expectation must be present with a matching
+     * value and unnamed keys are ignored — which is what makes this usable against
+     * responses carrying volatile fields (`created_at`, `_links`, ...). In a list, each
+     * expected element must match some element of the document, at any position and
+     * regardless of how many others are there; two expected elements never match the
+     * same one. Nesting is walked recursively and scalars are compared strictly.
      *
      * Example usage:
      * fact('{"id":42,"created_at":"..."}')->containsJson(['id' => 42]); // Passes
+     * fact('{"items":[{"id":1},{"id":2}]}')->containsJson(['items' => [['id' => 2]]]); // Passes
      * fact('{"id":42}')->containsJson(['id' => 43]); // Fails
      *
      * @param string|array<mixed>|object $expected The expected subset, as JSON text or as a value to encode.
@@ -150,7 +151,7 @@ trait JsonAssertions
         [$document, $subset] = $this->decodeJsonSubsetPair($expected, $message);
 
         Assert::assertTrue(
-            $this->arrayContainsAssociativeArrayRecursive($document, $subset),
+            $this->jsonContainsSubset($document, $subset),
             $message ?: sprintf(
                 "JSON document does not contain the expected subset.\n\nDocument: %s\n\nExpected subset: %s",
                 self::encodeJsonForMessage($document),
@@ -180,7 +181,7 @@ trait JsonAssertions
         [$document, $subset] = $this->decodeJsonSubsetPair($expected, $message);
 
         Assert::assertFalse(
-            $this->arrayContainsAssociativeArrayRecursive($document, $subset),
+            $this->jsonContainsSubset($document, $subset),
             $message ?: sprintf(
                 "JSON document contains the subset it should not.\n\nDocument: %s\n\nUnexpected subset: %s",
                 self::encodeJsonForMessage($document),
@@ -337,6 +338,69 @@ trait JsonAssertions
         }
 
         return [$document, $subset];
+    }
+
+    /**
+     * Matches an expected subset against a decoded document.
+     *
+     * An object keeps subset semantics (unnamed keys are ignored); a list is matched by
+     * membership rather than by position, because an index is not the identity of an
+     * element the way a key is the identity of a value.
+     *
+     * @param array<mixed> $document
+     * @param array<mixed> $subset
+     */
+    private function jsonContainsSubset(array $document, array $subset): bool
+    {
+        if (array_is_list($document) && array_is_list($subset)) {
+            return $this->jsonListContainsAll($document, $subset, 0, []);
+        }
+
+        foreach ($subset as $key => $value) {
+            if (! array_key_exists($key, $document) || ! $this->jsonValueMatches($document[$key], $value)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function jsonValueMatches(mixed $documentValue, mixed $expected): bool
+    {
+        if (is_array($documentValue) && is_array($expected)) {
+            return $this->jsonContainsSubset($documentValue, $expected);
+        }
+
+        return $documentValue === $expected;
+    }
+
+    /**
+     * Pairs every expected element with a distinct document element.
+     *
+     * Backtracks rather than taking the first match: with subsets on both sides a greedy
+     * pass can consume the only element a later expectation could have matched.
+     *
+     * @param array<int, mixed> $document
+     * @param array<int, mixed> $expected
+     * @param array<int, true> $taken
+     */
+    private function jsonListContainsAll(array $document, array $expected, int $index, array $taken): bool
+    {
+        if (! isset($expected[$index])) {
+            return true;
+        }
+
+        foreach ($document as $position => $candidate) {
+            if (isset($taken[$position]) || ! $this->jsonValueMatches($candidate, $expected[$index])) {
+                continue;
+            }
+
+            if ($this->jsonListContainsAll($document, $expected, $index + 1, $taken + [$position => true])) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
