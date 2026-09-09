@@ -20,10 +20,13 @@ This file outlines the requirements and best practices for adding new assertion 
   - `BooleanAssertions`: True/false assertions.
   - `NullAssertions`: Null checks.
   - `NumericAssertions`: Numeric comparisons (e.g., isPositive, isBetween).
-  - `StringAssertions`: String operations (e.g., startsWith, hasLength).
+  - `StringAssertions`: String operations (e.g., startsWith, hasLength, ulid).
+  - `JsonAssertions`: JSON documents (e.g., matchesJson, containsJson, jsonPath).
   - `ArrayAssertions`: Array checks (e.g., contains, hasSize).
   - `TypeCheckingAssertions`: Type validation (e.g., isInt, instanceOf, hasProperty).
-  - `SpecialAssertions`: Specialized checks (e.g., ULID).
+  - `ExceptionAssertions`: Thrown exceptions (throws).
+  - `DateTimeAssertions`: Date/time comparisons (e.g., isBefore, isSameDate).
+  - `EnumAssertions`: Native enum cases (e.g., isEnum, hasValue).
 - Traits are imported into `FluentAssertions` class using `use` statements.
 - Place new methods in the appropriate trait based on functionality.
 

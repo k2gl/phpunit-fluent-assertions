@@ -50,6 +50,10 @@ fact([1, 2, 3])->notCount(3); // Fails
 fact(['a' => ['b' => 'c']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Passes
 fact(['a' => ['b' => 'd']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Fails
 
+fact(['tags' => ['a', 'b']])->arrayContainsAssociativeArray(['tags' => ['b']]); // Passes — position does not matter
+fact(['tags' => ['a']])->arrayContainsAssociativeArray(['tags' => ['a', 'a']]); // Fails — only one to go around
+fact(['id' => 1])->arrayContainsAssociativeArray(['parent' => null]); // Fails — there is no such key
+
 fact(['a' => 1])->arrayHasKey('a'); // Passes
 fact(['a' => 1])->arrayHasKey('b'); // Fails
      
@@ -137,6 +141,33 @@ fact(1)->isZero(); // Fails
 
 fact(5)->isBetween(1, 10); // Passes
 fact(15)->isBetween(1, 10); // Fails
+
+fact(10)->isGreaterThanOrEqual(10); // Passes
+fact(5)->isGreaterThanOrEqual(10); // Fails
+
+fact(5)->isLowerThanOrEqual(5); // Passes
+fact(10)->isLowerThanOrEqual(5); // Fails
+
+fact(1)->isNotZero(); // Passes
+fact(0.0)->isNotZero(); // Fails
+
+fact(1.5)->isFinite(); // Passes
+fact(INF)->isFinite(); // Fails
+
+fact(sqrt(-1))->isNan(); // Passes
+fact(1.0)->isNan(); // Fails
+```
+
+Comparing floats with a tolerance — the delta defaults to `PHP_FLOAT_EPSILON`, which
+covers accumulated arithmetic noise. It is an absolute tolerance, so money, percentages
+and values far from `1.0` want a delta of their own.
+```php
+fact(0.1 + 0.2)->isCloseTo(0.3); // Passes — strict comparison would not
+fact(99.985)->isCloseTo(99.99, 0.005); // Passes
+fact(99.9)->isCloseTo(99.99, 0.005); // Fails
+
+fact(1.0)->notCloseTo(2.0); // Passes
+fact(0.1 + 0.2)->notCloseTo(0.3); // Fails
 ```
 
 ### String assertions
@@ -174,20 +205,58 @@ fact('hello')->isEmptyString(); // Fails
 fact('hello')->isNotEmptyString(); // Passes
 fact('')->isNotEmptyString(); // Fails
 
-fact('{"key": "value"}')->isJson(); // Passes
-fact('invalid json')->isJson(); // Fails
-
-fact('{"a":1,"b":2}')->matchesJson('{"b":2,"a":1}'); // Passes (key order ignored)
-fact('{"a":1}')->matchesJson('{"a":2}'); // Fails
-
-fact('{"a":1}')->notMatchesJson('{"a":2}'); // Passes
-fact('{"a":1,"b":2}')->notMatchesJson('{"b":2,"a":1}'); // Fails
-
 fact('user@example.com')->isValidEmail(); // Passes
 fact('invalid-email')->isValidEmail(); // Fails
 
 fact('01ARZ3NDEKTSV4RRFFQ69G5FAV')->ulid(); // Passes (if valid ULID)
 fact('invalid-ulid')->ulid(); // Fails
+```
+
+### JSON assertions
+The subject is a JSON string. Documents are compared by value, so object key order and
+formatting never matter; array element order does. An expectation can be written as JSON
+text or as the array/object it would encode to, which keeps `json_encode()` out of the test.
+```php
+fact('{"key": "value"}')->isJson(); // Passes
+fact('invalid json')->isJson(); // Fails
+
+fact('{"a":1,"b":2}')->matchesJson('{"b":2,"a":1}'); // Passes (key order ignored)
+fact('{"a":1,"b":2}')->matchesJson(['b' => 2, 'a' => 1]); // Passes
+fact('{"a":1}')->matchesJson('{"a":2}'); // Fails
+
+fact('{"a":1}')->notMatchesJson('{"a":2}'); // Passes
+fact('{"a":1,"b":2}')->notMatchesJson('{"b":2,"a":1}'); // Fails
+
+fact($canonicalJson)->matchesJsonFile(__DIR__ . '/fixtures/bundle.json'); // Passes when equal
+```
+
+`containsJson()` matches a subset. In an object, the keys you name must be present with a
+matching value and everything else is ignored — which is what makes it usable against
+responses carrying volatile fields. In a list, each expected element must match *some*
+element of the document, at any position, and two expectations never claim the same one.
+Scalars are compared strictly.
+```php
+fact('{"id":42,"created_at":"2026-01-01"}')->containsJson(['id' => 42]); // Passes
+fact('{"data":{"id":42,"role":"admin"}}')->containsJson(['data' => ['id' => 42]]); // Passes
+fact('{"items":[{"id":1},{"id":2}]}')->containsJson(['items' => [['id' => 2]]]); // Passes
+fact('{"tags":["b","a"]}')->containsJson(['tags' => ['a']]); // Passes — position is not identity
+fact('{"tags":["a"]}')->containsJson(['tags' => ['a', 'a']]); // Fails — only one to go around
+fact('{"id":42}')->containsJson(['id' => '42']); // Fails — strict comparison
+
+fact('{"id":42}')->notContainsJson(['id' => 43]); // Passes
+fact('{"id":42}')->notContainsJson(['id' => 42]); // Fails
+```
+
+Element order and the exact shape of a list are `matchesJson()`'s job, not this one's.
+
+Single values are reachable by a dot-separated path; segments address object keys and list
+positions alike. Keys that contain a dot are not addressable this way.
+```php
+fact('{"data":[{"id":42}]}')->jsonPath('data.0.id', 42); // Passes
+fact('{"meta":{"total":3}}')->jsonPath('meta.total', '3'); // Fails — strict comparison
+
+fact('{"data":{"id":42}}')->hasJsonPath('data.id'); // Passes
+fact('{"data":{"id":42}}')->notHasJsonPath('data.name'); // Passes
 ```
 
 ### Type Checking assertions
@@ -330,8 +399,9 @@ includes:
 
 Narrowing is applied for `notNull()`, `null()`, `true()`, `notTrue()`, `false()`,
 `notFalse()`, `instanceOf()`, `notInstanceOf()`, `is()`, the type checks `isString()`,
-`isInt()`, `isFloat()`, `isBool()`, `isArray()`, `isCallable()` and `isResource()`, and the JSON
-assertions `isJson()`, `matchesJson()` and `notMatchesJson()` (subject narrowed to `string`). Loose
+`isInt()`, `isFloat()`, `isBool()`, `isArray()`, `isCallable()` and `isResource()`, every JSON
+assertion (subject narrowed to `string`), and the numeric assertions that guard their subject —
+`isCloseTo()`, `notCloseTo()` and `isFinite()` (to `int|float`) and `isNan()` (to `float`). Loose
 or negated assertions such as `equals()` (loose `==`) and `not()` would not narrow soundly, so they
 are intentionally left out and leave the type unchanged.
 
