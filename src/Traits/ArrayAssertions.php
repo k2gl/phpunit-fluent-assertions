@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace K2gl\PHPUnitFluentAssertions\Traits;
 
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use K2gl\PHPUnitFluentAssertions\Support\SubsetMatcher;
 use PHPUnit\Framework\Assert;
 use ArrayAccess;
 use Countable;
@@ -67,11 +68,15 @@ trait ArrayAssertions
     /**
      * Asserts that the array contains another associative array.
      *
-     * This method checks if the actual array contains all the key-value pairs from the provided array.
+     * The keys named in the expectation must be present with a matching value; unnamed keys
+     * are ignored. Inside a list the expectation is matched by membership, so an expected
+     * element may sit at any position, and two expectations never claim the same element.
      *
      * Example usage:
      * fact(['a' => ['b' => 'c']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Passes
+     * fact(['tags' => ['a', 'b']])->arrayContainsAssociativeArray(['tags' => ['b']]); // Passes
      * fact(['a' => ['b' => 'd']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Fails
+     * fact(['id' => 1])->arrayContainsAssociativeArray(['parent' => null]); // Fails — no such key
      *
      * @param array<array-key, mixed> $values The associative array that should be contained within the actual array.
      *
@@ -84,7 +89,7 @@ trait ArrayAssertions
         }
 
         Assert::assertTrue(
-            $this->arrayContainsAssociativeArrayRecursive($this->variable, $values),
+            SubsetMatcher::matches($this->variable, $values),
             sprintf(
                 "Array does not contain associative array. \n\nArray: '%s' \n\nExpected values: '%s'",
                 var_export($this->variable, true),
@@ -93,27 +98,6 @@ trait ArrayAssertions
         );
 
         return $this;
-    }
-
-    /**
-     * @param array<array-key, mixed> $data
-     * @param array<array-key, mixed> $values
-     */
-    protected function arrayContainsAssociativeArrayRecursive(array $data, array $values): bool
-    {
-        foreach ($values as $key => $value) {
-            $actual = $data[$key] ?? null;
-
-            if (is_array($value)) {
-                if (! is_array($actual) || ! $this->arrayContainsAssociativeArrayRecursive($actual, $value)) {
-                    return false;
-                }
-            } elseif ($actual !== $value) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**

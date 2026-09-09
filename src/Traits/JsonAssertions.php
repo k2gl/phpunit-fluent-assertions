@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace K2gl\PHPUnitFluentAssertions\Traits;
 
 use K2gl\PHPUnitFluentAssertions\FluentAssertions;
+use K2gl\PHPUnitFluentAssertions\Support\SubsetMatcher;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -151,7 +152,7 @@ trait JsonAssertions
         [$document, $subset] = $this->decodeJsonSubsetPair($expected, $message);
 
         Assert::assertTrue(
-            $this->jsonContainsSubset($document, $subset),
+            SubsetMatcher::matches($document, $subset),
             $message ?: sprintf(
                 "JSON document does not contain the expected subset.\n\nDocument: %s\n\nExpected subset: %s",
                 self::encodeJsonForMessage($document),
@@ -181,7 +182,7 @@ trait JsonAssertions
         [$document, $subset] = $this->decodeJsonSubsetPair($expected, $message);
 
         Assert::assertFalse(
-            $this->jsonContainsSubset($document, $subset),
+            SubsetMatcher::matches($document, $subset),
             $message ?: sprintf(
                 "JSON document contains the subset it should not.\n\nDocument: %s\n\nUnexpected subset: %s",
                 self::encodeJsonForMessage($document),
@@ -338,69 +339,6 @@ trait JsonAssertions
         }
 
         return [$document, $subset];
-    }
-
-    /**
-     * Matches an expected subset against a decoded document.
-     *
-     * An object keeps subset semantics (unnamed keys are ignored); a list is matched by
-     * membership rather than by position, because an index is not the identity of an
-     * element the way a key is the identity of a value.
-     *
-     * @param array<mixed> $document
-     * @param array<mixed> $subset
-     */
-    private function jsonContainsSubset(array $document, array $subset): bool
-    {
-        if (array_is_list($document) && array_is_list($subset)) {
-            return $this->jsonListContainsAll($document, $subset, 0, []);
-        }
-
-        foreach ($subset as $key => $value) {
-            if (! array_key_exists($key, $document) || ! $this->jsonValueMatches($document[$key], $value)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private function jsonValueMatches(mixed $documentValue, mixed $expected): bool
-    {
-        if (is_array($documentValue) && is_array($expected)) {
-            return $this->jsonContainsSubset($documentValue, $expected);
-        }
-
-        return $documentValue === $expected;
-    }
-
-    /**
-     * Pairs every expected element with a distinct document element.
-     *
-     * Backtracks rather than taking the first match: with subsets on both sides a greedy
-     * pass can consume the only element a later expectation could have matched.
-     *
-     * @param array<int, mixed> $document
-     * @param array<int, mixed> $expected
-     * @param array<int, true> $taken
-     */
-    private function jsonListContainsAll(array $document, array $expected, int $index, array $taken): bool
-    {
-        if (! isset($expected[$index])) {
-            return true;
-        }
-
-        foreach ($document as $position => $candidate) {
-            if (isset($taken[$position]) || ! $this->jsonValueMatches($candidate, $expected[$index])) {
-                continue;
-            }
-
-            if ($this->jsonListContainsAll($document, $expected, $index + 1, $taken + [$position => true])) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

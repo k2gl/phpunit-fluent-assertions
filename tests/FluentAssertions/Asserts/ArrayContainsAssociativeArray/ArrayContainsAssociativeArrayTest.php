@@ -15,7 +15,7 @@ use function K2gl\PHPUnitFluentAssertions\fact;
 final class ArrayContainsAssociativeArrayTest extends FluentAssertionsTestCase
 {
     #[DataProvider('arrayContainsDataProvider')]
-    public function testArrayContains1111(array $data, array $values): void
+    public function testArrayContainsAssociativeArray(array $data, array $values): void
     {
         // act
         fact($data)->arrayContainsAssociativeArray($values);
@@ -35,6 +35,11 @@ final class ArrayContainsAssociativeArrayTest extends FluentAssertionsTestCase
             ['data' => ['items' => ['one', 'two']], 'values' => ['items' => ['one', 'two']]],
             ['data' => ['items' => ['one', 'two', 'three']], 'values' => ['items' => ['one', 'two']]],
             ['data' => ['items' => ['one', 'two', 'three']], 'values' => ['items' => ['one', 'two', 'three']]],
+            ['data' => ['items' => ['one', 'two']], 'values' => ['items' => ['two']]],
+            ['data' => ['items' => ['two', 'one']], 'values' => ['items' => ['one', 'two']]],
+            ['data' => ['items' => [['id' => 1], ['id' => 2]]], 'values' => ['items' => [['id' => 2]]]],
+            ['data' => ['items' => [null, 'one']], 'values' => ['items' => [null]]],
+            ['data' => ['parent' => null], 'values' => ['parent' => null]],
             [
                 'data' => ['a' => ['1', '2' => ['00' => '00', '11' => '111', '22' => '222'], '3']],
                 'values' => ['a' => ['2' => ['11' => '111']]],
@@ -47,7 +52,7 @@ final class ArrayContainsAssociativeArrayTest extends FluentAssertionsTestCase
     }
 
     #[DataProvider('arrayNotContainsDataProvider')]
-    public function testArrayNotContains2222(mixed $data, mixed $values): void
+    public function testFailsWhenValuesAreAbsent(mixed $data, mixed $values): void
     {
         // assert
         $this->incorrectAssertionExpected();
@@ -60,7 +65,11 @@ final class ArrayContainsAssociativeArrayTest extends FluentAssertionsTestCase
     {
         return [
             ['data' => ['one' => 'two'], 'values' => ['one' => 'three']],
-            ['data' => ['items' => ['one', 'two']], 'values' => ['items' => ['two', 'one']]],
+            ['data' => ['items' => ['one', 'two']], 'values' => ['items' => ['three']]],
+            ['data' => ['items' => ['one']], 'values' => ['items' => ['one', 'one']]],
+            ['data' => ['items' => ['one']], 'values' => ['items' => [null]]],
+            ['data' => ['id' => 1], 'values' => ['parent' => null]],
+            ['data' => ['id' => 1, 'parnet' => null], 'values' => ['parent' => null]],
             [
                 'data' => ['a' => ['type' => 'candy', 'color' => 'red'], 'b' => ['miss' => 'kiss', 'foo' => 'bar']],
                 'values' => ['b' => ['foo' => 'bar', 'miss' => 'kiss'], 'a' => ['color' => 'green']],

@@ -46,6 +46,7 @@ final class ContainsJsonTest extends FluentAssertionsTestCase
             'subset of a list element' => ['{"items":[{"id":1,"role":"admin"}]}', ['items' => [['id' => 1]]]],
             'repeated element'        => ['{"tags":["a","a"]}', ['tags' => ['a', 'a']]],
             'greedy pairing avoided'  => ['{"i":[{"id":1,"n":"a"},{"id":1}]}', ['i' => [['id' => 1], ['id' => 1, 'n' => 'a']]]],
+            'null inside a list'      => ['{"tags":[null,"a"]}', ['tags' => [null]]],
             'empty subset'            => ['{"id":42}', []],
             'null value'              => ['{"deleted_at":null}', ['deleted_at' => null]],
         ];
@@ -59,6 +60,7 @@ final class ContainsJsonTest extends FluentAssertionsTestCase
             'missing key'             => ['{"id":42}', ['name' => 'Ada']],
             'missing key expecting null' => ['{"id":42}', ['deleted_at' => null]],
             'absent list member'      => ['{"tags":["a","b"]}', ['tags' => ['c']]],
+            'null absent from list'   => ['{"tags":["a"]}', ['tags' => [null]]],
             'more elements than present' => ['{"tags":["a"]}', ['tags' => ['a', 'a']]],
             'no element matches'      => ['{"items":[{"id":1}]}', ['items' => [['id' => 2]]]],
             'nested mismatch'         => ['{"data":{"id":42}}', ['data' => ['id' => 43]]],

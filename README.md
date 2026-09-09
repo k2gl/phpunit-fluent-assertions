@@ -50,6 +50,10 @@ fact([1, 2, 3])->notCount(3); // Fails
 fact(['a' => ['b' => 'c']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Passes
 fact(['a' => ['b' => 'd']])->arrayContainsAssociativeArray(['a' => ['b' => 'c']]); // Fails
 
+fact(['tags' => ['a', 'b']])->arrayContainsAssociativeArray(['tags' => ['b']]); // Passes — position does not matter
+fact(['tags' => ['a']])->arrayContainsAssociativeArray(['tags' => ['a', 'a']]); // Fails — only one to go around
+fact(['id' => 1])->arrayContainsAssociativeArray(['parent' => null]); // Fails — there is no such key
+
 fact(['a' => 1])->arrayHasKey('a'); // Passes
 fact(['a' => 1])->arrayHasKey('b'); // Fails
      

@@ -28,6 +28,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
+- `arrayContainsAssociativeArray()` now answers the subset question the same way
+  `containsJson()` does. Inside a list an expected element may sit at any position instead
+  of having to line up by index, so assertions that used to fail on reordered data now
+  pass. It also tells a missing key apart from a key holding `null`: expecting
+  `['parent' => null]` against `['id' => 1]` used to pass and now fails, which turns tests
+  that were asserting nothing red.
 - The JSON assertions moved from `StringAssertions` into a `JsonAssertions` trait. The
   public API is unchanged; only code using the trait directly is affected.
 
