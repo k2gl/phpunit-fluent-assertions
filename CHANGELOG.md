@@ -29,6 +29,11 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - The JSON assertions moved from `StringAssertions` into a `JsonAssertions` trait. The
   public API is unchanged; only code using the trait directly is affected.
 
+### Fixed
+
+- `isJson()` no longer calls `json_validate()`, which only exists on PHP 8.3+ while the
+  package supports 8.1. It now validates the same way the other JSON assertions do.
+
 ## [12.10.0] - 2026-07-07
 
 ### Added

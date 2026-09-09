@@ -33,7 +33,9 @@ trait JsonAssertions
             Assert::fail($message ?: 'Variable is not a string.');
         }
 
-        Assert::assertTrue(json_validate($this->variable), $message ?: 'String is not valid JSON.');
+        json_decode($this->variable);
+
+        Assert::assertTrue(json_last_error() === JSON_ERROR_NONE, $message ?: 'String is not valid JSON.');
 
         return $this;
     }
