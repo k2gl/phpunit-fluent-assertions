@@ -311,6 +311,8 @@ Pass a message substring to also assert on the exception message.
 fact(fn () => throw new RuntimeException('boom'))->throws(RuntimeException::class); // Passes
 fact(fn () => $service->run())->throws(DomainException::class, 'invalid'); // Passes if message contains "invalid"
 fact(fn () => 42)->throws(RuntimeException::class); // Fails — nothing thrown
+fact(fn () => $client->get())->throws(HttpException::class, inspect: fn (HttpException $e) => fact($e->status)->is(404)); // Assert on the exception itself
+fact(fn () => $policy->check($certificate))->doesNotThrow(); // Passes — the call completes
 ```
 
 ### Date/time assertions

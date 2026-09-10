@@ -4,6 +4,17 @@ All notable changes to this package are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.12.0] - 2026-09-10
+
+### Added
+
+- `doesNotThrow()`, the counterpart of `throws()`: the subject is called and the assertion
+  fails if anything is thrown. It replaces the `$call(); $this->addToAssertionCount(1);`
+  idiom for "this input is accepted".
+- `throws()` takes an optional `inspect` callback that receives the thrown exception, so a
+  status code or a payload can be checked with ordinary `fact()` calls instead of a
+  try/catch block.
+
 ## [12.11.0] - 2026-09-09
 
 ### Added
